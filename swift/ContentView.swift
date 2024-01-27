@@ -1,9 +1,6 @@
-//
 //  ContentView.swift
 //  Scouting FRC
-//
 //  Created by Joy Pan on 1/25/24.
-//
 
 import SwiftUI
 
