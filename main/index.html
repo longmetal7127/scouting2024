@@ -6,6 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teams</title>
 <link rel="stylesheet" href="index.css" />
+<script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+<script>
+	// Check that service workers are supported
+	if ("serviceWorker" in navigator) {
+	  // Use the window load event to keep the page load performant
+	
+	  window.addEventListener("load", () => {
+		navigator.serviceWorker.register("./sw.js");
+	  });
+	}
+	</script>
+<script href="manifest.json"></script>
 </head>
 
 <body>
