@@ -38,7 +38,7 @@ header h1{
 h1{
 	text-align: center;
 }
-#new-task-form {
+#new-team-form {
 	display: flex;
 }
 
@@ -49,7 +49,7 @@ input, button {
 	background: none;
 }
 
-#new-task-input {
+#new-team-input {
 	flex: 1 1 0%;
 	background-color: var(--darker);
 	padding: 1rem;
@@ -59,11 +59,11 @@ input, button {
 	font-size: 1.25rem;
 }
 
-#new-task-input::placeholder {
+#new-team-input::placeholder {
 	color: var(--grey);
 }
 
-#new-task-submit {
+#new-team-submit {
 	color: var(--pink);
 	font-size: 1.25rem;
 	font-weight: 700;
@@ -74,11 +74,11 @@ input, button {
 	transition: 0.4s;
 }
 
-#new-task-submit:hover {
+#new-team-submit:hover {
 	opacity: 0.8;
 }
 
-#new-task-submit:active {
+#new-team-submit:active {
 	opacity: 0.6;
 }
 
@@ -89,18 +89,18 @@ main {
 	margin: 0 auto;
 }
 
-.task-list {
+.team-list {
 	padding: 1rem;
 }
 
-.task-list h2 {
+.team-list h2 {
 	font-size: 1.5rem;
 	font-weight: 300;
 	color: var(--grey);
 	margin-bottom: 1rem;
 }
 
-#tasks .task {
+#teams .team {
 	display: flex;
 	justify-content: space-between;
 	background-color: var(--darkest);
@@ -109,11 +109,11 @@ main {
 	margin-bottom: 1rem;
 }
 
-.task .content {
+.team .content {
 	flex: 1 1 0%;
 }
 
-.task .content .text {
+.team .content .text {
 	color: var(--light);
 	font-size: 1.125rem;
 	width: 100%;
@@ -121,16 +121,16 @@ main {
 	transition: 0.4s;
 }
 
-.task .content .text:not(:read-only) {
+.team .content .text:not(:read-only) {
 	color: var(--pink);
 }
 
-.task .actions {
+.team .actions {
 	display: flex;
 	margin: 0 -0.5rem;
 }
 
-.task .actions button {
+.team .actions button {
 	cursor: pointer;
 	margin: 0 0.5rem;
 	font-size: 1.125rem;
@@ -139,20 +139,20 @@ main {
 	transition: 0.4s;
 }
 
-.task .actions button:hover {
+.team .actions button:hover {
 	opacity: 0.8;
 }
 
-.task .actions button:active {
+.team .actions button:active {
 	opacity: 0.6;
 }
 
-.task .actions .edit {
+.team .actions .edit {
 	background-image: linear-gradient(to right, var(--pink), var(--purple));
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
-.task .actions .delete {
+.team .actions .delete {
 	color: crimson;
 }

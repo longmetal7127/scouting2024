@@ -1,9 +1,9 @@
 const db = new Dexie("Todo App");
 db.version(1).stores({ todos: "++id, todo" });
 
-const form = document.querySelector("#new-task-form");
-const input = document.querySelector("#new-task-input");
-const list_el = document.querySelector("#tasks");
+const form = document.querySelector("#new-team-form");
+const input = document.querySelector("#new-team-input");
+const list_el = document.querySelector("#teams");
 
 //add team
 form.onsubmit = async (event) => {
@@ -21,7 +21,7 @@ const getTodos = async () => {
     .map(
       (todo) => `
 	
-	<div class="task">
+	<div class="team">
 	<div class="content">
 	<input id="edit" class="text" readonly="readonly" type="text" value= ${todo.todo}>
 	</div>
