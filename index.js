@@ -5,7 +5,7 @@ const form = document.querySelector("#new-task-form");
 const input = document.querySelector("#new-task-input");
 const list_el = document.querySelector("#tasks");
 
-//add todo
+//add team
 form.onsubmit = async (event) => {
   event.preventDefault();
   const todo = input.value;
@@ -14,7 +14,7 @@ form.onsubmit = async (event) => {
   form.reset();
 };
 
-//display todo
+//display team
 const getTodos = async () => {
   const allTodos = await db.todos.reverse().toArray();
   list_el.innerHTML = allTodos
