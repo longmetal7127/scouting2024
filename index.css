@@ -6,6 +6,10 @@
 	--pink: #EC4899;
 	--purple: #8B5CF6;
 	--light: #EEE;
+	--background: #fffffff6;
+	--teamlist: #cfedff; 
+	--text: #2d3875; 
+	--deletebutton: #de4e4e;
 }
 
 * {
@@ -19,20 +23,22 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	color: #FFF;
-	background-color: #edf6f9; /* this is the overall bg */
+	background-color: var(--background); /* this is the overall bg */
 }
 
 header {
 	padding: 2rem 1rem;
-	max-width: 800px;
+	background-color: var(--teamlist);
+	/*max-width: 1000px;*/
 	width: 100%;
 	margin: 0 auto;
 }
 
 header h1{ 
 	font-size: 2.5rem;
-	font-weight: 300;
-	color: #464D77;
+	font-weight: 400;
+	font-family: monospace;
+	color: var(--text);
 	margin-bottom: 1rem;
 }
 h1{
@@ -51,16 +57,17 @@ input, button {
 
 #new-team-input {
 	flex: 1 1 0%;
-	background-color: #c5d9ff; /* bg color of team input*/
+	background-color: var(--background); /* bg color of team input*/
 	padding: 1rem;
 	border-radius: 1rem;
 	margin-right: 1rem;
-	color: var(--light);
+	color: var(--dark);
 	font-size: 1.25rem;
 }
 
 #new-team-input::placeholder {
 	color: var(--grey);
+	font-family: monospace;
 }
 
 #new-team-submit {
@@ -95,7 +102,8 @@ main {
 
 .team-list h2 {
 	font-size: 1.5rem;
-	font-weight: 300;
+	font-weight: 400;
+	font-family: monospace;
 	color: var(--grey);
 	margin-bottom: 1rem;
 }
@@ -103,7 +111,7 @@ main {
 #teams .team {
 	display: flex;
 	justify-content: space-between;
-	background-color: #c5d9ff; /*This is team label color */
+	background-color: var(--teamlist); /*This is team label color */
 	padding: 1rem;
 	border-radius: 1rem;
 	margin-bottom: 1rem;
@@ -116,6 +124,7 @@ main {
 .team .content .text {
 	color: var(--grey);
 	font-size: 1.125rem;
+	font-family: monospace;
 	width: 100%;
 	display: block;
 	transition: 0.4s;
@@ -154,5 +163,5 @@ main {
 }
 
 .team .actions .delete {
-	color: #F87575;
+	color: var(--deletebutton);
 }
