@@ -19,7 +19,7 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	color: #FFF;
-	background-color: var(--dark);
+	background-color: #edf6f9; /* this is the overall bg */
 }
 
 header {
@@ -32,7 +32,7 @@ header {
 header h1{ 
 	font-size: 2.5rem;
 	font-weight: 300;
-	color: white;
+	color: #464D77;
 	margin-bottom: 1rem;
 }
 h1{
@@ -51,7 +51,7 @@ input, button {
 
 #new-team-input {
 	flex: 1 1 0%;
-	background-color: var(--darker);
+	background-color: #c5d9ff; /* bg color of team input*/
 	padding: 1rem;
 	border-radius: 1rem;
 	margin-right: 1rem;
@@ -103,7 +103,7 @@ main {
 #teams .team {
 	display: flex;
 	justify-content: space-between;
-	background-color: var(--darkest);
+	background-color: #c5d9ff; /*This is team label color */
 	padding: 1rem;
 	border-radius: 1rem;
 	margin-bottom: 1rem;
@@ -114,7 +114,7 @@ main {
 }
 
 .team .content .text {
-	color: var(--light);
+	color: var(--grey);
 	font-size: 1.125rem;
 	width: 100%;
 	display: block;
@@ -154,5 +154,5 @@ main {
 }
 
 .team .actions .delete {
-	color: crimson;
+	color: #F87575;
 }
