@@ -10,12 +10,22 @@
 	--teamlist: #cfedff; 
 	--text: #2d3875; 
 	--deletebutton: #de4e4e;
+	--navbar: #565f90
 }
 
 * {
 	margin: 0;
 	box-sizing: border-box;
 	font-family: "Fira sans", sans-serif;
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 8vh;
+	background-color: var(--navbar);
+	font-family: "Montserrat", sans-serif;
 }
 
 body {
