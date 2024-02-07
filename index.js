@@ -40,3 +40,30 @@ const deleteTodo = async (event, id) => {
   await db.todos.delete(id);
   await getTodos();
 };
+
+// CHATGPT CODE TO CONNECT TO MYSQL SERVER
+
+function saveTeam(teamName) {
+  db.teams.add({ name: teamName }).then(() => {
+      syncTeamWithServer(teamName);
+  });
+}
+
+function syncTeamWithServer(teamName) {
+  fetch('/sync', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ teamName: teamName })
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Failed to sync data');
+      }
+      return response.json();
+  })
+  .catch(error => {
+      console.error(error);
+  });
+}
