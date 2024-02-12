@@ -8,3 +8,5 @@ https://scouting7127.azurewebsites.net/
 
 https://scouting7127.azurewebsites.net/phpmyadmin/
 
+https://stackoverflow.com/questions/22342836/syncing-indexeddb-with-sql-server 
+
