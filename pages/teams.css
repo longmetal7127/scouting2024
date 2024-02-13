@@ -13,6 +13,10 @@
 	--navbar: #565f90
 }
 
+header {
+    background-color: var(--teamlist);
+}
+
 body {
     
 }
