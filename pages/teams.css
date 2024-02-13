@@ -1,0 +1,30 @@
+:root {
+	--dark: #05152E;
+	--darker: #1F2937;
+	--darkest: #001E3C;
+	--grey: #6B7280;
+	--pink: #EC4899;
+	--purple: #8B5CF6;
+	--light: #EEE;
+	--background: #fffffff6;
+	--teamlist: #cfedff; 
+	--text: #2d3875; 
+	--deletebutton: #de4e4e;
+	--navbar: #565f90
+}
+
+body {
+    
+}
+
+h1 {
+    
+}
+
+h2 {
+    font-weight: 100;
+}
+
+h3 {
+    font-weight: 100;
+}
