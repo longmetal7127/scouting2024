@@ -13,16 +13,51 @@
 	--navbar: #565f90
 }
 
+* {
+	margin: 0;
+	box-sizing: border-box;
+	
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 8vh;
+	background-color: var(--navbar);
+	font-family: "Montserrat", sans-serif;
+}
+
+.topnav a{
+	float: left;
+  	color: var(--background);
+  	text-align: center;
+  	padding: 14px 16px;
+  	text-decoration: none;
+  	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: var(--background);
+	color: var(--text);
+  }
+
 header {
-    background-color: var(--teamlist);
+    padding: 2rem 1rem;
+	background-color: var(--teamlist);
+	/*max-width: 1000px;*/
+	width: 100%;
+	margin: 0 auto;
 }
 
 body {
-    
+    display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 h1 {
-    
+	text-align: center;
 }
 
 h2 {

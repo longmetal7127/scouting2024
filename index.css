@@ -28,6 +28,20 @@ nav {
 	font-family: "Montserrat", sans-serif;
 }
 
+.topnav a{
+	float: left;
+  	color: var(--background);
+  	text-align: center;
+  	padding: 14px 16px;
+  	text-decoration: none;
+  	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: var(--background);
+	color: var(--text);
+  }
+
 body {
 	display: flex;
 	flex-direction: column;
