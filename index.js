@@ -1,5 +1,5 @@
 const db = new Dexie("Todo App");
-db.version(1).stores({ todos: "++id, todo" });
+db.version(1).stores({ todos: "++id, todo, globalid" });
 
 const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
@@ -9,7 +9,8 @@ const list_el = document.querySelector("#teams");
 form.onsubmit = async (event) => {
   event.preventDefault();
   const todo = input.value;
-  await db.todos.add({ todo });
+  const globalid = Date.UTC();
+  await db.todos.add({ todo , globalid });
   await getTodos();
   form.reset();
 };
@@ -27,6 +28,7 @@ const getTodos = async () => {
 	</div>
 	<div class="actions">
 	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
+  <button class="edit" onclick="window.open(/pages/teamdetails.html, "_blank");">Edit</button>
 	</div>
 	</div>
 	`
@@ -43,27 +45,27 @@ const deleteTodo = async (event, id) => {
 
 // CHATGPT CODE TO CONNECT TO MYSQL SERVER
 
-function saveTeam(teamName) {
-  db.teams.add({ name: teamName }).then(() => {
-      syncTeamWithServer(teamName);
-  });
-}
+// function saveTeam(teamName) {
+//   db.teams.add({ name: teamName }).then(() => {
+//       syncTeamWithServer(teamName);
+//   });
+// }
 
-function syncTeamWithServer(teamName) {
-  fetch('/sync', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ teamName: teamName })
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error('Failed to sync data');
-      }
-      return response.json();
-  })
-  .catch(error => {
-      console.error(error);
-  });
-}
+// function syncTeamWithServer(teamName) {
+//   fetch('/sync', {
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ teamName: teamName })
+//   })
+//   .then(response => {
+//       if (!response.ok) {
+//           throw new Error('Failed to sync data');
+//       }
+//       return response.json();
+//   })
+//   .catch(error => {
+//       console.error(error);
+//   });
+// }
