@@ -27,7 +27,7 @@ const getTodos = async () => {
 	<input id="edit" class="text" readonly="readonly" type="text" value= ${todo.todo}>
   </div>
   <div>
-  <label id="globalid" class="text" value=${todo.globalid}>
+  ${todo.globalid}
 	</div>
 	<div class="actions">
 	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
