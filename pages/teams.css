@@ -7,22 +7,68 @@
 	--purple: #8B5CF6;
 	--light: #EEE;
 	--background: #fffffff6;
-	--teamlist: #cfedff; 
+	--teamlist: #e9f7ff; 
 	--text: #2d3875; 
 	--deletebutton: #de4e4e;
 	--navbar: #565f90
 }
 
+* {
+	margin: 0;
+	box-sizing: border-box;
+	
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 8vh;
+	background-color: var(--navbar);
+	font-family: "Montserrat", sans-serif;
+	color: var(--background)
+}
+
+.topnav a{
+	float: left;
+  	color: var(--background);
+  	text-align: center;
+  	padding: 14px 16px;
+  	text-decoration: none;
+  	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: var(--background);
+	color: var(--text);
+  }
+
 header {
-    background-color: var(--teamlist);
+    padding: 2rem 1rem;
+	/*background-color: var(--teamlist);*/
+	/*max-width: 1000px;*/
+	width: 100%;
+	margin: 0 auto;
+}
+
+header h1{ 
+	font-size: 2.5rem;
+	font-weight: 400;
+	font-family: monospace;
+	color: var(--text);
+	margin-bottom: 1rem;
 }
 
 body {
-    
+    display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: monospace;
+	font-size: 1.125rem;
 }
 
 h1 {
-    
+	text-align: center;
 }
 
 h2 {
