@@ -7,7 +7,7 @@
 	--purple: #8B5CF6;
 	--light: #EEE;
 	--background: #fffffff6;
-	--teamlist: #cfedff; 
+	--teamlist: #e9f7ff; 
 	--text: #2d3875; 
 	--deletebutton: #de4e4e;
 	--navbar: #565f90
@@ -137,8 +137,8 @@ main {
 	justify-content: space-between;
 	background-color: var(--teamlist); /*This is team label color */
 	padding: 1rem;
-	border-radius: 0.5rem;
-	margin-bottom: 1rem;
+	border-radius: 0.2rem;
+	margin-bottom: 0.2rem;
 }
 
 .team .content {

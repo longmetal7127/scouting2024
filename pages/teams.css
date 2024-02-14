@@ -7,7 +7,7 @@
 	--purple: #8B5CF6;
 	--light: #EEE;
 	--background: #fffffff6;
-	--teamlist: #cfedff; 
+	--teamlist: #e9f7ff; 
 	--text: #2d3875; 
 	--deletebutton: #de4e4e;
 	--navbar: #565f90
@@ -45,7 +45,7 @@ nav {
 
 header {
     padding: 2rem 1rem;
-	background-color: var(--teamlist);
+	/*background-color: var(--teamlist);*/
 	/*max-width: 1000px;*/
 	width: 100%;
 	margin: 0 auto;
