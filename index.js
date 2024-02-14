@@ -15,24 +15,23 @@ form.onsubmit = async (event) => {
   form.reset();
 };
 
+
 //display team
 const getTodos = async () => {
   const allTodos = await db.todos.reverse().toArray();
   list_el.innerHTML = allTodos
-    .map(
-      (todo) => `
+    .map(=> `
 	
+      (todo) 
 	<div class="team">
 	<div class="content">
 	<input id="edit" class="text" readonly="readonly" type="text" value= ${todo.todo}>
   </div>
-  <div>
-  ${todo.globalid}
-	</div>
+  
 	<div class="actions">
+  ${todo.globalid}
 	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
-  <button class="edit" onclick="window.open(pages/teamdetails.html, "_blank");">Edit</button>
-	</div>
+  <button class="edit" o
 	</div>
 	`
     )
