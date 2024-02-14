@@ -9,7 +9,7 @@ const list_el = document.querySelector("#teams");
 form.onsubmit = async (event) => {
   event.preventDefault();
   const todo = input.value;
-  const globalid = Date.UTC();
+  const globalid = Date.UTC().toUTCString();
   await db.todos.add({ todo , globalid });
   await getTodos();
   form.reset();
