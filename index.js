@@ -9,7 +9,8 @@ const list_el = document.querySelector("#teams");
 form.onsubmit = async (event) => {
   event.preventDefault();
   const todo = input.value;
-  const globalid = Date.UTC().toUTCString();
+  let DateObj = new Date();
+  const globalid = DateObj.getTime();
   await db.todos.add({ todo , globalid });
   await getTodos();
   form.reset();
@@ -30,7 +31,7 @@ const getTodos = async () => {
 	<div class="actions">
   <div>${todo.globalid}</div>
 	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
-  <button class="edit" onclick="window.open(pages/teamdetails.html, "_blank");">Edit</button>
+  <button class="edit" onclick="editTeam(${todo.globalid})">Edit</button>
 	</div>
 	</div>
 	`
@@ -45,6 +46,9 @@ const deleteTodo = async (event, id) => {
   await getTodos();
 };
 
+function editTeam(globalid) {
+  window.open(`/pages/teamdetails.html?globalid=${globalid}`, "_blank");
+}
 // CHATGPT CODE TO CONNECT TO MYSQL SERVER
 
 // function saveTeam(teamName) {
