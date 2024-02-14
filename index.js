@@ -25,6 +25,8 @@ const getTodos = async () => {
 	<div class="team">
 	<div class="content">
 	<input id="edit" class="text" readonly="readonly" type="text" value= ${todo.todo}>
+  </div>
+  <div>
   <label id="globalid" class="text" value=${todo.globalid}>
 	</div>
 	<div class="actions">
