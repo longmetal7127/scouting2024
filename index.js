@@ -31,7 +31,7 @@ const getTodos = async () => {
 	</div>
 	<div class="actions">
 	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
-  <button class="edit" onclick="window.open(/pages/teamdetails.html, "_blank");">Edit</button>
+  <button class="edit" onclick="window.open(pages/teamdetails.html, "_blank");">Edit</button>
 	</div>
 	</div>
 	`
