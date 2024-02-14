@@ -19,6 +19,12 @@
 	
 }
 
+#moreinfo {
+	width: 80%;
+	margin-left: 50px;
+	
+}
+
 nav {
 	display: flex;
 	justify-content: space-around;
