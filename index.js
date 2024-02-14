@@ -9,11 +9,12 @@ const list_el = document.querySelector("#teams");
 form.onsubmit = async (event) => {
   event.preventDefault();
   const todo = input.value;
-  const globalid = Date.UTC();
+  const globalid = Date.UTC().toUTCString();
   await db.todos.add({ todo , globalid });
   await getTodos();
   form.reset();
 };
+
 
 //display team
 const getTodos = async () => {
@@ -25,10 +26,11 @@ const getTodos = async () => {
 	<div class="team">
 	<div class="content">
 	<input id="edit" class="text" readonly="readonly" type="text" value= ${todo.todo}>
-	</div>
+  </div>  
 	<div class="actions">
+  <div>${todo.globalid}</div>
 	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
-  <button class="edit" onclick="window.open(/pages/teamdetails.html, "_blank");">Edit</button>
+  <button class="edit" onclick="window.open(pages/teamdetails.html, "_blank");">Edit</button>
 	</div>
 	</div>
 	`

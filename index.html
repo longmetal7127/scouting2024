@@ -24,7 +24,7 @@
 
 	<nav>
 		<div class = "heading">
-			<h1> Longmetal 7127 </h1>
+			<h1> Longmetal 7127 3</h1>
 		</div>
 		<div class = "topnav">
 			<a href="index.html"> Teams </a> 
@@ -53,41 +53,5 @@
 
 	<script src="index.js"></script>
 </body>
-
-<!-- <script>
-	const express = require('express');
-	const bodyParser = require('body-parser');
-	const mysql = require('mysql');
-
-	const app = express();
-	app.use(bodyParser.json());
-
-	// MySQL database connection configuration
-	const connection = mysql.createConnection({
-		host: 'localhost',
-		user: 'jamesmur_scout',
-		password: 'Longmetal7127',
-		database: 'jamesmur_scouting'
-	});
-
-	// API endpoint for syncing data from client to server
-	app.post('/sync', (req, res) => {
-		const teamName = req.body.teamName;
-		connection.query('INSERT INTO teams (name) VALUES (?)', [teamName], (error, results) => {
-			if (error) {
-				console.error(error);
-				res.status(500).send('Error syncing data');
-			} else {
-				res.status(200).send('Data synced successfully');
-			}
-		});
-	});
-
-	// Start the server
-	const port = 3000;
-	app.listen(port, () => {
-		console.log(`Server is listening on port ${port}`);
-	});
-</script> -->
 
 </html>
