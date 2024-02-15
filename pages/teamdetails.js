@@ -37,6 +37,10 @@ const globalid = getQueryParam("globalid");
 
     // searches the URL parameters for a key called globalid and saved value in constant 
 
+/*document.getElementById("submit").addEventListener("submit", function(event){
+    print("hello world")
+})*/
+
 // Fetch and display team details
 if (globalid) { // if globalid isn't null, undef, empty, etc.
     fetchTeamDetails(globalid).then(team => {
