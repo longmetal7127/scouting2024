@@ -89,3 +89,20 @@ h2 {
 h3 {
     font-weight: 100;
 }
+
+.submit {
+	background-color: var(--background);
+	width: 20%;
+	border-width: 1px;
+	border-radius: 4px;
+	font-size: 20px;
+	font-family: monospace;
+	font-weight: bold;
+	color: var(--deletebutton);
+	align-self: center;
+}
+
+.submit:hover {
+	background-color: var(--teamlist);
+}
+
