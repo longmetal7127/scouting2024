@@ -47,7 +47,7 @@ const deleteTodo = async (event, id) => {
 };
 
 function editTeam(globalid) {
-  window.open(`./pages/teamdetails.html?globalid=${globalid}`, "_blank");
+  window.open(`pages/teamdetails.html?globalid=${globalid}`, "_blank");
 }
 // CHATGPT CODE TO CONNECT TO MYSQL SERVER
 
