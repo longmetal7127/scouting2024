@@ -25,6 +25,10 @@
 	
 }
 
+.teaminfo {
+	margin-left: 10px;
+}
+
 nav {
 	display: flex;
 	justify-content: space-around;
@@ -79,6 +83,7 @@ h1 {
 
 h2 {
     font-weight: 100;
+	margin-left: 10px;
 }
 
 h3 {
