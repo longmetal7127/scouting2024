@@ -1,70 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Team Details</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Details</title>
     <link rel="stylesheet" href="teams.css" />
-</head>
-<body>
-
-	<nav>
-		<div class = "heading">
-			<h1> Longmetal 7127 </h1>
-		</div>
-		<div class = "topnav">
-			<a href="../index.html"> Teams </a> 
-		    <a href="teamdetails.html"> Team Details </a> 
-			<a href="aboutus.html"> About Us </a> 
-		</div>
-	</nav>
+  </head>
+  <body>
+    <nav>
+      <div class="heading">
+        <h1>Longmetal 7127</h1>
+      </div>
+      <div class="topnav">
+        <a href="../index.html"> Teams </a>
+        <a href="teamdetails.html"> Team Details </a>
+        <a href="aboutus.html"> About Us </a>
+      </div>
+    </nav>
 
     <header>
-        <div>
-            <h1> Team Details </h1>
-        </div>
+      <div>
+        <h1>Team Details</h1>
+      </div>
     </header>
-    <br>
+    <br />
 
-   
     <form class="teaminfo">
-        <label for="teamname"> Name: </label>
-        <input type="text" id="teamname" name="teamname">
+      <label for="teamname"> Name: </label>
+      <input type="text" id="teamname" name="teamname" />
 
-        <br>
+      <br />
 
-        <label for="teamnumber"> Team Number: </label>
-        <input type="text" id="teamnumber" name="teamnumber" maxlength="4">
-    
-        <br>
+      <label for="teamnumber"> Team Number: </label>
+      <input type="text" id="teamnumber" name="teamnumber" maxlength="4" />
 
-        <label for="teamschool"> Based In: </label>
-        <input type="text" id="teamschool" name="teamschool">
+      <br />
 
-        <br><br>
-    
-        <label for="moreinfo"> More Info: </label><br>
-        <textarea id="moreinfo" name="moreinfo" rows="8" cols="50" placeholder="big fat textbox" style="resize: none;"></textarea>
+      <label for="teamschool"> Based In: </label>
+      <input type="text" id="teamschool" name="teamschool" />
 
+      <br /><br />
+
+      <label for="moreinfo"> More Info: </label><br />
+      <textarea
+        id="moreinfo"
+        name="moreinfo"
+        rows="8"
+        cols="50"
+        placeholder="big fat textbox"
+        style="resize: none"
+      ></textarea>
     </form>
 
-    <br> 
+    <br />
 
-    <h2> Abilities </h2>
+    <h2>Abilities</h2>
 
-    <br>
+    <br />
 
     <h1>Team Details</h1>
     <div id="team-details">
-        <!-- Team details will be displayed here -->
+      <!-- Team details will be displayed here -->
     </div>
-    
-    <input type="submit" class="submit" id="submit">
+
+    <input type="submit" class="submit" id="submit" />
 
     <!-- NOTE: add a "CANCEL" button if any changes are made to the text fields in case changes are not to be saved-->
 
-
     <script src="teamdetails.js"></script>
-
-</body>
+  </body>
 </html>

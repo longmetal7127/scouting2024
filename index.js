@@ -23,26 +23,37 @@ const newTodo = (todo) => {
   const content = document.createElement("div");
   content.classList.add("content");
   container.append(content);
-  const input = Object.assign(document.createElement("input"), {className: "text", value: todo.todo});
+  const input = Object.assign(document.createElement("input"), {
+    className: "text",
+    value: todo.todo,
+  });
   input.setAttribute("id", "edit");
   input.setAttribute("readonly", "readonly");
   input.setAttribute("type", "text");
 
   content.append(input);
 
-  const actions = Object.assign(document.createElement("div"), {className: "actions"});
+  const actions = Object.assign(document.createElement("div"), {
+    className: "actions",
+  });
   container.append(actions);
 
   const id = Object.assign(document.createElement("span"), {
-    innerText: todo.globalid
+    innerText: todo.globalid,
   });
   actions.append(id);
 
-  const deleteButton = Object.assign(document.createElement("button"), {className: "delete", innerText: "Delete"});
+  const deleteButton = Object.assign(document.createElement("button"), {
+    className: "delete",
+    innerText: "Delete",
+  });
   deleteButton.addEventListener("click", (e) => {
     deleteTodo(e, todo.id);
   });
-  const editButton = Object.assign(document.createElement("button"), {className: "edit", innerText: "Edit"});
+  const editButton = Object.assign(document.createElement("button"), {
+    className: "edit",
+    innerText: "Edit",
+  });
   editButton.addEventListener("click", (e) => {
     editTeam(todo.globalid);
   });
@@ -52,7 +63,7 @@ const newTodo = (todo) => {
 //display team
 const getTodos = async () => {
   const allTodos = await db.todos.reverse().toArray();
-  
+
   list_el.replaceChildren(...allTodos.map((todo) => newTodo(todo)));
 };
 window.addEventListener("load", getTodos);

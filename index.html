@@ -1,75 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teams</title>
-<link rel="stylesheet" href="index.css" />
-<script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teams</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
 
-<script>
-	// Check that service workers are supported
-	if ("serviceWorker" in navigator) {
-	  // Use the window load event to keep the page load performant
-	  window.addEventListener("load", () => {
-		navigator.serviceWorker.register("./sw.js");
-	  });
-	}
-	</script>
-<script href="manifest.json"></script>
-</head>
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js");
+        });
+      }
+    </script>
+    <script href="manifest.json"></script>
+  </head>
 
-<body>
-	<script>
-		async function registerServiceWorker() {
-		  if ("serviceWorker" in navigator) {
-			try {
-			  const registration = await navigator.serviceWorker.register(
-				"sw.js"
-			  );
-			  console.log(
-				"Service Worker registered with scope:",
-				registration.scope
-			  );
-			} catch (error) {
-			  console.error("Service Worker registration failed:", error);
-			}
-		  }
-		}
-  
-		registerServiceWorker();
-	  </script>
-	<nav>
-		<div class = "heading">
-			<h1>Longmetal 7127 4</h1>
-		</div>
-		<div class = "topnav">
-			<a href="index.html"> Teams </a> 
-		    <a href="pages/teamdetails.html"> Team Details </a> 
-			<a href="pages/aboutus.html"> About Us </a> 
-		</div>
-	</nav>
+  <body>
+    <script>
+      async function registerServiceWorker() {
+        if ("serviceWorker" in navigator) {
+          try {
+            const registration =
+              await navigator.serviceWorker.register("sw.js");
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope,
+            );
+          } catch (error) {
+            console.error("Service Worker registration failed:", error);
+          }
+        }
+      }
 
- <header>
-	<h1>Teams</h1>
-	<form id="new-team-form">
-	 <input type="text" name="new-team-input" id="new-team-input" placeholder="Input Team Name" />
-     <input type="submit" id="new-team-submit" value="Add Team" />
-	</form>
-	</header>
-	<main>
-		<section class="team-list">
+      registerServiceWorker();
+    </script>
+    <nav>
+      <div class="heading">
+        <h1>Longmetal 7127 4</h1>
+      </div>
+      <div class="topnav">
+        <a href="index.html"> Teams </a>
+        <a href="pages/teamdetails.html"> Team Details </a>
+        <a href="pages/aboutus.html"> About Us </a>
+      </div>
+    </nav>
 
-			<h2>Team List</h2>
-			<div id="teams">
-			</div>
+    <header>
+      <h1>Teams</h1>
+      <form id="new-team-form">
+        <input
+          type="text"
+          name="new-team-input"
+          id="new-team-input"
+          placeholder="Input Team Name"
+        />
+        <input type="submit" id="new-team-submit" value="Add Team" />
+      </form>
+    </header>
+    <main>
+      <section class="team-list">
+        <h2>Team List</h2>
+        <div id="teams"></div>
+      </section>
+    </main>
 
-		</section>
-
-	</main>
-
-	<script src="index.js"></script>
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>

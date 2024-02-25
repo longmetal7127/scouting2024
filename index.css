@@ -1,191 +1,192 @@
 :root {
-	--dark: #05152E;
-	--darker: #1F2937;
-	--darkest: #001E3C;
-	--grey: #6B7280;
-	--pink: #EC4899;
-	--purple: #8B5CF6;
-	--light: #EEE;
-	--background: #fffffff6;
-	--teamlist: #e9f7ff; 
-	--text: #2d3875; 
-	--deletebutton: #de4e4e;
-	--navbar: #565f90
+  --dark: #05152e;
+  --darker: #1f2937;
+  --darkest: #001e3c;
+  --grey: #6b7280;
+  --pink: #ec4899;
+  --purple: #8b5cf6;
+  --light: #eee;
+  --background: #fffffff6;
+  --teamlist: #e9f7ff;
+  --text: #2d3875;
+  --deletebutton: #de4e4e;
+  --navbar: #565f90;
 }
 
 * {
-	margin: 0;
-	box-sizing: border-box;
-	font-family: "Fira sans", sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Fira sans", sans-serif;
 }
 
 nav {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	min-height: 8vh;
-	background-color: var(--navbar);
-	font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 8vh;
+  background-color: var(--navbar);
+  font-family: "Montserrat", sans-serif;
 }
 
-.topnav a{
-	float: left;
-  	color: var(--background);
-  	text-align: center;
-  	padding: 14px 16px;
-  	text-decoration: none;
-  	font-size: 17px;
+.topnav a {
+  float: left;
+  color: var(--background);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 .topnav a:hover {
-	background-color: var(--background);
-	color: var(--text);
-  }
+  background-color: var(--background);
+  color: var(--text);
+}
 
 body {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	color: #FFF;
-	background-color: var(--background); /* this is the overall bg */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: #fff;
+  background-color: var(--background); /* this is the overall bg */
 }
 
 header {
-	padding: 2rem 1rem;
-	/*background-color: var(--teamlist);*/
-	/*max-width: 1000px;*/
-	width: 100%;
-	margin: 0 auto;
+  padding: 2rem 1rem;
+  /*background-color: var(--teamlist);*/
+  /*max-width: 1000px;*/
+  width: 100%;
+  margin: 0 auto;
 }
 
-header h1{ 
-	font-size: 2.5rem;
-	font-weight: 400;
-	font-family: monospace;
-	color: var(--text);
-	margin-bottom: 1rem;
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-family: monospace;
+  color: var(--text);
+  margin-bottom: 1rem;
 }
-h1{
-	text-align: center;
+h1 {
+  text-align: center;
 }
 #new-team-form {
-	display: flex;
+  display: flex;
 }
 
-input, button {
-	appearance: none;
-	border: none;
-	outline: none;
-	background: none;
+input,
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
 }
 
 #new-team-input {
-	flex: 1 1 0%;
-	background-color: var(--teamlist); /* bg color of team input*/
-	padding: 1rem;
-	border-radius: 0.5rem;
-	margin-right: 1rem;
-	color: var(--dark);
-	font-size: 1.25rem;
+  flex: 1 1 0%;
+  background-color: var(--teamlist); /* bg color of team input*/
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  color: var(--dark);
+  font-size: 1.25rem;
 }
 
 #new-team-input::placeholder {
-	color: var(--grey);
-	font-family: monospace;
+  color: var(--grey);
+  font-family: monospace;
 }
 
 #new-team-submit {
-	color: var(--pink);
-	font-size: 1.25rem;
-	font-weight: 700;
-	background-image: linear-gradient(to right, var(--pink), var(--purple));
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	cursor: pointer;
-	transition: 0.4s;
+  color: var(--pink);
+  font-size: 1.25rem;
+  font-weight: 700;
+  background-image: linear-gradient(to right, var(--pink), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+  transition: 0.4s;
 }
 
 #new-team-submit:hover {
-	opacity: 0.8;
+  opacity: 0.8;
 }
 
 #new-team-submit:active {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 
 main {
-	flex: 1 1 0%;
-	max-width: 800px;
-	width: 100%;
-	margin: 0 auto;
+  flex: 1 1 0%;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .team-list {
-	padding: 1rem;
+  padding: 1rem;
 }
 
 .team-list h2 {
-	font-size: 1.5rem;
-	font-weight: 400;
-	font-family: monospace;
-	color: var(--grey);
-	margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-family: monospace;
+  color: var(--grey);
+  margin-bottom: 1rem;
 }
 
 #teams .team {
-	display: flex;
-	justify-content: space-between;
-	background-color: var(--teamlist); /*This is team label color */
-	padding: 1rem;
-	border-radius: 0.2rem;
-	margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--teamlist); /*This is team label color */
+  padding: 1rem;
+  border-radius: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 
 .team .content {
-	flex: 1 1 0%;
+  flex: 1 1 0%;
 }
 
 .team .content .text {
-	color: var(--grey);
-	font-size: 1.125rem;
-	font-family: monospace;
-	width: 100%;
-	display: block;
-	transition: 0.4s;
+  color: var(--grey);
+  font-size: 1.125rem;
+  font-family: monospace;
+  width: 100%;
+  display: block;
+  transition: 0.4s;
 }
 
 .team .content .text:not(:read-only) {
-	color: var(--pink);
+  color: var(--pink);
 }
 
 .team .actions {
-	display: flex;
-	margin: 0 -0.5rem;
+  display: flex;
+  margin: 0 -0.5rem;
 }
 
 .team .actions button {
-	cursor: pointer;
-	margin: 0 0.5rem;
-	font-size: 1.125rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	transition: 0.4s;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.4s;
 }
 
 .team .actions button:hover {
-	opacity: 0.8;
+  opacity: 0.8;
 }
 
 .team .actions button:active {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 
 .team .actions .edit {
-	background-image: linear-gradient(to right, var(--pink), var(--purple));
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, var(--pink), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .team .actions .delete {
-	color: var(--deletebutton);
+  color: var(--deletebutton);
 }
