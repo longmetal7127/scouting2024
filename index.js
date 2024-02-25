@@ -11,34 +11,54 @@ form.onsubmit = async (event) => {
   const todo = input.value;
   let DateObj = new Date();
   const globalid = DateObj.getTime();
-  await db.todos.add({ todo , globalid });
+  await db.todos.add({ todo, globalid });
   await getTodos();
   form.reset();
 };
 
+const newTodo = (todo) => {
+  const container = document.createElement("div");
+  container.classList.add("team");
 
+  const content = document.createElement("div");
+  content.classList.add("content");
+  container.append(content);
+  const input = document.createElement("input");
+  input.setAttribute("id", "edit");
+  input.setAttribute("readonly", "readonly");
+  input.setAttribute("type", "text");
+
+  input.classList.add("text");
+  input.value = todo.todo;
+  content.append(input);
+  const actions = document.createElement("div");
+  actions.classList.add("actions");
+  container.append(actions);
+  const id = document.createElement("span");
+  id.innerText = todo.globalid;
+  actions.append(id);
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete");
+  deleteButton.innerText = "Delete";
+  deleteButton.addEventListener("click", (e) => {
+    deleteTodo(e, todo.id);
+  });
+  const editButton = document.createElement("button");
+  editButton.classList.add("edit");
+  editButton.innerText = "Edit";
+  editButton.addEventListener("click", (e) => {
+    editTeam(todo.globalid);
+  });
+  actions.append(deleteButton, editButton);
+  return container;
+};
 //display team
 const getTodos = async () => {
   const allTodos = await db.todos.reverse().toArray();
-  list_el.innerHTML = allTodos
-    .map(
-      (todo) => `
-	
-	<div class="team">
-	<div class="content">
-	<input id="edit" class="text" readonly="readonly" type="text" value= ${todo.todo}>
-  </div>  
-	<div class="actions">
-  <div>${todo.globalid}</div>
-	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
-  <button class="edit" onclick="editTeam(${todo.globalid})">Edit</button>
-	</div>
-	</div>
-	`
-    )
-    .join("");
+  
+  list_el.replaceChildren(...allTodos.map((todo) => newTodo(todo)));
 };
-window.onload = getTodos;
+window.addEventListener("load", getTodos);
 
 //delete todo
 const deleteTodo = async (event, id) => {

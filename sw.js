@@ -1,5 +1,13 @@
 const cacheName = "offline-cache-v1";
-const cacheUrls = ["index.html","index.js","manifest.json","sw.js","index.css","node_modules\\dexie\\","pages\\"];
+const cacheUrls = [
+  "index.html",
+  "index.js",
+  "manifest.json",
+  "sw.js",
+  "index.css",
+  "node_modules\\dexie\\",
+  "pages\\",
+];
 
 // Installing the Service Worker
 self.addEventListener("install", async (event) => {
@@ -18,12 +26,6 @@ self.addEventListener("fetch", (event) => {
       const cache = await caches.open(cacheName);
 
       try {
-        const cachedResponse = await cache.match(event.request);
-        if (cachedResponse) {
-          console.log("cachedResponse: ", event.request.url);
-          return cachedResponse;
-        }
-
         const fetchResponse = await fetch(event.request);
         if (fetchResponse) {
           console.log("fetchResponse: ", event.request.url);
@@ -31,9 +33,17 @@ self.addEventListener("fetch", (event) => {
           return fetchResponse;
         }
       } catch (error) {
-        console.log("Fetch failed: ", error);
-        const cachedResponse = await cache.match("index.html");
-        return cachedResponse;
+        try {
+          const cachedResponse = await cache.match(event.request);
+          if (cachedResponse) {
+            console.log("cachedResponse: ", event.request.url);
+            return cachedResponse;
+          }
+        } catch {
+          console.log("Fetch failed: ", error);
+          const cachedResponse = await cache.match("index.html");
+          return cachedResponse;
+        }
       }
     })()
   );
