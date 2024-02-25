@@ -17,16 +17,21 @@ form.onsubmit = async (event) => {
 };
 
 const newTodo = (todo) => {
+
+  // create container element object
   const container = document.createElement("div");
   container.classList.add("team");
 
   const content = document.createElement("div");
   content.classList.add("content");
+  // add the content element as a child of container
   container.append(content);
+
+  // Object.assign assigns the given properties to the object and returns the assigned object
   const input = Object.assign(document.createElement("input"), {
     className: "text",
-    value: todo.todo,
-  });
+    value: todo.todo, // assigning property through JS instead of a template string means that you can't exit the input by adding html markup
+  });                 // before, ""> <img onerror="alert('ooh')" src=""> would run the code
   input.setAttribute("id", "edit");
   input.setAttribute("readonly", "readonly");
   input.setAttribute("type", "text");
@@ -63,7 +68,7 @@ const newTodo = (todo) => {
 //display team
 const getTodos = async () => {
   const allTodos = await db.todos.reverse().toArray();
-
+  // replace all children with new children
   list_el.replaceChildren(...allTodos.map((todo) => newTodo(todo)));
 };
 window.addEventListener("load", getTodos);
