@@ -23,29 +23,26 @@ const newTodo = (todo) => {
   const content = document.createElement("div");
   content.classList.add("content");
   container.append(content);
-  const input = document.createElement("input");
+  const input = Object.assign(document.createElement("input"), {className: "text", value: todo.todo});
   input.setAttribute("id", "edit");
   input.setAttribute("readonly", "readonly");
   input.setAttribute("type", "text");
 
-  input.classList.add("text");
-  input.value = todo.todo;
   content.append(input);
-  const actions = document.createElement("div");
-  actions.classList.add("actions");
+
+  const actions = Object.assign(document.createElement("div"), {className: "actions"});
   container.append(actions);
-  const id = document.createElement("span");
-  id.innerText = todo.globalid;
+
+  const id = Object.assign(document.createElement("span"), {
+    innerText: todo.globalid
+  });
   actions.append(id);
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete");
-  deleteButton.innerText = "Delete";
+
+  const deleteButton = Object.assign(document.createElement("button"), {className: "delete", innerText: "Delete"});
   deleteButton.addEventListener("click", (e) => {
     deleteTodo(e, todo.id);
   });
-  const editButton = document.createElement("button");
-  editButton.classList.add("edit");
-  editButton.innerText = "Edit";
+  const editButton = Object.assign(document.createElement("button"), {className: "edit", innerText: "Edit"});
   editButton.addEventListener("click", (e) => {
     editTeam(todo.globalid);
   });
