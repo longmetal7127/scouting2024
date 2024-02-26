@@ -61,6 +61,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
 
+/* function submitform() {
+    console.log("hello world")
+}
+
+document.getElementById("submit").onclick = submitform; */
+
+
+
 // // Initialize IndexedDB database
 
 // //NOTE: we need to rename all of the variables in here from the "To-Do List" template to our "Teams" 
