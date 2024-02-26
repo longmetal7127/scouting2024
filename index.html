@@ -21,7 +21,25 @@
 </head>
 
 <body>
-
+	<script>
+		async function registerServiceWorker() {
+		  if ("serviceWorker" in navigator) {
+			try {
+			  const registration = await navigator.serviceWorker.register(
+				"sw.js"
+			  );
+			  console.log(
+				"Service Worker registered with scope:",
+				registration.scope
+			  );
+			} catch (error) {
+			  console.error("Service Worker registration failed:", error);
+			}
+		  }
+		}
+  
+		registerServiceWorker();
+	  </script>
 	<nav>
 		<div class = "heading">
 			<h1>Longmetal 7127 4</h1>
@@ -36,7 +54,7 @@
  <header>
 	<h1>Teams</h1>
 	<form id="new-team-form">
-	 <input type="text" name="new-team-input" id="new-team-input" placeholder="Input TeamName_Number (ex. LongMetal_7127)" />
+	 <input type="text" name="new-team-input" id="new-team-input" placeholder="Input Team Name" />
      <input type="submit" id="new-team-submit" value="Add Team" />
 	</form>
 	</header>
