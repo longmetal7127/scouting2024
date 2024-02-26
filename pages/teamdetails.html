@@ -6,6 +6,17 @@
     <title> Team Details</title>
     <link rel="stylesheet" href="teams.css" />
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+
+    <script>
+        // Check that service workers are supported
+        if ("serviceWorker" in navigator) {
+          // Use the window load event to keep the page load performant
+          window.addEventListener("load", () => {
+            navigator.serviceWorker.register("./sw.js");
+          });
+        }
+    </script>
+
 </head>
 <body>
 
@@ -27,8 +38,8 @@
     </header>
     <br>
 
-    <div id="team-details">
-        <form class="teaminfo">
+    <!-- <div id="team-details"> -->
+        <form id="dataForm" class="teaminfo">
             <label for="teamname"> Name: </label>
             <input type="text" id="teamname" name="teamname">
 
@@ -48,7 +59,7 @@
             <textarea id="moreinfo" name="moreinfo" rows="8" cols="50" placeholder="big fat textbox" style="resize: none;"></textarea>
 
         </form>
-    </div>
+    <!-- </div> -->
 
     <br> 
 
