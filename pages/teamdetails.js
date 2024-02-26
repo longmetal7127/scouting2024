@@ -24,11 +24,13 @@ if (globalid) {
             const teamDetailsDiv = document.getElementById("team-details");
             teamDetailsDiv.innerHTML = `<p>Team Name: ${team.todo}</p>`;
         } else {
+            const teamDetailsDiv = document.getElementById("team-details");
+            teamDetailsDiv.innerHTML = `Team not found`;
             console.error("Team not found");
         }
     }).catch(error => {
         console.error("Error fetching team details:", error);
-    });
+    });q
 } else {
     console.error("Global ID not found in URL");
 }
