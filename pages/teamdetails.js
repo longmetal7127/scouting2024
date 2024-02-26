@@ -1,64 +1,64 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
+// document.addEventListener('DOMContentLoaded', async () => {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const id = urlParams.get('id');
   
-    const nameInput = document.getElementById('teamnumber');
-    const emailInput = document.getElementById('email');
+//     const nameInput = document.getElementById('teamnumber');
+//     const emailInput = document.getElementById('email');
   
-    // Check if ID exists, if yes, populate the form fields
-    if (id) {
-      try {
-        const response = await fetch(`/getData?id=${id}`);
-        const data = await response.json();
+//     // Check if ID exists, if yes, populate the form fields
+//     if (id) {
+//       try {
+//         const response = await fetch(`/getData?id=${id}`);
+//         const data = await response.json();
   
-        // Populate the form fields with existing data
-        nameInput.value = data.teamnumber || '';
-        emailInput.value = data.email || '';
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
+//         // Populate the form fields with existing data
+//         nameInput.value = data.teamnumber || '';
+//         emailInput.value = data.email || '';
+//       } catch (error) {
+//         console.error('Error fetching data:', error);
+//       }
+//     }
   
-    const form = document.getElementById('dataForm');
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+//     const form = document.getElementById('dataForm');
+//     form.addEventListener('submit', async (event) => {
+//       event.preventDefault();
   
-      const formData = {
-        name: nameInput.value,
-        email: emailInput.value
-      };
+//       const formData = {
+//         name: nameInput.value,
+//         email: emailInput.value
+//       };
   
-      try {
-        // Handle submitting new information
-        // Here you can send the formData to your server
-        console.log('Submitting data:', formData);
+//       try {
+//         // Handle submitting new information
+//         // Here you can send the formData to your server
+//         console.log('Submitting data:', formData);
   
-        // Optionally, you can also save the submitted data to IndexedDB
-        // This ensures that the form is pre-filled the next time it's accessed with the same ID
-        await saveDataToIndexedDB(formData, id);
+//         // Optionally, you can also save the submitted data to IndexedDB
+//         // This ensures that the form is pre-filled the next time it's accessed with the same ID
+//         await saveDataToIndexedDB(formData, id);
   
-        // Reset the form after submission
-        form.reset();
-      } catch (error) {
-        console.error('Error submitting data:', error);
-      }
-    });
-  });
+//         // Reset the form after submission
+//         form.reset();
+//       } catch (error) {
+//         console.error('Error submitting data:', error);
+//       }
+//     });
+//   });
   
-  async function saveDataToIndexedDB(data, id) {
-    const db = await openDB('myIndexedDB', 1);
-    const tx = db.transaction('storeName', 'readwrite');
-    const store = tx.objectStore('storeName');
+//   async function saveDataToIndexedDB(data, id) {
+//     const db = await openDB('myIndexedDB', 1);
+//     const tx = db.transaction('storeName', 'readwrite');
+//     const store = tx.objectStore('storeName');
   
-    // If an ID exists, update existing data; otherwise, add new data
-    if (id) {
-      await store.put(data, id);
-    } else {
-      await store.add(data);
-    }
+//     // If an ID exists, update existing data; otherwise, add new data
+//     if (id) {
+//       await store.put(data, id);
+//     } else {
+//       await store.add(data);
+//     }
   
-    await tx.done;
-  }
+//     await tx.done;
+//   }
 
 
 /* function submitform() {
