@@ -19,9 +19,9 @@
 </head>
 <body>
 
-	<nav>
+	<nav class="nav">
 		<div class = "heading">
-			<h1> Longmetal 7127 pineapple</h1>
+			<h1> Longmetal 7127</h1>
 		</div>
 		<div class = "topnav">
 			<a href="../index.html"> Teams </a> 
@@ -37,38 +37,41 @@
     </header>
     <br>
 
-    <!-- <div id="team-details"> -->
-        <!-- <form id="dataForm" class="teaminfo"> -->
+    <div class="team-details-container">
+        <div class="inner-container">
+            <!-- <form id="dataForm" class="teaminfo"> --> 
             <label for="teamname"> Name: </label>
-            <input type="text" id="teamname" name="teamname">
+            <input type="text" class="basicinfo" name="teamname">
 
             <br>
 
             <label for="teamnumber"> Team Number: </label>
-            <input type="text" id="teamnumber" name="teamnumber" maxlength="4">
+            <input type="text" class="basicinfo" name="teamnumber" maxlength="4">
         
 
             <br>
 
             <label for="teamschool"> Based In: </label>
-            <input type="text" id="teamschool" name="teamschool">
+            <input type="text" class="basicinfo" name="teamschool">
 
-            <br><br>
+            <br>
+            <!-- </form> -->
+        </div>
         
-            <label for="moreinfo"> More Info: </label><br>
-            <textarea id="moreinfo" name="moreinfo" rows="8" cols="50" placeholder="big fat textbox" style="resize: none;"></textarea>
+        <div class="inner-container">
+            <input type="file" name="team-image" accept="image/gif, image/jpeg, image/png, image/jpg">
+        </div>
+        
+    </div> <br> 
 
-        <!-- </form> -->
-    <!-- </div> -->
+    <label for="moreinfo"> More Info: </label>
+    <textarea class="moreinfo" name="moreinfo" rows="8" cols="50" placeholder="big fat textbox" style="resize: none;"></textarea> <br>
 
-    <br> 
+    <h2> Abilities </h2><br>
 
-    <h2> Abilities </h2>
-
-    <br>
 <!-- Autonomous Survey-->
     <label for="Autonomous Starting position"> Autonomous Starting Position: </label>
-        <input type="text" id="startingpos" name="startingpos" maxlength="1">
+        <input type="text" class="moreinfo" name="startingpos" maxlength="100"><br>
     
     <form action="/action_page.php">
         <input type="checkbox" id="action1" name="Leaveszone" value="leaves">
@@ -89,7 +92,7 @@
         <br>
 <!-- Teleop Survey-->
     <form action="/action_page.php">
-        <p>Preferred scoring method:</p>
+        <p class="ptext">Preferred scoring method:</p>
         <input type="radio" id="amp" name="score" value="amp">
         <label for="amp">Amp</label><br>
         <input type="radio" id="speaker" name="score" value="speaker">
@@ -100,32 +103,33 @@
 
         <br>
 
-        <p>Preferred Intake method:</p>
-        <input type="radio" id="ground" name="intake" value="ground">
-        <label for="ground">Ground</label><br>
-        <input type="radio" id="human" name="intake" value="human">
-        <label for="human">Human Player</label><br>
-        <input type="radio" id="" name="intake" value="either">
+        <p class="ptext">Preferred Intake method:</p>
+        <label for="ground">Ground</label>
+        <input type="radio" class="radio" id="ground" name="intake" value="ground">
+        <label for="human">Human Player</label>
+        <input type="radio" class="radio" id="human" name="intake" value="human">
         <label for="either">Either</label>
-    </form>    
+        <input type="radio" class="radio" id="either" name="intake" value="either">
+        
+    </form><br> 
 
     <label for="prefintake"> Other: </label>
-    <input type="text" id="" name="prefintake" maxlength="1">
+    <input type="text" id="othertext" name="prefintake" maxlength="100">
 
     <br>
 
     <form action="/action_page.php">
-        <p>Preferred scoring method:</p>
+        <p class="ptext">Preferred scoring method:</p>
         <input type="radio" id="amp" name="score" value="amp">
         <label for="amp">Amp</label><br>
         <input type="radio" id="speaker" name="score" value="speaker">
         <label for="css">Speaker</label><br>
         <input type="radio" id="either" name="score" value="either">
         <label for="either">Either</label>
-    </form>      
+    </form><br>      
     
     <form action="/action_page.php">
-        <p>Stage abilities:</p>
+        <p class="ptext">Stage abilities:</p>
         <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
         <label for="spotlight"> Enters stage</label><br>
         <input type="checkbox" id="trap" name="trap" value="trap">
