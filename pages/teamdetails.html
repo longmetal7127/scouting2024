@@ -19,8 +19,6 @@
 </head>
 <body>
 
-
-
 	<nav>
 		<div class = "heading">
 			<h1> Longmetal 7127 </h1>
@@ -66,6 +64,87 @@
     <br> 
 
     <h2> Abilities </h2>
+
+    <br>
+<!-- Autonomous Survey-->
+    <label for="Autonomous Starting position"> Autonomous Starting Position: </label>
+        <input type="text" id="startingpos" name="startingpos" maxlength="1">
+    
+    <form action="/action_page.php">
+        <input type="checkbox" id="action1" name="Leaveszone" value="leaves">
+        <label for="action1"> Leaves zone</label><br>
+        <input type="checkbox" id="action2.0" name="scores1amp" value="scores1amp">
+        <label for="action2.0"> Scores 1st in amp</label><br>
+        <input type="checkbox" id="action2.1" name="scores1speaker" value="scores1speaker">
+        <label for="action2.1"> Scores 1st in speaker</label><br><br>
+        <input type="checkbox" id="action3" name="picksup" value="picksup">
+        <label for="action3"> Picks up new note</label><br><br>
+        <input type="checkbox" id="action4.0" name="scores2amp" value="scores2amp">
+        <label for="action4.0"> Scores 2nd in amp</label><br>
+        <input type="checkbox" id="action4.1" name="scores2speaker" value="scores2speaker">
+        <label for="action4.1"> Scores 2nd in speaker</label><br><br>
+        
+        </form>
+
+        <br>
+<!-- Teleop Survey-->
+    <form action="/action_page.php">
+        <p>Preferred scoring method:</p>
+        <input type="radio" id="amp" name="score" value="amp">
+        <label for="amp">Amp</label><br>
+        <input type="radio" id="speaker" name="score" value="speaker">
+        <label for="css">Speaker</label><br>
+        <input type="radio" id="either" name="score" value="either">
+        <label for="either">Either</label>
+        </form>    
+
+        <br>
+
+        <p>Preferred Intake method:</p>
+        <input type="radio" id="ground" name="intake" value="ground">
+        <label for="ground">Ground</label><br>
+        <input type="radio" id="human" name="intake" value="human">
+        <label for="human">Human Player</label><br>
+        <input type="radio" id="" name="intake" value="either">
+        <label for="either">Either</label>
+    </form>    
+
+    <label for="prefintake"> Other: </label>
+    <input type="text" id="" name="prefintake" maxlength="1">
+
+    <br>
+
+    <form action="/action_page.php">
+        <p>Preferred scoring method:</p>
+        <input type="radio" id="amp" name="score" value="amp">
+        <label for="amp">Amp</label><br>
+        <input type="radio" id="speaker" name="score" value="speaker">
+        <label for="css">Speaker</label><br>
+        <input type="radio" id="either" name="score" value="either">
+        <label for="either">Either</label>
+    </form>      
+    
+    <form action="/action_page.php">
+        <p>Stage abilities:</p>
+        <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
+        <label for="spotlight"> Enters stage</label><br>
+        <input type="checkbox" id="trap" name="trap" value="trap">
+        <label for="trap"> Scores in trapdoor </label><br>
+        <input type="checkbox" id="alone" name="alone" value="alone">
+        <label for="alone"> Hangs alone </label><br>
+        <input type="checkbox" id="another" name="another" value="another">
+        <label for="another"> Hangs with another </label><br>
+    </form>
+
+    <br>
+
+    <!-- Human Player Survey-->
+    <form action="/action_page.php">
+        <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
+        <label for="spotlight"> Attempts Spotlight</label><br>
+        <input type="checkbox" id="coop" name="coop" value="coop">
+        <label for="coop"> Favors coopertition button</label><br>
+    </form>
 
     <br>
 
