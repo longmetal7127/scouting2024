@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Team Details</title>
     <link rel="stylesheet" href="teams.css" />
@@ -12,10 +13,11 @@
         if ("serviceWorker" in navigator) {
           // Use the window load event to keep the page load performant
           window.addEventListener("load", () => {
-            navigator.serviceWorker.register("./sw.js");
+            navigator.serviceWorker.register("../sw2.js");
           });
-        }
-    </script>
+		}
+		</script>
+	<script href="manifest.json"></script>
 </head>
 <body>
 
@@ -39,8 +41,8 @@
     </header>
     <br>
 
-    <!-- <div id="team-details"> -->
-        <!-- <form id="dataForm" class="teaminfo"> -->
+    <div id="team-details">
+        <form id="dataForm" class="teaminfo">
             <label for="teamname"> Name: </label>
             <input type="text" id="teamname" name="teamname">
 
@@ -59,30 +61,15 @@
         
             <label for="moreinfo"> More Info: </label><br>
             <textarea id="moreinfo" name="moreinfo" rows="8" cols="50" placeholder="big fat textbox" style="resize: none;"></textarea>
-
-        <!-- </form> -->
-    <!-- </div> -->
-
     <br> 
 
     <h2> Abilities </h2>
 
     <br>
 
-    <input type="submit" class="submit">
-
-
-    <!-- <h1>Team Details</h1>
-    <div id="team-details">
-       Team details will be displayed here 
-    </div> -->
-    
-    <input type="submit" class="submit" id="submit">
-
-    <!-- NOTE: add a "CANCEL" button if any changes are made to the text fields in case changes are not to be saved-->
-
-
+    <input type="submit" class="submitButton" id="submitButton">
+</form>
+</div>
     <script src="teamdetails.js"></script>
-
 </body>
 </html>
