@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' 'unsafe-inline' http://127.0.0.1:5500">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="expires" content="0">
     <title> Team Details</title>
-    <link rel="stylesheet" href="teams.css" />
-    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <link rel="stylesheet" href="../css/teams.css" />
+    <script src="../js/dexie.js"></script>
 
-    <script>
+    <!-- <script>
         // Check that service workers are supported
         if ("serviceWorker" in navigator) {
           // Use the window load event to keep the page load performant
@@ -16,7 +18,7 @@
             navigator.serviceWorker.register("../sw2.js");
           });
 		}
-		</script>
+		</script> -->
 	<script href="manifest.json"></script>
 </head>
 <body>
@@ -68,7 +70,6 @@
     <label for="Autonomous Starting position"> Autonomous Starting Position: </label>
         <input type="text" id="startingpos" name="startingpos" maxlength="1">
     
-    <form action="/action_page.php">
         <input type="checkbox" id="action1" name="Leaveszone" value="leaves">
         <label for="action1"> Leaves zone</label><br>
         <input type="checkbox" id="action2.0" name="scores1amp" value="scores1amp">
@@ -82,11 +83,9 @@
         <input type="checkbox" id="action4.1" name="scores2speaker" value="scores2speaker">
         <label for="action4.1"> Scores 2nd in speaker</label><br><br>
         
-        </form> 
 
         <br>
 <!-- Teleop Survey-->
-    <form action="/action_page.php">
         <p>Preferred scoring method:</p>
         <input type="radio" id="amp" name="score" value="amp">
         <label for="amp">Amp</label><br>
@@ -94,7 +93,6 @@
         <label for="css">Speaker</label><br>
         <input type="radio" id="either" name="score" value="either">
         <label for="either">Either</label>
-        </form>    
 
         <br>
 
@@ -105,14 +103,12 @@
         <label for="human">Human Player</label><br>
         <input type="radio" id="" name="intake" value="either">
         <label for="either">Either</label>
-    </form>    
 
     <label for="prefintake"> Other: </label>
     <input type="text" id="" name="prefintake" maxlength="1">
 
     <br>
 
-    <form action="/action_page.php">
         <p>Preferred scoring method:</p>
         <input type="radio" id="amp" name="score" value="amp">
         <label for="amp">Amp</label><br>
@@ -120,9 +116,7 @@
         <label for="css">Speaker</label><br>
         <input type="radio" id="either" name="score" value="either">
         <label for="either">Either</label>
-    </form>      
     
-    <form action="/action_page.php">
         <p>Stage abilities:</p>
         <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
         <label for="spotlight"> Enters stage</label><br>
@@ -132,17 +126,14 @@
         <label for="alone"> Hangs alone </label><br>
         <input type="checkbox" id="another" name="another" value="another">
         <label for="another"> Hangs with another </label><br>
-    </form>
 
     <br>
 
     <!-- Human Player Survey-->
-    <form action="/action_page.php">
         <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
         <label for="spotlight"> Attempts Spotlight</label><br>
         <input type="checkbox" id="coop" name="coop" value="coop">
         <label for="coop"> Favors coopertition button</label><br>
-    </form>
 
     <br>
 
@@ -151,7 +142,8 @@
        Team details will be displayed here 
     </div> -->
     
-    <input type="submit" class="submit" id="submit">
+    <input type="submit" class="submit" id="submitButton">
+</form>
 
     <!-- NOTE: add a "CANCEL" button if any changes are made to the text fields in case changes are not to be saved-->
 

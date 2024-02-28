@@ -1,5 +1,5 @@
-const db = new Dexie("Todo App");
-db.version(1).stores({ todos: "++id, todo, globalid" });
+const db = new Dexie("Team Tracking App");
+db.version(1).stores({ teams: "++id, teamname, globalid" });
 
 const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
@@ -8,70 +8,45 @@ const list_el = document.querySelector("#teams");
 //add team
 form.onsubmit = async (event) => {
   event.preventDefault();
-  const todo = input.value;
+  const teamname = input.value;
   let DateObj = new Date();
   const globalid = DateObj.getTime();
-  await db.todos.add({ todo , globalid });
-  await getTodos();
+  await db.teams.add({ teamname , globalid });
+  await getTeams();
   form.reset();
 };
 
 
 //display team
-const getTodos = async () => {
-  const allTodos = await db.todos.reverse().toArray();
-  list_el.innerHTML = allTodos
+const getTeams = async () => {
+  const allTeams = await db.teams.reverse().toArray();
+  list_el.innerHTML = allTeams
     .map(
-      (todo) => `
+      (teams) => `
 	
 	<div class="team">
 	<div class="content">
-	<input id="edit" class="text" readonly="readonly" type="text" value= ${todo.todo}>
+	<input id="edit" class="text" readonly="readonly" type="text" value= ${teams.teamname}>
   </div>  
 	<div class="actions">
-  <div>${todo.globalid}</div>
-	<button class="delete" onclick="deleteTodo(event, ${todo.id})">Delete</button>
-  <button class="edit" onclick="editTeam(${todo.globalid})">Edit</button>
+  <div>${teams.globalid}</div>
+	<button class="delete" onclick="deleteTodo(event, ${teams.id})">Delete</button>
+  <button class="edit" onclick="editTeam(${teams.globalid})">Edit</button>
 	</div>
 	</div>
 	`
     )
     .join("");
 };
-window.onload = getTodos;
+window.onload = getTeams;
 
 //delete todo
-const deleteTodo = async (event, id) => {
-  await db.todos.delete(id);
-  await getTodos();
+const deleteTeams = async (event, id) => {
+  await db.teams.delete(id);
+  await getTeams();
 };
 
 function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_blank");
 }
-// CHATGPT CODE TO CONNECT TO MYSQL SERVER
 
-// function saveTeam(teamName) {
-//   db.teams.add({ name: teamName }).then(() => {
-//       syncTeamWithServer(teamName);
-//   });
-// }
-
-// function syncTeamWithServer(teamName) {
-//   fetch('/sync', {
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ teamName: teamName })
-//   })
-//   .then(response => {
-//       if (!response.ok) {
-//           throw new Error('Failed to sync data');
-//       }
-//       return response.json();
-//   })
-//   .catch(error => {
-//       console.error(error);
-//   });
-// }

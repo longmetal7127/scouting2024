@@ -5,5 +5,6 @@
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/75452281-a54f-4c9c-8599-687235b1ed8e/resourceGroups/Soucting2024_group/providers/Microsoft.Web/sites/Soucting2024",
     "appService.deploySubpath": ".",
-    "liveServer.settings.multiRootWorkspaceName": "scouting2024"
+    "liveServer.settings.multiRootWorkspaceName": "scouting2024",
+    "liveServer.settings.CustomBrowser": "chrome"
 }
