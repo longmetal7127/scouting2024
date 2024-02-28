@@ -16,10 +16,19 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
-	
 }
 
-#moreinfo {
+#othertext {
+	width: 80%;
+	margin-left: 50px;
+}
+
+.basicinfo {
+	width: 30%;
+	margin-left: 50px;
+}
+
+.moreinfo {
 	width: 80%;
 	margin-left: 50px;
 	
@@ -59,6 +68,22 @@ header {
 	/*max-width: 1000px;*/
 	width: 100%;
 	margin: 0 auto;
+}
+
+label {
+	margin-left: 20px;
+}
+
+input {
+	margin-left: 30px;
+}
+
+.ptext {
+	margin-left: 10px;
+}
+
+.inner-container {
+	float: left;
 }
 
 header h1{ 
