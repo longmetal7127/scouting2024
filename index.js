@@ -16,7 +16,6 @@ form.onsubmit = async (event) => {
   form.reset();
 };
 
-
 //display team
 const getTeams = async () => {
   const allTeams = await db.teams.reverse().toArray();
