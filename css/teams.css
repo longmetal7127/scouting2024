@@ -24,8 +24,25 @@
 }
 
 .basicinfo {
-	width: 30%;
-	margin-left: 50px;
+	width: 40%;
+	margin-left: 10px;
+	border-bottom-color: black;
+	border-top-color: var(--background);
+	border-left-color: var(--background);
+	border-right-color: var(--background);
+	border-style: dashed;
+	border-width: 1.5px;
+}
+
+.basicinfonumber {
+	width: 15%;
+	margin-left: 10px;
+	border-bottom-color: black;
+	border-top-color: var(--background);
+	border-left-color: var(--background);
+	border-right-color: var(--background);
+	border-style: dashed;
+	border-width: 1.5px;
 }
 
 .moreinfo {
@@ -76,6 +93,9 @@ label {
 
 input {
 	margin-left: 30px;
+	font-family: inherit;
+	font-weight: inherit;
+	font-size: 12pt;
 }
 
 .ptext {
@@ -100,6 +120,10 @@ body {
 	min-height: 100vh;
 	font-family: monospace;
 	font-size: 1.125rem;
+}
+
+.leftaligneddiv {
+	flex-direction: flex-start;
 }
 
 h1 {
