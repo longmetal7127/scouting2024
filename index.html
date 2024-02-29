@@ -3,15 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	
-	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' 'unsafe-inline' http://127.0.0.1:5500">
+	<!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' 'unsafe-inline' http://127.0.0.1:5500"> -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="expires" content="0">
+	<!-- <meta http-equiv="expires" content="0"> -->
 	<title>Teams</title>
 	<link rel="stylesheet" href="css/index.css" />
 	<script src="js/dexie.js"></script>
 
-	<!-- <script>
+	<script>
 		// Check that service workers are supported
 		if ("serviceWorker" in navigator) {
 		// Use the window load event to keep the page load performant
@@ -19,9 +19,7 @@
 			navigator.serviceWorker.register("./sw.js");
 		});
 		}
-	</script> -->
-
-
+	</script>
 	
 	<script href="manifest.json"></script>
 
