@@ -12,29 +12,52 @@ self.addEventListener("install", async (event) => {
 });
 
 // Fetching resources
-self.addEventListener("fetch", (event) => {
+self.addEventListener('fetch', event => {
   event.respondWith(
-    (async () => {
-      const cache = await caches.open(cacheName);
-
-      try {
-        const cachedResponse = await cache.match(event.request);
-        if (cachedResponse) {
-          console.log("cachedResponse: ", event.request.url);
-          return cachedResponse;
+    // Try fetching from the network first
+    fetch(event.request)
+      .then(response => {
+        // If request succeeds, clone the response to cache and return the response
+        if (response && response.status === 200) {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+          return response;
         }
-
-        const fetchResponse = await fetch(event.request);
-        if (fetchResponse) {
-          console.log("fetchResponse: ", event.request.url);
-          await cache.put(event.request, fetchResponse.clone());
-          return fetchResponse;
-        }
-      } catch (error) {
-        console.log("Fetch failed: ", error);
-        const cachedResponse = await cache.match("index.html");
-        return cachedResponse;
-      }
-    })()
+        // If request fails (e.g., network error), fall back to the cache
+        return caches.match(event.request);
+      })
+      .catch(error => {
+        // If fetch from network fails, try serving from cache
+        return caches.match(event.request);
+      })
   );
 });
+
+
+// self.addEventListener("fetch", (event) => {
+//   event.respondWith(
+//     (async () => {
+//       const cache = await caches.open(cacheName);
+//       try {
+//         const cachedResponse = await cache.match(event.request);
+//         if (cachedResponse) {
+//           console.log("cachedResponse: ", event.request.url);
+//           return cachedResponse;
+//         }
+//         const fetchResponse = await fetch(event.request);
+//         if (fetchResponse) {
+//           console.log("fetchResponse: ", event.request.url);
+//           await cache.put(event.request, fetchResponse.clone());
+//           return fetchResponse;
+//         }
+//       } catch (error) {
+//         console.log("Fetch failed: ", error);
+//         const cachedResponse = await cache.match("index.html");
+//         return cachedResponse;
+//       }
+//     })()
+//   );
+// });
