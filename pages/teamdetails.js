@@ -1,27 +1,19 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Initialize Dexie database
-    const db = new Dexie("Team Tracking App");
-    db.version(1).stores({
-       teams: "++id, teamname, globalid" 
-    });
-  
-    // Retrieve data from IndexedDB and fill the textbox if it exists
-    const existingData = await db.teams.get(1); // Assuming you have only one record
-    if (existingData && existingData.todo) {
-        document.getElementById('teamname').value = existingData.teamname;
-    }
-  
-    // Event listener for submit button
-    document.getElementById('submitButton').addEventListener('click', async () => { 
-        const newData = document.getElementById('teamname').value;
-  
-        // Save or update data in IndexedDB
-        if (existingData) {
-            await db.teams.update(1, { teamname: newData });
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const globalid = parseInt(urlParams.get('globalid'));
+        
+        const db = new Dexie("Team Tracking App");
+        db.version(1).stores({ teams: "++id, teamname, globalid" });
+
+        const team = await db.teams.where('globalid').equals(globalid).first();
+        if (team) {
+            const teamDetailsDiv = document.getElementById('teamname');
+            teamDetailsDiv.value = `${team.teamname}`;
         } else {
-            await db.teams.add({ teamname: newData });
+            console.log(`Team with ID ${globalid} not found.`);
         }
-  
-        alert('Data saved successfully!');
-    });
-  });
+    } catch (error) {
+        console.error("Error accessing database:", error);
+    }
+});

@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' 'unsafe-inline' http://127.0.0.1:5500">
+	
+	<!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' 'unsafe-inline' http://127.0.0.1:5500"> -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="expires" content="0">
+	<!-- <meta http-equiv="expires" content="0"> -->
 	<title>Teams</title>
 	<link rel="stylesheet" href="css/index.css" />
 	<script src="js/dexie.js"></script>
 
-	<!-- <script>
+	<script>
 		// Check that service workers are supported
 		if ("serviceWorker" in navigator) {
 		// Use the window load event to keep the page load performant
@@ -18,31 +19,13 @@
 			navigator.serviceWorker.register("./sw.js");
 		});
 		}
-		</script>
-	<script href="manifest.json"></script> -->
+	</script>
+	
+	<script href="manifest.json"></script>
 
 </head>
 
 <body>
-	<script>
-		async function registerServiceWorker() {
-		  if ("serviceWorker" in navigator) {
-			try {
-			  const registration = await navigator.serviceWorker.register(
-				"sw.js"
-			  );
-			  console.log(
-				"Service Worker registered with scope:",
-				registration.scope
-			  );
-			} catch (error) {
-			  console.error("Service Worker registration failed:", error);
-			}
-		  }
-		}
-  
-		registerServiceWorker();
-	  </script>
 	<nav>
 		<div class = "heading">
 			<h1>Longmetal 7127 test</h1>
