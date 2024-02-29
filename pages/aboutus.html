@@ -34,13 +34,13 @@
     </style>
 
     <script>
-	// Check that service workers are supported
-	if ("serviceWorker" in navigator) {
-	  // Use the window load event to keep the page load performant
-	  window.addEventListener("load", () => {
-		navigator.serviceWorker.register("./sw.js");
-	  });
-	}
+        // Check that service workers are supported
+        if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("./sw.js");
+        });
+        }
 	</script>
 
 </head>
@@ -67,32 +67,31 @@
     </div>
     <!-- Space or new line between the box and the bullet list -->
     <p class="indented"><strong>Autonomous</strong></p>
+
     <ul>
         <li class="bullet-list">prefer position ___ </li>
         <li class="bullet-list">leaves position and shoots in ___ </li>
-    </ul>
-    <br>
+    </ul><br>
+
     <p class="indented"><strong>TeleOp</strong></p>
     <ul>
         <li class="bullet-list">prefer scoring in ___ </li>
         <li class="bullet-list">prefer intaking from ___ </li>
         <li class="bullet-list">can hang with ___ </li>
-    </ul>
-    <br>
+    </ul><br>
+
     <p class="indented"><strong>Human Player</strong></p>
     <ul></ul>
         <li class="bullet-list">prefer the coopertition button </li>
         <li class="bullet-list">don't attempt the spotlight </li>
-    </ul>
-    <br>
+    </ul><br>
+
     <div class="capability-box">
         <h2>Our Stats:</h2>
     </div>
     <br>
-    <p class="indented"><strong>Current Ranking:</strong> <input type="text" class="ranking-input"></p>
-    <br>
-    <p class="indented"><strong>Average points scored:</strong> <input type="text" class="ranking-input"></p>
-    <br>
+    <p class="indented"><strong>Current Ranking:</strong> <input type="text" class="ranking-input"></p><br>
+    <p class="indented"><strong>Average points scored:</strong> <input type="text" class="ranking-input"></p><br>
 
     <input type="submit" class="submit" value="Save">
 
