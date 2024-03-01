@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const globalid = parseInt(urlParams.get('globalid','teamnumber'));
         
         const db = new Dexie("Team Tracking App");
-        db.version(1).stores({ teams: "++id, teamname, globalid" });
+        db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber" });
 
         const team = await db.teams.where('globalid').equals(globalid).first();
         if (team) {
