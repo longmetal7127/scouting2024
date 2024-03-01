@@ -42,105 +42,105 @@
     </header>
     <br>
 
-    <div class="team-details-container">
-        <div class="inner-container">
-            <!-- <form id="dataForm" class="teaminfo"> --> 
-            <label for="teamname"> Name: </label>
-            <input type="text" class="basicinfo" name="teamname" id="teamname"><br>
-
-            <label for="teamnumber"> Team Number: </label>
-            <input type="text" class="basicinfonumber" name="teamnumber" maxlength="4"><br>
-
-            <label for="teamschool"> Based In: </label>
-            <input type="text" class="basicinfo" name="teamschool"><br>
-
-            <label for="alliancescore"> Alliance Score: </label>
-            <input type="text" class="basicinfonumber" name="alliancescore"><label>/10</label>
-            
-            <!-- </form> -->
-        </div>
-        
-        <!-- 
+    <form> 
+        <div class="team-details-container">
             <div class="inner-container">
-                input type="file" name="team-image" accept="image/gif, image/jpeg, image/png, image/jpg">
-            </div> 
-        -->
+                <!-- <form id="dataForm" class="teaminfo"> --> 
+                <label for="teamname"> Name: </label>
+                <input type="text" class="basicinfo" name="teamname" id="teamname"><br>
+
+                <label for="teamnumber"> Team Number: </label>
+                <input type="number" class="basicinfonumber" name="teamnumber" max="9999" min="0"><br>
+
+                <label for="teamschool"> Based In: </label>
+                <input type="text" class="basicinfo" name="teamschool"><br>
+
+                <label for="alliancescore"> Alliance Score: </label>
+                <input type="number" class="basicinfonumber" name="alliancescore" max="10" min="-10" step="0.1"><label>/10</label>
+                
+                <!-- </form> -->
+            </div>
+            
+            <!-- 
+                <div class="inner-container">
+                    input type="file" name="team-image" accept="image/gif, image/jpeg, image/png, image/jpg">
+                </div> 
+            -->
+        </div> <br> 
+
+        <label for="moreinfo"> More Info: </label>
+        <textarea class="moreinfo" name="moreinfo" rows="10" cols="50" placeholder="big fat textbox" style="resize: none;"></textarea> <br>
+
+        <h2> Abilities </h2><br>
+
+    <!-- Autonomous Survey-->
+
+        <div class="leftaligneddiv">
+            <label for="Autonomous Starting position"> Autonomous Starting Position: </label>
+            <input type="text" class="moreinfo" name="startingpos" maxlength="100"><br><br>
         
-    </div> <br> 
+            <input type="checkbox" id="action1" name="Leaveszone" value="leaves">
+            <label for="action1"> Leaves zone</label><br>
+            <input type="checkbox" id="action2.0" name="scores1amp" value="scores1amp">
+            <label for="action2.0"> Scores 1st in amp</label><br>
+            <input type="checkbox" id="action2.1" name="scores1speaker" value="scores1speaker">
+            <label for="action2.1"> Scores 1st in speaker</label><br><br>
+            <input type="checkbox" id="action3" name="picksup" value="picksup">
+            <label for="action3"> Picks up new note</label><br><br>
+            <input type="checkbox" id="action4.0" name="scores2amp" value="scores2amp">
+            <label for="action4.0"> Scores 2nd in amp</label><br>
+            <input type="checkbox" id="action4.1" name="scores2speaker" value="scores2speaker">
+            <label for="action4.1"> Scores 2nd in speaker</label><br>
+            
 
-    <label for="moreinfo"> More Info: </label>
-    <textarea class="moreinfo" name="moreinfo" rows="10" cols="50" placeholder="big fat textbox" style="resize: none;"></textarea> <br>
+            <br>
+    <!-- Teleop Survey-->
+            <p>Preferred scoring method:</p>
+            <input type="radio" id="amp" name="score" value="amp">
+            <label for="amp">Amp</label><br>
+            <input type="radio" id="speaker" name="score" value="speaker">
+            <label for="css">Speaker</label><br>
+            <input type="radio" id="either" name="score" value="either">
+            <label for="either">Either</label><br><br>
 
-    <h2> Abilities </h2><br>
+            <p class="ptext">Preferred Intake method:</p>
+            <label for="ground">Ground</label>
+            <input type="radio" class="radio" id="ground" name="intake" value="ground"><br>
+            <label for="human">Human Player</label>
+            <input type="radio" class="radio" id="human" name="intake" value="human"><br>
+            <label for="either">Either</label>
+            <input type="radio" class="radio" id="either" name="intake" value="either"><br><br>
 
-<!-- Autonomous Survey-->
+            <label for="prefintake"> Other: </label>
+            <input type="text" id="othertext" name="prefintake" maxlength="100"><br><br>
 
-    <div class="leftaligneddiv">
-        <label for="Autonomous Starting position"> Autonomous Starting Position: </label>
-        <input type="text" class="moreinfo" name="startingpos" maxlength="100"><br><br>
-    
-        <input type="checkbox" id="action1" name="Leaveszone" value="leaves">
-        <label for="action1"> Leaves zone</label><br>
-        <input type="checkbox" id="action2.0" name="scores1amp" value="scores1amp">
-        <label for="action2.0"> Scores 1st in amp</label><br>
-        <input type="checkbox" id="action2.1" name="scores1speaker" value="scores1speaker">
-        <label for="action2.1"> Scores 1st in speaker</label><br><br>
-        <input type="checkbox" id="action3" name="picksup" value="picksup">
-        <label for="action3"> Picks up new note</label><br><br>
-        <input type="checkbox" id="action4.0" name="scores2amp" value="scores2amp">
-        <label for="action4.0"> Scores 2nd in amp</label><br>
-        <input type="checkbox" id="action4.1" name="scores2speaker" value="scores2speaker">
-        <label for="action4.1"> Scores 2nd in speaker</label><br>
+            <p class="ptext">Stage abilities:</p>
+            <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
+            <label for="spotlight"> Enters stage</label><br>
+            <input type="checkbox" id="trap" name="trap" value="trap">
+            <label for="trap"> Scores in trapdoor </label><br>
+            <input type="checkbox" id="alone" name="alone" value="alone">
+            <label for="alone"> Hangs alone </label><br>
+            <input type="checkbox" id="another" name="another" value="another">
+            <label for="another"> Hangs with another </label><br>
+
+            <br>
+
+        <!-- Human Player Survey-->
+            <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
+            <label for="spotlight"> Attempts Spotlight</label><br>
+            <input type="checkbox" id="coop" name="coop" value="coop">
+            <label for="coop"> Favors coopertition button</label><br>
+
+            <br>
+        </div>
+        <!-- <h1>Team Details</h1>
+        <div id="team-details">
+        Team details will be displayed here 
+        </div> -->
         
-
-        <br>
-<!-- Teleop Survey-->
-        <p>Preferred scoring method:</p>
-        <input type="radio" id="amp" name="score" value="amp">
-        <label for="amp">Amp</label><br>
-        <input type="radio" id="speaker" name="score" value="speaker">
-        <label for="css">Speaker</label><br>
-        <input type="radio" id="either" name="score" value="either">
-        <label for="either">Either</label><br><br>
-
-        <p class="ptext">Preferred Intake method:</p>
-        <label for="ground">Ground</label>
-        <input type="radio" class="radio" id="ground" name="intake" value="ground"><br>
-        <label for="human">Human Player</label>
-        <input type="radio" class="radio" id="human" name="intake" value="human"><br>
-        <label for="either">Either</label>
-        <input type="radio" class="radio" id="either" name="intake" value="either"><br><br>
-
-        <label for="prefintake"> Other: </label>
-        <input type="text" id="othertext" name="prefintake" maxlength="100"><br><br>
-
-        <p class="ptext">Stage abilities:</p>
-        <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
-        <label for="spotlight"> Enters stage</label><br>
-        <input type="checkbox" id="trap" name="trap" value="trap">
-        <label for="trap"> Scores in trapdoor </label><br>
-        <input type="checkbox" id="alone" name="alone" value="alone">
-        <label for="alone"> Hangs alone </label><br>
-        <input type="checkbox" id="another" name="another" value="another">
-        <label for="another"> Hangs with another </label><br>
-
-        <br>
-
-    <!-- Human Player Survey-->
-        <input type="checkbox" id="spotlight" name="spotlight" value="spotlight">
-        <label for="spotlight"> Attempts Spotlight</label><br>
-        <input type="checkbox" id="coop" name="coop" value="coop">
-        <label for="coop"> Favors coopertition button</label><br>
-
-        <br>
-    </div>
-    <!-- <h1>Team Details</h1>
-    <div id="team-details">
-       Team details will be displayed here 
-    </div> -->
-    
         <input type="submit" class="submit" id="submitButton">
-</form> <!-- This form tag has no opening tag-->
+</form> 
 
     <!-- NOTE: add a "CANCEL" button if any changes are made to the text fields in case changes are not to be saved-->
 

@@ -19,3 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error accessing database:", error);
     }
 });
+
+form.onsubmit = async (event) => {
+    alert("submit button pressed");
+}
