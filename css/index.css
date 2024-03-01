@@ -87,6 +87,7 @@ input, button {
 	margin-right: 1rem;
 	color: var(--dark);
 	font-size: 1.25rem;
+	font-family: monospace;
 }
 
 #new-team-input::placeholder {
