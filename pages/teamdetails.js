@@ -27,11 +27,11 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
         const parsedGlobalId = parseInt(globalid, 10);
 
         const teamData = { 
-            teamname: teamName, 
+            teamname: teamname, 
             globalid: globalid,
-            teamnumber: teamNumber, 
-            teamschool: teamSchool,
-            alliancescore: allianceScore,
+            teamnumber: teamnumber, 
+            teamschool: teamschool,
+            alliancescore: alliancescore,
             moreinfo: moreinfo,
             Leaveszone: Leaveszone,
             scores1amp: scores1amp,
