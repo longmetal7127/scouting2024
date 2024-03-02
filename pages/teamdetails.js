@@ -92,7 +92,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             coop: coop
         };
 
-        const existingTeam = await db.teams.where('globalid').equals(GlobalId).first();
+        const existingTeam = await db.teams.where('globalid').equals(globalid).first();
 
         if (existingTeam) {
             await db.teams.update(existingTeam.id, teamData);
