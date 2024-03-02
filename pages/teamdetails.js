@@ -96,8 +96,13 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const scores2amp = document.getElementById('scores2amp').checked;
     const scores2speaker = document.getElementById('scores2speaker').checked;
 
-    const preferredScoringMethod = document.querySelector('input[name="score"]:checked').value;
-    const preferredIntakeMethod = document.querySelector('input[name="intake"]:checked').value;
+    //need to handle if no radio button is selected
+    const preferredScoringMethodElement = document.querySelector('input[name="score"]:checked');
+    const preferredScoringMethod = preferredScoringMethodElement ? preferredScoringMethodElement.value : undefined;
+
+    //need to handle if no radio button is selected
+    const preferredIntakeMethodElement = document.querySelector('input[name="score"]:checked');
+    const preferredIntakeMethod = preferredIntakeMethodElement ? preferredIntakeMethodElement.value : undefined;
 
 	const prefintake = document.getElementById('prefintake').value;
 	
