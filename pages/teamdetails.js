@@ -88,10 +88,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const scores2amp = document.getElementById('scores2amp').value;
     const scores2speaker = document.getElementById('scores2speaker').value;
 
-    const preferredScoringMethod = document.getElementById('preferredScoringMethod').value;
-    const preferredIntakeMethod = document.getElementById('teamnumber').value;
-    const otherIntakeInfo = document.getElementById('teamschool').value;
-    const stageAbilities = document.getElementById('alliancescore').value;
+    const preferredScoringMethod = document.getElementById('Preferred').value;
 
     const favorsCoopertition = document.getElementById('teamname').value;
 
