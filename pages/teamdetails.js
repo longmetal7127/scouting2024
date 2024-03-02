@@ -99,13 +99,15 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
         if (existingTeam) {
             await db.teams.update(existingTeam.id, teamData);
             console.log('Team data updated successfully:', existingTeam.id);
+            alert('Team data updated successfully:', existingTeam.id);
         } else {
+            let DateObj = new Date();
+            const globalid = DateObj.getTime();
+            parsedGlobalId = parseInt(globalid, 10);
             await db.teams.add({...teamData, globalid: parsedGlobalId});
-            console.log('New team added successfully:', teamName, teamNumber, parsedGlobalId);
+            console.log('New team added successfully:', teamname, teamnumber, parsedGlobalId);
+            alert('New team added successfully:', teamname, teamnumber, parsedGlobalId);
         }
-
-        alert("Team data successfully submitted.");
-
     } catch (error) {
         console.error("Error accessing database:", error);
     }
