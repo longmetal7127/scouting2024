@@ -49,25 +49,12 @@ async function submitTeamData(teamName, teamNumber, globalId) {
     }
 }
 
-// async function submitteamname(teamname, id) {
-//     const db = await openDB('myIndexedDB', 1); 
-//     // this is a completely new database object??
-//     const tx = db.transaction('storeName', 'readwrite');
-//     const store = tx.objectStore('storeName');
-
-//     // If an ID exists, update existing data; otherwise, add new data
-//     if (id) {
-//       await store.put(teamname, id);
-//     } else {
-//       await store.add(teamname);
-//     } // idk what this code does
-  
-//     await tx.done;
-// }
-
 document.getElementById("teaminfoform").addEventListener("submit", function(event) {
     event.preventDefault(); // prevent default form submission behavior
+    
     const teamname = document.getElementById('teamname').value;
+    const teamnumber = document.getElementById('teamnumber').value;
+
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("globalid");
 
