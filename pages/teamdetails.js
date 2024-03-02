@@ -105,6 +105,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
 
 	const prefintake = document.getElementById('prefintake').value;
 	
+    const spotlight = document.getElementById('spotlight').value;
 	const trap = document.getElementById('trap').value;
 	const alone = document.getElementById('alone').value;
 	const hangsWithAnother = document.getElementById('hangsWithAnother').value;
