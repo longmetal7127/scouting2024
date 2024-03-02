@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // no because we aren't adding anything to the page elsewhere.  We just add the number, it gets saved and that's it, it's already on the page although that doesn't seem to be working now.
 
-async function submitTeamData(globalid, teamname, teamnumber, teamschool, alliancescore, startingpos, leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, otherIntakeInfo, stageAbilities, favorsCoopertition) {
+async function submitTeamData(teamname, globalid, teamnumber, teamschool, alliancescore, startingpos, leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, otherIntakeInfo, stageAbilities, favorsCoopertition) {
     try {
         const parsedGlobalId = parseInt(globalId, 10);
 
@@ -101,7 +101,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const globalid = urlParams.get("globalid");
 
     // Pass the new data to submitTeamData
-    submitTeamData(globalid, teamname, teamnumber, teamschool, alliancescore, startingpos, leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, otherIntakeInfo, stageAbilities, favorsCoopertition);
+    submitTeamData(teamname, globalid, teamnumber, teamschool, alliancescore, startingpos, leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, otherIntakeInfo, stageAbilities, favorsCoopertition);
     
     alert("Team data successfully submitted.");
 });
