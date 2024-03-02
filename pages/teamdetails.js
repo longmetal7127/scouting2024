@@ -39,7 +39,7 @@ db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool,
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const urlParams = new URLSearchParams(window.location.search);
-        const globalid = parseInt(urlParams.get('globalid'));
+        const globalid = urlParams.get('globalid');
         
          // Use the globally initialized db instance
          const team = await db.teams.where('globalid').equals(globalid).first();
