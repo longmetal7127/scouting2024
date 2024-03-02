@@ -1,6 +1,6 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
+db.version(1).stores({ teams: "++id,  teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      }
 });
 
-async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
+async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
     try {
         const parsedGlobalId = parseInt(globalid, 10);
 
@@ -72,15 +72,21 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const startingpos = document.getElementById('startingpos').value;
 	const moreinfo = document.getElementById('moreinfo').value;
 
-	const Leaveszone = document.getElementById('Leaveszone').value;
-	const scores1amp = document.getElementById('scores1amp').value;
-	const scores1speaker = document.getElementById('scores1speaker').value;
-    const picksup = document.getElementById('picksup').value;
-    const scores2amp = document.getElementById('scores2amp').value;
-    const scores2speaker = document.getElementById('scores2speaker').value;
+	const Leaveszone = document.getElementById('Leaveszone').checked ;
+	const scores1amp = document.getElementById('scores1amp').checked ;
+	const scores1speaker = document.getElementById('scores1speaker').checked ;
+    const picksup = document.getElementById('picksup').checked ;
+    const scores2amp = document.getElementById('scores2amp').checked ;
+    const scores2speaker = document.getElementById('scores2speaker').checked ;
 	
 	const amp = document.getElementById('amp').value;
-	const Preferred = document.getElementById('Preferred').value;
+    const speaker = document.getElementById('speaker').value;
+    const scoreEither = document.getElementById('scoreEither').value;
+
+	const ground = document.getElementById('ground').value;
+    const human = document.getElementById('human').value;
+    const either = document.getElementById('either').value;
+
 	const prefintake = document.getElementById('prefintake').value;
 	
 	const trap = document.getElementById('trap').value;
@@ -95,7 +101,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const globalid = urlParams.get("globalid");
 
     // Pass the new data to submitTeamData
-    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
+    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
     
     alert("Team data successfully submitted.");
 });
