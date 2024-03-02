@@ -1,6 +1,6 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id,  teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
+db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      }
 });
 
-async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
+async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
     try {
         const parsedGlobalId = parseInt(globalid, 10);
 
@@ -45,13 +45,9 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             scores2amp: scores2amp,
             scores2speaker: scores2speaker,
             
-            amp: amp,
-            speaker: speaker,
-            scoreEither: scoreEither,
+            preferredScoringMethod: preferredScoringMethod,
 
-            ground: ground,
-            human: human,
-            either: either,
+            preferredIntakeMethod: preferredIntakeMethod,
 
             prefintake: prefintake,
 
@@ -73,6 +69,9 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             await db.teams.add({...teamData, globalid: parsedGlobalId});
             console.log('New team added successfully:', teamName, teamNumber, parsedGlobalId);
         }
+
+        alert("Team data successfully submitted.");
+
     } catch (error) {
         console.error("Error accessing database:", error);
     }
@@ -88,37 +87,30 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const startingpos = document.getElementById('startingpos').value;
 	const moreinfo = document.getElementById('moreinfo').value;
 
-	const Leaveszone = document.getElementById('Leaveszone').checked ;
-	const scores1amp = document.getElementById('scores1amp').checked ;
-	const scores1speaker = document.getElementById('scores1speaker').checked ;
-    const picksup = document.getElementById('picksup').checked ;
-    const scores2amp = document.getElementById('scores2amp').checked ;
-    const scores2speaker = document.getElementById('scores2speaker').checked ;
-	
-	const amp = document.getElementById('amp').value;
-    const speaker = document.getElementById('speaker').value;
-    const scoreEither = document.getElementById('scoreEither').value;
+    const Leaveszone = document.getElementById('Leaveszone').checked;
+    const scores1amp = document.getElementById('scores1amp').checked;
+    const scores1speaker = document.getElementById('scores1speaker').checked;
 
-	const ground = document.getElementById('ground').value;
-    const human = document.getElementById('human').value;
-    const either = document.getElementById('either').value;
+    const picksup = document.getElementById('picksup').checked;
+
+    const scores2amp = document.getElementById('scores2amp').checked;
+    const scores2speaker = document.getElementById('scores2speaker').checked;
+
+    const preferredScoringMethod = document.querySelector('input[name="score"]:checked').value;
+    const preferredIntakeMethod = document.querySelector('input[name="intake"]:checked').value;
 
 	const prefintake = document.getElementById('prefintake').value;
 	
-    const spotlight = document.getElementById('spotlight').value;
-	const trap = document.getElementById('trap').value;
-	const alone = document.getElementById('alone').value;
-	const hangsWithAnother = document.getElementById('hangsWithAnother').value;
-	const attemptsSpotlight = document.getElementById('attemptsSpotlight').value;
-	const coop = document.getElementById('coop').value;
-
-    // Capture other form data similarly
+    const spotlight = document.getElementById('spotlight').checked;
+	const trap = document.getElementById('trap').checked;
+	const alone = document.getElementById('alone').checked;
+	const hangsWithAnother = document.getElementById('hangsWithAnother').checked;
+	const attemptsSpotlight = document.getElementById('attemptsSpotlight').checked;
+	const coop = document.getElementById('coop').checked;
 
     const urlParams = new URLSearchParams(window.location.search);
     const globalid = urlParams.get("globalid");
 
-    // Pass the new data to submitTeamData
-    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
+    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
     
-    alert("Team data successfully submitted.");
 });
