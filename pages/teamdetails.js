@@ -1,6 +1,6 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, teamname, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
+db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      }
 });
 
-async function submitTeamData( teamname, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
+async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
     try {
         const parsedGlobalId = parseInt(globalId, 10);
 
@@ -96,7 +96,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const globalid = urlParams.get("globalid");
 
     // Pass the new data to submitTeamData
-    submitTeamData( teamname, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
+    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
     
     alert("Team data successfully submitted.");
 });
