@@ -61,7 +61,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             hangsWithAnother: hangsWithAnother,
 
             attemptsSpotlight: attemptsSpotlight,
-            coop: coop,
+            coop: coop
         };
 
         const existingTeam = await db.teams.where('globalid').equals(parsedGlobalId).first();
