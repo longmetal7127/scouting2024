@@ -28,4 +28,6 @@ document.getElementById("teaminfoform").onsubmit = () => {
     // why does it go to a new page (new query parameters) after pressing the submit button?
     //https://www.w3schools.com/tags/att_form_target.asp
     //https://www.w3schools.com/tags/att_form_action.asp
+
+    //If you go to the index.js file, it is the line in the function that reads window.open(`pages/teamdetails.html?globalid=${globalid}`, "_blank");  you want to remove the ,"_blank" part
 }
