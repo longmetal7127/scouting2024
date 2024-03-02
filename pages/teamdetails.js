@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-form.onsubmit = async (event) => {
-    alert("submit button pressed");
+document.getElementById("teaminfoform").onsubmit = () => {
+    
+    
+
+    alert("Form information successfully submitted.");
+    // why does it go to a new page (new query parameters) after pressing the submit button?
+    //https://www.w3schools.com/tags/att_form_target.asp
+    //https://www.w3schools.com/tags/att_form_action.asp
 }
