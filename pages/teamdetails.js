@@ -71,8 +71,11 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("globalid");
 
-    submitTeamData(teamname, teamNumber, id); // I forgot how the database is set up, does id refer to a team object or does the teamname have an id???
+    submitTeamData(teamname, teamnumber, id); // I forgot how the database is set up, does id refer to a team object or does the teamname have an id???
     // I guessed id = globalid
+
+    //the id is the globalid.  In general (except with sql) you want to keep control of your ids unless you have a complete understadning of how the system is setting them up.  In this case, I have no idea what that id++ is doing.  I assume it just adds to the last entry.  But does it go back to the 
+    //lowest entry if we delete one?  It makes it easier when we start pushing this stuff up to a central database.  We will have to check then for duplicate ids but the odds are greatly diminished when we are using the UNIX time since it is down to the second. 
 
     alert("Team name successfully submitted.");
 });
