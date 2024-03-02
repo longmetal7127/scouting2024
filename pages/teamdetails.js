@@ -14,6 +14,27 @@ document.addEventListener('DOMContentLoaded', async () => {
              teamNameElm.value = team.teamname;
              const teamNumElm = document.getElementById('teamnumber');
              teamNumElm.value = team.teamnumber;
+             const teamSchoolElm = document.getElementById('teamschool');
+             teamNumElm.value = team.teamschool;
+             const allianceScoreElm = document.getElementById('alliancescore');
+             teamNumElm.value = team.alliancescore;
+             const moreInfoElm = document.getElementById('moreinfo');
+             teamNumElm.value = team.moreinfo;
+             const startingPosElm = document.getElementById('startingpos');
+             teamNumElm.value = team.startingpos;
+             const LeavesZone = document.getElementById('Leaveszone');
+             teamNumElm.value = team.Leaveszone;
+             const scores1Amp = document.getElementById('scores1amp');
+             teamNumElm.value = team.scores1amp;
+             const scores1Speaker = document.getElementById('scores1speaker');
+             teamNumElm.value = team.scores1speaker;
+             const picksUp = document.getElementById('picksup');
+             teamNumElm.value = team.picksup;
+             const scores2Amp = document.getElementById('scores2amp');
+             teamNumElm.value = team.scores2amp;
+             const scores2SpeakerElm = document.getElementById('scores2speaker');
+             teamNumElm.value = team.scores2speaker;
+
          } else {
              console.log(`Team with ID ${globalid} not found.`);
          }
