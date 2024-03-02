@@ -166,12 +166,6 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     
 });
 
-// Assuming db is your Dexie database instance
-const db = new Dexie("Team Tracking App");
-db.version(1).stores({
-  teams: "++id,teamname,globalid,teamnumber,teamschool,alliancescore" // Define your schema as per your setup
-});
-
 // Function to print all teams to the console
 async function printTeams() {
   try {
