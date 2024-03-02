@@ -20,8 +20,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 // do we need to refresh the page in a similar way above in index.js? 
-//if the teamname changes then it should be reflected in team list page
+// if the teamname changes then it should be reflected in team list page
 
+// no because we aren't adding anything to the page elsewhere.  We just add the number, it gets saved and that's it, it's already on the page although that doesn't seem to be working now.
 
 
 // below is all broken code
