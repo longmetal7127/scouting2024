@@ -10,9 +10,8 @@ form.onsubmit = async (event) => {
   event.preventDefault();
   const teamname = input.value;
   let DateObj = new Date();
-  const globalid = DateObj.getTime();
-  const parsedGlobalid = parseInt(globalid,10);
-  await db.teams.add({ teamname , parsedGlobalid });
+  const globalid = parseInt(DateObj.getTime(),10);
+  await db.teams.add({ teamname , globalid });
   await getTeams();
   form.reset();
 };
