@@ -58,8 +58,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
     try {
-        const parsedGlobalId = parseInt(globalid, 10);
-
         const teamData = { 
             teamname: teamname, 
             globalid: globalid,
@@ -94,7 +92,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             coop: coop
         };
 
-        const existingTeam = await db.teams.where('globalid').equals(parsedGlobalId).first();
+        const existingTeam = await db.teams.where('globalid').equals(GlobalId).first();
 
         if (existingTeam) {
             await db.teams.update(existingTeam.id, teamData);
@@ -103,10 +101,9 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
         } else {
             let DateObj = new Date();
             const globalid = DateObj.getTime();
-            parsedGlobalId = parseInt(globalid, 10);
-            await db.teams.add({...teamData, globalid: parsedGlobalId});
-            console.log('New team added successfully:', teamname, teamnumber, parsedGlobalId);
-            alert('New team added successfully:', teamname, teamnumber, parsedGlobalId);
+            await db.teams.add({...teamData, globalid: globalid});
+            console.log('New team added successfully:', teamname, teamnumber, globalid);
+            alert('New team added successfully:', teamname, teamnumber, globalid);
         }
     } catch (error) {
         console.error("Error accessing database:", error);
