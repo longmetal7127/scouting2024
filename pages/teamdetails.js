@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const globalid = parseInt(urlParams.get('globalid'), 10);
         
          // Use the globally initialized db instance
-         const team = await db.teams.where('globalid').equals(globalid).first();
+         const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
          if (team) {
              const teamNameElm = document.getElementById('teamname');
              teamNameElm.value = team.teamname;
@@ -67,7 +67,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
         } else {
             let DateObj = new Date();
             const globalid = DateObj.getTime();
-            await db.teams.add({...teamData, globalid: globalid});
+            await db.teams.add({...teamData, globalid: parseInt(globalid,10)});
             console.log('New team added successfully:', teamname, teamnumber, globalid);
             alert('New team added successfully:', teamname, teamnumber, globalid);
         }
@@ -113,7 +113,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
 	const coop = document.getElementById('coop').checked;
 
     const urlParams = new URLSearchParams(window.location.search);
-    const globalid = urlParams.get("globalid");
+    const globalid = parseInt(urlParams.get("globalid"),10);
 
     submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
     

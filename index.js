@@ -11,7 +11,8 @@ form.onsubmit = async (event) => {
   const teamname = input.value;
   let DateObj = new Date();
   const globalid = DateObj.getTime();
-  await db.teams.add({ teamname , globalid });
+  const parsedGlobalid = parseInt(globalid,10);
+  await db.teams.add({ teamname , parsedGlobalid });
   await getTeams();
   form.reset();
 };
