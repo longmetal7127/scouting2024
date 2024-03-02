@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error accessing database:", error);
     }
 });
-
+// do we need to refresh the page in a similar way above in index.js? 
+//if the teamname changes then it should be reflected in team list page
 
 
 
