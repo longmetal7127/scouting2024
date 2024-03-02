@@ -1,5 +1,5 @@
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
+db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
 const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
