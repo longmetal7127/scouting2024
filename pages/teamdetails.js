@@ -1,6 +1,6 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id,  teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
+db.version(1).stores({ teams: "++id,  teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      }
 });
 
-async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
+async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
     try {
         const parsedGlobalId = parseInt(globalid, 10);
 
@@ -32,18 +32,34 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             teamnumber: teamnumber, 
             teamschool: teamschool,
             alliancescore: alliancescore,
+
             moreinfo: moreinfo,
+            startingpos: startingpos,
+
             Leaveszone: Leaveszone,
             scores1amp: scores1amp,
             scores1speaker: scores1speaker,
+
             picksup: picksup,
+
             scores2amp: scores2amp,
             scores2speaker: scores2speaker,
-            Preferred: Preferred,
+            
+            amp: amp,
+            speaker: speaker,
+            scoreEither: scoreEither,
+
+            ground: ground,
+            human: human,
+            either: either,
+
             prefintake: prefintake,
+
+            spotlight: spotlight,
             trap: trap,
             alone: alone,
             hangsWithAnother: hangsWithAnother,
+
             attemptsSpotlight: attemptsSpotlight,
             coop: coop,
         };
@@ -101,7 +117,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const globalid = urlParams.get("globalid");
 
     // Pass the new data to submitTeamData
-    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
+    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, speaker, scoreEither, ground, human, either, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
     
     alert("Team data successfully submitted.");
 });
