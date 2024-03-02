@@ -1,37 +1,3 @@
-// self.addEventListener('fetch', function(event) {
-//     event.respondWith(
-//         caches.match(event.request)
-//             .then(function(response) {
-//                 // Cache hit - return response
-//                 if (response) {
-//                     return response;
-//                 }
-//                 var fetchRequest = event.request.clone();
-//                 return fetch(fetchRequest).then(
-//                     function(response) {
-//                         // Check if we received a valid response
-//                         if(!response || response.status !== 200 || response.type !== 'basic') {
-//                             return response;
-//                         }
-//                         var responseToCache = response.clone();
-//                         caches.open(CACHE_NAME)
-//                             .then(function(cache) {
-//                                 cache.put(event.request, responseToCache);
-//                             });
-
-//                         return response;
-//                     }
-//                 );
-//             })
-//             .catch(function() {
-//                 // If both the network and cache fail, show a generic fallback:
-//                 return caches.match('/fallback.html');
-//                 // Alternatively, you could return a custom error response here
-//             })
-//     );
-// });
-
-
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
 db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
@@ -39,7 +5,7 @@ db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool,
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const urlParams = new URLSearchParams(window.location.search);
-        const globalid = urlParams.get('globalid');
+        const globalid = parseInt(urlParams.get('globalid'), 10);
         
          // Use the globally initialized db instance
          const team = await db.teams.where('globalid').equals(globalid).first();
@@ -92,7 +58,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             coop: coop
         };
 
-        const existingTeam = await db.teams.where('globalid').equals(globalid).first();
+        const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
 
         if (existingTeam) {
             await db.teams.update(existingTeam.id, teamData);
