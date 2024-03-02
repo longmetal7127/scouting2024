@@ -40,7 +40,6 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             scores2speaker: scores2speaker,
             Preferred: Preferred,
             prefintake: prefintake,
-            spotlightEnters: spotlightEnters,
             trap: trap,
             alone: alone,
             hangsWithAnother: hangsWithAnother,
@@ -83,7 +82,6 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
 	const Preferred = document.getElementById('Preferred').value;
 	const prefintake = document.getElementById('prefintake').value;
 	
-	const spotlightEnters = document.getElementById('spotlightEnters').value;
 	const trap = document.getElementById('trap').value;
 	const alone = document.getElementById('alone').value;
 	const hangsWithAnother = document.getElementById('hangsWithAnother').value;
