@@ -46,6 +46,6 @@ const deleteTeams = async (event, id) => {
 };
 
 function editTeam(globalid) {
-  window.open(`pages/teamdetails.html?globalid=${globalid}`);//, "_blank");
+  window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
