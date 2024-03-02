@@ -39,7 +39,7 @@ const getTeams = async () => {
 };
 window.onload = getTeams;
 
-//delete todo
+//delete team
 const deleteTeams = async (event, id) => {
   await db.teams.delete(id);
   await getTeams();
