@@ -27,21 +27,43 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // below is all broken code
 
-async function submitteamname(teamname, id) {
-    const db = await openDB('myIndexedDB', 1); 
-    // this is a completely new database object??
-    const tx = db.transaction('storeName', 'readwrite');
-    const store = tx.objectStore('storeName');
+async function submitTeamData(teamName, teamNumber, globalId) {
+    try {
+        const db = new Dexie("Team Tracking App");
+        db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber" });
 
-    // If an ID exists, update existing data; otherwise, add new data
-    if (id) {
-      await store.put(teamname, id);
-    } else {
-      await store.add(teamname);
-    } // idk what this code does
-  
-    await tx.done;
+        // Check if the team with the given global ID exists
+        const existingTeam = await db.teams.where('globalid').equals(globalId).first();
+
+        // If the team exists, update its data
+        if (existingTeam) {
+            await db.teams.update(existingTeam.id, { teamname: teamName, teamnumber: teamNumber });
+            console.log('Team data updated successfully:', existingTeam.id);
+        } else {
+            // If the team doesn't exist, add it as a new entry
+            await db.teams.add({ teamname: teamName, teamnumber: teamNumber, globalid: globalId });
+            console.log('New team added successfully:', teamName, teamNumber, globalId);
+        }
+    } catch (error) {
+        console.error("Error accessing database:", error);
+    }
 }
+
+// async function submitteamname(teamname, id) {
+//     const db = await openDB('myIndexedDB', 1); 
+//     // this is a completely new database object??
+//     const tx = db.transaction('storeName', 'readwrite');
+//     const store = tx.objectStore('storeName');
+
+//     // If an ID exists, update existing data; otherwise, add new data
+//     if (id) {
+//       await store.put(teamname, id);
+//     } else {
+//       await store.add(teamname);
+//     } // idk what this code does
+  
+//     await tx.done;
+// }
 
 document.getElementById("teaminfoform").addEventListener("submit", function(event) {
     event.preventDefault(); // prevent default form submission behavior
