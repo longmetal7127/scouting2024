@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const teamNameElm = document.getElementById('teamname');
             teamNameElm.value = `${team.teamname}`;
             const teamNumElm = document.getElementById('teamnumber');
-            teamNumElm.value = `${team.teamname}`;
+            teamNumElm.value = `${team.teamnumber}`;
         } else {
             console.log(`Team with ID ${globalid} not found.`);
         }
