@@ -1,5 +1,5 @@
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, teamname, globalid" });
+db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber" });
 
 const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
