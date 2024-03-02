@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
     try {
-        const parsedGlobalId = parseInt(globalId, 10);
+        const parsedGlobalId = parseInt(globalid, 10);
 
         const teamData = { 
             teamname: teamName, 
