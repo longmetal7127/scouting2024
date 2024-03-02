@@ -71,7 +71,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("globalid");
 
-    submitteamname(teamname, id); // I forgot how the database is set up, does id refer to a team object or does the teamname have an id???
+    submitTeamData(teamname, teamNumber, id); // I forgot how the database is set up, does id refer to a team object or does the teamname have an id???
     // I guessed id = globalid
 
     alert("Team name successfully submitted.");
