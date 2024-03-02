@@ -1,6 +1,6 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, teamname, teamnumber, teamschool, alliancescore, startingpos, leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, otherIntakeInfo, stageAbilities, favorsCoopertition" });
+db.version(1).stores({ teams: "++id,  teamname, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      }
 });
 
-async function submitTeamData(teamname, globalid, teamnumber, teamschool, alliancescore, startingpos, leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, otherIntakeInfo, stageAbilities, favorsCoopertition) {
+async function submitTeamData( teamname, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop) {
     try {
         const parsedGlobalId = parseInt(globalId, 10);
 
@@ -31,7 +31,21 @@ async function submitTeamData(teamname, globalid, teamnumber, teamschool, allian
             teamnumber: teamNumber, 
             teamschool: teamSchool,
             alliancescore: allianceScore,
-            // Include other form data fields here, structured similarly
+            moreinfo: moreinfo,
+            Leaveszone: Leaveszone,
+            scores1amp: scores1amp,
+            scores1speaker: scores1speaker,
+            picksup: picksup,
+            scores2amp: scores2amp,
+            scores2speaker: scores2speaker,
+            Preferred: Preferred,
+            prefintake: prefintake,
+            spotlightEnters: spotlightEnters,
+            trap: trap,
+            alone: alone,
+            hangsWithAnother: hangsWithAnother,
+            attemptsSpotlight: attemptsSpotlight,
+            coop: coop,
         };
 
         const existingTeam = await db.teams.where('globalid').equals(parsedGlobalId).first();
@@ -55,15 +69,26 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const teamnumber = document.getElementById('teamnumber').value;
     const teamschool = document.getElementById('teamschool').value;
     const alliancescore = document.getElementById('alliancescore').value;
-
     const startingpos = document.getElementById('startingpos').value;
+	const moreinfo = document.getElementById('moreinfo').value;
+
+	const Leaveszone = document.getElementById('Leaveszone').value;
+	const scores1amp = document.getElementById('scores1amp').value;
+	const scores1speaker = document.getElementById('scores1speaker').value;
     const picksup = document.getElementById('picksup').value;
     const scores2amp = document.getElementById('scores2amp').value;
     const scores2speaker = document.getElementById('scores2speaker').value;
-
-    const preferredScoringMethod = document.getElementById('Preferred').value;
-
-    const favorsCoopertition = document.getElementById('teamname').value;
+	
+	const amp = document.getElementById('amp').value;
+	const Preferred = document.getElementById('Preferred').value;
+	const prefintake = document.getElementById('prefintake').value;
+	
+	const spotlightEnters = document.getElementById('spotlightEnters').value;
+	const trap = document.getElementById('trap').value;
+	const alone = document.getElementById('alone').value;
+	const hangsWithAnother = document.getElementById('hangsWithAnother').value;
+	const attemptsSpotlight = document.getElementById('attemptsSpotlight').value;
+	const coop = document.getElementById('coop').value;
 
     // Capture other form data similarly
 
@@ -71,7 +96,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const globalid = urlParams.get("globalid");
 
     // Pass the new data to submitTeamData
-    submitTeamData(teamname, globalid, teamnumber, teamschool, alliancescore, startingpos, leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, otherIntakeInfo, stageAbilities, favorsCoopertition);
+    submitTeamData( teamname, teamnumber, teamschool, alliancescore, moreinfo, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, amp, Preferred, prefintake, spotlightEnters, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
     
     alert("Team data successfully submitted.");
 });
