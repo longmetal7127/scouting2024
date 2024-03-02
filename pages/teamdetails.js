@@ -125,7 +125,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
 
 document.getElementById("teaminfoform").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent default form submission behavior
-    
+
     const teamname = document.getElementById('teamname').value;
     const teamnumber = document.getElementById('teamnumber').value;
     const teamschool = document.getElementById('teamschool').value;
@@ -165,3 +165,23 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
     
 });
+
+// Assuming db is your Dexie database instance
+const db = new Dexie("Team Tracking App");
+db.version(1).stores({
+  teams: "++id,teamname,globalid,teamnumber,teamschool,alliancescore" // Define your schema as per your setup
+});
+
+// Function to print all teams to the console
+async function printTeams() {
+  try {
+    // Use Dexie's toArray() to get all records from the teams table
+    const allTeams = await db.teams.toArray();
+    console.log("Teams:", allTeams);
+  } catch (error) {
+    console.error("Failed to print teams:", error);
+  }
+}
+
+// Call the function to print teams
+printTeams();
