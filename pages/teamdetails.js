@@ -188,7 +188,7 @@ async function printTeams() {
 printTeams();
 
 
-/*  Description: ------------------------------------------------------------------------------------------------------
+/*  Description: ------------------------------------------------------------------------------------------------------ */
 
 // This JavaScript code snippet is designed for a web application that utilizes Dexie.js, a wrapper for IndexedDB, to manage team data within a "Team Tracking App". The script initializes the database, defines its schema, and provides functionality to retrieve, display, and update team information based on user interaction through a web form. Below is a detailed breakdown of its functionality:
 // Database Initialization and Schema Definition
