@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', async () => {
              const scores2SpeakerElm = document.getElementById('scores2speaker');
              scores2SpeakerElm.checked = team.scores2speaker;
 
-             const amp = document.getElementById('Leaveszone');
+             const amp = document.getElementById('amp');
              amp.checked = team.amp;
-             const speaker = document.getElementById('scores1amp');
+             const speaker = document.getElementById('speaker');
              speaker.checked = team.speaker;
-             const scoreEither = document.getElementById('scores1speaker');
+             const scoreEither = document.getElementById('scoreEither');
              scores1SpeascoreEitherker.checked = team.scoreEither;
 
              const ground = document.getElementById('ground');
