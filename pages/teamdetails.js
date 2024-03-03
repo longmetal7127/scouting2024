@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
              const speaker = document.getElementById('speaker');
              speaker.checked = team.speaker;
              const scoreEither = document.getElementById('scoreEither');
-             scores1SpeascoreEitherker.checked = team.scoreEither;
+             scoreEither.checked = team.scoreEither;
 
              const ground = document.getElementById('ground');
              ground.checked = team.ground;
