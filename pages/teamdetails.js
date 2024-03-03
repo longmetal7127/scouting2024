@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
          // Use the globally initialized db instance
          const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
          if (team) {
+            //text values
              const teamNameElm = document.getElementById('teamname');
              teamNameElm.value = team.teamname;
              const teamNumElm = document.getElementById('teamnumber');
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
              const startingPosElm = document.getElementById('startingpos');
              startingPosElm.value = team.startingpos;
              
+             //checkbox values - checked
              const LeavesZone = document.getElementById('Leaveszone');
              LeavesZone.checked = team.Leaveszone;
              const scores1Amp = document.getElementById('scores1amp');
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
              const scores2SpeakerElm = document.getElementById('scores2speaker');
              scores2SpeakerElm.checked = team.scores2speaker;
             
-             //radio elements
+             //radio elements - if set then true
              const scoreRadios = document.querySelectorAll('input[name="score"]');
              scoreRadios.forEach((radio) => {
                 if (radio.value === team.preferredScoringMethod) {
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      }
 });
 
+//insert/update team data
 async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
     try {
         const teamData = { 
@@ -117,11 +120,12 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
 
         const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
 
+        //if a team already exists then update it
         if (existingTeam) {
             await db.teams.update(existingTeam.id, teamData);
             console.log('Team data updated successfully:', existingTeam.id);
             alert('Team data updated successfully:', existingTeam.id);
-        } else {
+        } else { //else create a new globalid for a new team and store
             let DateObj = new Date();
             const globalid = DateObj.getTime();
             await db.teams.add({...teamData, globalid: parseInt(globalid,10)});
@@ -133,6 +137,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
     }
 }
 
+//when the submit button is pressed get all the values on the page and submit them to the database
 document.getElementById("teaminfoform").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent default form submission behavior
 
@@ -175,7 +180,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);    
 });
 
-// Function to print all teams to the console
+// Function to print all db teams to the console for debugging
 async function printTeams() {
   try {
     // Use Dexie's toArray() to get all records from the teams table
