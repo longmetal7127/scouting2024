@@ -38,19 +38,33 @@ document.addEventListener('DOMContentLoaded', async () => {
              const scores2SpeakerElm = document.getElementById('scores2speaker');
              scores2SpeakerElm.checked = team.scores2speaker;
 
-             const amp = document.getElementById('amp');
-             amp.checked = team.amp;
-             const speaker = document.getElementById('speaker');
-             speaker.checked = team.speaker;
-             const scoreEither = document.getElementById('scoreEither');
-             scoreEither.checked = team.scoreEither;
+             const scoreRadios = document.querySelectorAll('input[name="score"]');
+             scoreRadios.forEach((radio) => {
+                if (radio.value === preferredScoringMethod) {
+                  radio.checked = true; // Set the matching radio button as checked
+                }
+              });
+              
+              const intakeRadios = document.querySelectorAll('input[name="intake"]');
+              intakeRadios.forEach((radio) => {
+                 if (radio.value === preferredIntakeMethod) {
+                   radio.checked = true; // Set the matching radio button as checked
+                 }
+               });
 
-             const ground = document.getElementById('ground');
-             ground.checked = team.ground;
-             const human = document.getElementById('human');
-             human.checked = team.human;
-             const either = document.getElementById('either');
-             either.checked = team.either;
+            //  const amp = document.getElementById('amp');
+            //  amp.checked = team.amp;
+            //  const speaker = document.getElementById('speaker');
+            //  speaker.checked = team.speaker;
+            //  const scoreEither = document.getElementById('scoreEither');
+            //  scoreEither.checked = team.scoreEither;
+
+            //  const ground = document.getElementById('ground');
+            //  ground.checked = team.ground;
+            //  const human = document.getElementById('human');
+            //  human.checked = team.human;
+            //  const either = document.getElementById('either');
+            //  either.checked = team.either;
 
              const prefintake = document.getElementById('prefintake');
              prefintake.value = team.prefintake;
