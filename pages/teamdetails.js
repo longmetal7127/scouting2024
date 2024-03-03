@@ -155,7 +155,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const preferredScoringMethod = preferredScoringMethodElement ? preferredScoringMethodElement.value : undefined;
 
     //need to handle if no radio button is selected
-    const preferredIntakeMethodElement = document.querySelector('input[name="score"]:checked');
+    const preferredIntakeMethodElement = document.querySelector('input[name="intake"]:checked');
     const preferredIntakeMethod = preferredIntakeMethodElement ? preferredIntakeMethodElement.value : undefined;
 
 	const prefintake = document.getElementById('prefintake').value;
@@ -170,8 +170,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const urlParams = new URLSearchParams(window.location.search);
     const globalid = parseInt(urlParams.get("globalid"),10);
 
-    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);
-    
+    submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);    
 });
 
 // Function to print all teams to the console
@@ -187,3 +186,45 @@ async function printTeams() {
 
 // Call the function to print teams
 printTeams();
+
+
+/*  Description: ------------------------------------------------------------------------------------------------------
+
+// This JavaScript code snippet is designed for a web application that utilizes Dexie.js, a wrapper for IndexedDB, to manage team data within a "Team Tracking App". The script initializes the database, defines its schema, and provides functionality to retrieve, display, and update team information based on user interaction through a web form. Below is a detailed breakdown of its functionality:
+// Database Initialization and Schema Definition
+
+//     Initializes a Dexie database named "Team Tracking App".
+//     Defines a version (1) for the database with a single table named teams. This table includes fields for storing team details such as name, global ID, team number, school, alliance score, and various boolean flags and values representing team attributes and actions.
+
+// Page Load Handling
+
+//     Once the DOM content is fully loaded, the script attempts to retrieve team information based on a globalid obtained from the URL parameters.
+//     If a matching team is found, their details are populated into corresponding form fields on the page, including text inputs and checkboxes.
+//     For boolean attributes (e.g., Leaveszone, scores1amp), checkboxes are checked or unchecked based on the stored values.
+
+// Team Data Submission
+
+//     Defines an async function submitTeamData that constructs an object with the team's data from form inputs and checkbox states.
+//     Attempts to find an existing team by globalid. If found, updates the existing record; if not, adds a new team record to the database.
+//     Upon form submission, it prevents the default form submission behavior, collects data from the form, and calls submitTeamData with this data.
+
+// Utility Functions
+
+//     Implements a function to print all team records to the console, useful for debugging or administrative purposes.
+
+// Event Listeners and Dynamic UI Updates
+
+//     Attaches an event listener to the team information form to handle the submit event, collecting input values and checkbox states to update the database accordingly.
+//     Correctly handles the scenario where no radio button may be selected for preferredScoringMethod and preferredIntakeMethod by checking if the element exists before trying to access its value.
+
+// Error Handling
+
+//     Throughout the database operations, try...catch blocks are used to catch and log any errors that may occur, ensuring robust error handling and feedback in the console.
+
+// Notable Features and Considerations
+
+//     The script dynamically interacts with IndexedDB through Dexie.js, showcasing how to perform CRUD operations in a structured and asynchronous manner.
+//     It demonstrates handling of both scalar values (e.g., strings and numbers) and boolean states (e.g., from checkboxes) within a web form context, reflecting a real-world scenario of form-based data entry and persistence.
+//     Includes careful handling of potentially undefined values for radio buttons, showcasing thoughtful error checking and dynamic content handling.
+
+// This script exemplifies modern web development practices for working with client-side databases in a progressive web application, emphasizing asynchronous JavaScript, event-driven programming, and robust error handling.
