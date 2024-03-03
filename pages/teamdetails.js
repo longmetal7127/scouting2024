@@ -38,7 +38,37 @@ document.addEventListener('DOMContentLoaded', async () => {
              const scores2SpeakerElm = document.getElementById('scores2speaker');
              scores2SpeakerElm.checked = team.scores2speaker;
 
+             const amp = document.getElementById('Leaveszone');
+             amp.checked = team.amp;
+             const speaker = document.getElementById('scores1amp');
+             speaker.checked = team.speaker;
+             const scoreEither = document.getElementById('scores1speaker');
+             scores1SpeascoreEitherker.checked = team.scoreEither;
 
+             const ground = document.getElementById('ground');
+             ground.checked = team.ground;
+             const human = document.getElementById('human');
+             human.checked = team.human;
+             const either = document.getElementById('either');
+             either.checked = team.either;
+
+             const prefintake = document.getElementById('prefintake');
+             prefintake.value = team.prefintake;
+
+             const spotlight = document.getElementById('spotlight');
+             spotlight.checked = team.spotlight;
+             const trap = document.getElementById('trap');
+             trap.checked = team.trap;
+             const alone = document.getElementById('alone');
+             alone.checked = team.alone;
+             const hangsWithAnother = document.getElementById('hangsWithAnother');
+             hangsWithAnother.checked = team.hangsWithAnother;
+
+             const attemptsSpotlight = document.getElementById('attemptsSpotlight');
+             attemptsSpotlight.checked = team.attemptsSpotlight;
+             const coop = document.getElementById('coop');
+             coop.checked = team.coop;
+             
          } else {
              console.log(`Team with ID ${globalid} not found.`);
          }
