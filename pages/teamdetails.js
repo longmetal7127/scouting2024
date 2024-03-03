@@ -40,14 +40,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
              const scoreRadios = document.querySelectorAll('input[name="score"]');
              scoreRadios.forEach((radio) => {
-                if (radio.value === preferredScoringMethod) {
+                if (radio.value === team.preferredScoringMethod) {
                   radio.checked = true; // Set the matching radio button as checked
                 }
               });
               
               const intakeRadios = document.querySelectorAll('input[name="intake"]');
               intakeRadios.forEach((radio) => {
-                 if (radio.value === preferredIntakeMethod) {
+                 if (radio.value === team.preferredIntakeMethod) {
                    radio.checked = true; // Set the matching radio button as checked
                  }
                });
