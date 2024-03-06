@@ -5,6 +5,18 @@ const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
 const list_el = document.querySelector("#teams");
 
+Offline.options = {
+  checkOnLoad: true, // Whether to check the connection status immediately when the page loads
+  reconnect: {
+      initialDelay: 3, // Initial delay before attempting to reconnect (in seconds)
+      delay: 20 // Delay between reconnection attempts (in seconds)
+  },
+  requests: false, // Whether to automatically intercept AJAX requests and retry them when the connection is back
+  game: false, // Whether to simulate offline behavior for testing purposes
+  checks: {xhr: {url: 'www.google.com'}}
+};
+
+
 //add team
 form.onsubmit = async (event) => {
   event.preventDefault();
