@@ -37,7 +37,7 @@
   padding: 1em;
   max-width: 100%;
   bottom: 1em;
-  left: 1em;
+  right: 1em;
 }
 /* line 19, ../sass/offline-theme-default-indicator.sass */
 .offline-ui.offline-ui-up {
