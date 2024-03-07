@@ -23,3 +23,16 @@ body {
 .ranking-input {
     width: 50px; /* Adjust the width as needed */
 }
+
+#longmetalfulllogo {
+    width: 60%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#CADdiagram {
+    width: 50%; 
+    max-width: 500px;
+    margin: auto;
+}
