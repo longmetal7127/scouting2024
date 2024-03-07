@@ -28,6 +28,10 @@ nav {
 	font-family: "Montserrat", sans-serif;
 }
 
+nav .heading {
+	font-size: 13.5pt;
+}
+
 .topnav a{
 	float: left;
   	color: var(--background);
