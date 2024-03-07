@@ -138,7 +138,8 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
 }
 
 document.getElementById("cancelButton").onclick = () => {
-    alert("Cancel button pressed!");
+    alert("Changes canceled.");
+    printTeams();
 }
 
 
