@@ -5,6 +5,25 @@ const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
 const list_el = document.querySelector("#teams");
 
+//options for the internet check (offline.js).  It looks to google for the internet and if it does not find it knows we have no internet (unless google goes down)
+Offline.options = {
+  checkOnLoad: true, // Whether to check the connection status immediately when the page loads
+  reconnect: {
+      initialDelay: 3, // Initial delay before attempting to reconnect (in seconds)
+      delay: 20 // Delay between reconnection attempts (in seconds)
+  },
+  requests: false, // Whether to automatically intercept AJAX requests and retry them when the connection is back
+  game: false, // Whether to simulate offline behavior for testing purposes
+  checks: {
+    google: {
+        url: 'http://www.google.com/', // URL to check for internet connectivity
+        timeout: 5000, // Timeout for the check (in milliseconds)
+        type: 'GET' // HTTP method to use for the check
+    }
+  }
+};
+
+
 //add team
 form.onsubmit = async (event) => {
   event.preventDefault();
