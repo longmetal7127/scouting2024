@@ -1,0 +1,32 @@
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Changed from center to flex-start */
+    font-size: 17px;
+}
+.counter button {
+    padding: 5px 10px;
+    margin: 0 10px;
+    font-size: inherit;
+    cursor: pointer;
+}
+.section {
+    margin-top: 30px;
+}
+.section h2, label {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 5%;
+}
+
+p {
+    margin-left: 10%;
+}
+
+.endgame label{
+    margin-left: 1%;
+}
+
+.endgame input{
+    margin-left: 10%;
+}
