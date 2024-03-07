@@ -5,6 +5,7 @@ const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
 const list_el = document.querySelector("#teams");
 
+//options for the internet check (offline.js).  It looks to google for the internet and if it does not find it knows we have no internet (unless google goes down)
 Offline.options = {
   checkOnLoad: true, // Whether to check the connection status immediately when the page loads
   reconnect: {
