@@ -13,7 +13,7 @@ Offline.options = {
   },
   requests: false, // Whether to automatically intercept AJAX requests and retry them when the connection is back
   game: false, // Whether to simulate offline behavior for testing purposes
-  checks: {xhr: {url: 'www.google.com'}}
+  checks: {xhr: {url: 'https://www.google.com'}}
 };
 
 
