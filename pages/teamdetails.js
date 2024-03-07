@@ -137,11 +137,6 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
     }
 }
 
-document.getElementById("cancelButton").onclick = () => {
-    alert("Changes canceled.");
-    printTeams();
-}
-
 
 //when the submit button is pressed get all the values on the page and submit them to the database
 document.getElementById("teaminfoform").addEventListener("submit", function(event) {
