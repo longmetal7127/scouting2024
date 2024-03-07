@@ -1,11 +1,271 @@
+
+Autocorrected to amazonConversation opened. 1 read message.
+
+Skip to content
+Using Gmail with screen readers
+1 of 157
+Match Info code
+Inbox
+
+Audrey Lam <audreylam730@gmail.com>
+7:50 PM (3 hours ago)
+to me
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Info</title>
+
+    <link rel="stylesheet" href="../css/teams.css" />
+    <link rel="stylesheet" href="css\offline-language-english.css" />
+    <link rel="stylesheet" href="css\offline-theme-default-indicator.css" />
+    <script src="../js/dexie.js"></script>
+    <script href="manifest.json"></script>
+    <script src="../js/offline.min.js"></script>
+
+    <style>
+        .counter {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Changed from center to flex-start */
+            font-size: 17px;
+        }
+        .counter button {
+            padding: 5px 10px;
+            margin: 0 10px;
+            font-size: inherit;
+            cursor: pointer;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        .section h2 {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+    
 </head>
 <body>
-    
+
+<nav class="nav">
+    <div class="heading">
+        <h1> Longmetal 7127 </h1>
+    </div>
+    <div class="topnav">
+        <a href="../"> Teams </a> 
+        <a href="matchinfo.html"> Match Info </a> 
+        <a href="aboutus.html"> About Us </a> 
+    </div>
+</nav>
+
+<header>
+    <div>
+        <h1> Match Info </h1>
+    </div>
+</header>
+
+<label for="ranking"> Ranking: </label>
+<input type="text" class="rank" name="rank" id="rank" maxlength="10" style="display: inline-block; width: 60px;">
+
+
+<section class="section">
+    <h2><b>Autonomous</b></h2>
+    <br>
+    <div class="counter">
+        <p>Autonomous Shots Attempted:</p>
+        <button id="minusBtn1">-</button>
+        <span id="count1">0</span>
+        <button id="plusBtn1">+</button>
+    </div>
+    <br>
+    <div class="counter">
+        <p>Autonomous Shots Made:</p>
+        <button id="minusBtn2">-</button>
+        <span id="count2">0</span>
+        <button id="plusBtn2">+</button>
+    </div>
+    <br>
+    <h2><b>TeleOp</b></h2>
+    <br>
+    <div class="counter">
+        <p>Speaker Shots Attempted:</p>
+        <button id="minusBtn3">-</button>
+        <span id="count3">0</span>
+        <button id="plusBtn3">+</button>
+    </div>
+    <br>
+    <div class="counter">
+        <p>Speaker Shots Made:</p>
+        <button id="minusBtn4">-</button>
+        <span id="count4">0</span>
+        <button id="plusBtn4">+</button>
+    </div>
+    <br>
+    <div class="counter">
+        <p>Amp Shots Attempted:</p>
+        <button id="minusBtn5">-</button>
+        <span id="count5">0</span>
+        <button id="plusBtn5">+</button>
+    </div>
+    <br>
+    <div class="counter">
+        <p>Amp Shots Made:</p>
+        <button id="minusBtn6">-</button>
+        <span id="count6">0</span>
+        <button id="plusBtn6">+</button>
+    </div>
+    <br>
+    <div class="counter">
+        <p>Died/froze:</p>
+        <button id="minusBtn7">-</button>
+        <span id="count7">0</span>
+        <button id="plusBtn7">+</button>
+    </div>
+    <br>
+    <h2><b>Endgame</b></h2>
+    <br><br>
+    <input type="checkbox" id="stage" name="stage" value="stage">
+    <label for="action1"> Stage</label><br>
+    <input type="checkbox" id="hangs" name="hangs" value="hangs">
+    <label for="action2.0"> Hangs</label><br>
+    <input type="checkbox" id="harmony" name="harmony" value="harmony">
+    <label for="action2.1"> Harmony Hangs</label><br>
+    <input type="checkbox" id="trap" name="trap" value="trap">
+    <label for="action3"> Scores in Trap</label>
+    <br><br>
+</section>
+
+<!-- Make buttons-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const countElement1 = document.getElementById('count1');
+        const minusBtn1 = document.getElementById('minusBtn1');
+        const plusBtn1 = document.getElementById('plusBtn1');
+        let count1 = 0;
+
+        function updateCounter1(value) {
+            count1 += value;
+            countElement1.textContent = count1;
+        }
+
+        minusBtn1.addEventListener('click', function() {
+            updateCounter1(-1);
+        });
+
+        plusBtn1.addEventListener('click', function() {
+            updateCounter1(1);
+        });
+
+        const countElement2 = document.getElementById('count2');
+        const minusBtn2 = document.getElementById('minusBtn2');
+        const plusBtn2 = document.getElementById('plusBtn2');
+        let count2 = 0;
+
+        function updateCounter2(value) {
+            count2 += value;
+            countElement2.textContent = count2;
+        }
+
+        minusBtn2.addEventListener('click', function() {
+            updateCounter2(-1);
+        });
+
+        plusBtn2.addEventListener('click', function() {
+            updateCounter2(1);
+        });
+
+        const countElement3 = document.getElementById('count3');
+        const minusBtn3 = document.getElementById('minusBtn3');
+        const plusBtn3 = document.getElementById('plusBtn3');
+        let count3 = 0;
+        function updateCounter3(value) {
+            count3 += value;
+            countElement3.textContent = count3;
+        }
+
+        minusBtn3.addEventListener('click', function() {
+            updateCounter3(-1);
+        });
+
+        plusBtn3.addEventListener('click', function() {
+            updateCounter3(1);
+        });
+
+        const countElement4 = document.getElementById('count4');
+        const minusBtn4 = document.getElementById('minusBtn4');
+        const plusBtn4 = document.getElementById('plusBtn4');
+        let count4 = 0;
+        function updateCounter4(value) {
+            count4 += value;
+            countElement4.textContent = count4;
+        }
+
+        minusBtn4.addEventListener('click', function() {
+            updateCounter4(-1);
+        });
+
+        plusBtn4.addEventListener('click', function() {
+            updateCounter4(1);
+        });
+
+        const countElement5 = document.getElementById('count5');
+        const minusBtn5 = document.getElementById('minusBtn5');
+        const plusBtn5 = document.getElementById('plusBtn5');
+        let count5 = 0;
+        function updateCounter5(value) {
+            count5 += value;
+            countElement5.textContent = count5;
+        }
+
+        minusBtn5.addEventListener('click', function() {
+            updateCounter5(-1);
+        });
+
+        plusBtn5.addEventListener('click', function() {
+            updateCounter5(1);
+        });
+
+        const countElement6 = document.getElementById('count6');
+        const minusBtn6 = document.getElementById('minusBtn6');
+        const plusBtn6 = document.getElementById('plusBtn6');
+        let count6 = 0;
+        function updateCounter6(value) {
+            count6 += value;
+            countElement6.textContent = count6;
+        }
+
+        minusBtn6.addEventListener('click', function() {
+            updateCounter6(-1);
+        });
+
+        plusBtn6.addEventListener('click', function() {
+            updateCounter6(1);
+        });
+        const countElement7 = document.getElementById('count7');
+        const minusBtn7 = document.getElementById('minusBtn7');
+        const plusBtn7 = document.getElementById('plusBtn7');
+        let count7 = 0;
+        function updateCounter7(value) {
+            count7 += value;
+            countElement7.textContent = count7;
+        }
+
+        minusBtn7.addEventListener('click', function() {
+            updateCounter6(-1);
+        });
+
+        plusBtn7.addEventListener('click', function() {
+            updateCounter7(1);
+        });
+    });
+</script>
+
+<input type="submit" class="submit" id="submitButton">
+        <button type="button" class="submit" id="cancelButton"> Cancel Changes </button>
 </body>
 </html>
+
+Displaying 8085_configV0 (1).json.
