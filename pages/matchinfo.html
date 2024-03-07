@@ -1,16 +1,3 @@
-
-Autocorrected to amazonConversation opened. 1 read message.
-
-Skip to content
-Using Gmail with screen readers
-1 of 157
-Match Info code
-Inbox
-
-Audrey Lam <audreylam730@gmail.com>
-7:50 PM (3 hours ago)
-to me
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,8 +54,17 @@ to me
     </div>
 </header>
 
-<label for="ranking"> Ranking: </label>
-<input type="text" class="rank" name="rank" id="rank" maxlength="10" style="display: inline-block; width: 60px;">
+<form>
+    <label for="ranking"> Ranking: </label>
+    <input type="text" class="rank" name="rank" id="rank" maxlength="10" style="display: inline-block; width: 60px;"><br>
+
+    <label for="teamnumber"> Team Number: </label>
+    <input type="number" class="basicinfonumber" name="teamnumber" id="teamnumber" max="9999" min="0"><br>
+
+    <label for="matchnumber"> Match Number: </label>
+    <input type="number" class="basicinfonumber" name="matchnumber" id="matchnumber" max="9999" min="0"><br>
+
+</form>
 
 
 <section class="section">
@@ -152,7 +148,9 @@ to me
         }
 
         minusBtn1.addEventListener('click', function() {
-            updateCounter1(-1);
+            if (count1 > 0) {
+                updateCounter1(-1);
+            } // can't be negative
         });
 
         plusBtn1.addEventListener('click', function() {
@@ -170,7 +168,10 @@ to me
         }
 
         minusBtn2.addEventListener('click', function() {
-            updateCounter2(-1);
+            if (count2 > 0) {
+                updateCounter2(-1);
+            }
+            
         });
 
         plusBtn2.addEventListener('click', function() {
@@ -187,7 +188,9 @@ to me
         }
 
         minusBtn3.addEventListener('click', function() {
-            updateCounter3(-1);
+            if (count3 > 0) {
+                updateCounter3(-1);
+            }
         });
 
         plusBtn3.addEventListener('click', function() {
@@ -204,7 +207,9 @@ to me
         }
 
         minusBtn4.addEventListener('click', function() {
-            updateCounter4(-1);
+            if (count4 > 0) {
+                updateCounter4(-1);
+            }
         });
 
         plusBtn4.addEventListener('click', function() {
@@ -221,7 +226,9 @@ to me
         }
 
         minusBtn5.addEventListener('click', function() {
-            updateCounter5(-1);
+            if (count5 > 0) {
+                updateCounter5(-1);
+            }
         });
 
         plusBtn5.addEventListener('click', function() {
@@ -238,7 +245,9 @@ to me
         }
 
         minusBtn6.addEventListener('click', function() {
-            updateCounter6(-1);
+            if (count6 > 0) {
+                updateCounter6(-1);
+            }
         });
 
         plusBtn6.addEventListener('click', function() {
@@ -254,7 +263,9 @@ to me
         }
 
         minusBtn7.addEventListener('click', function() {
-            updateCounter6(-1);
+            if (count7 > 0) {
+                updateCounter7(-1);
+            }
         });
 
         plusBtn7.addEventListener('click', function() {
