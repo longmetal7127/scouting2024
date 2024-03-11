@@ -1,10 +1,26 @@
+:root {
+	--dark: #05152E;
+	--darker: #1F2937;
+	--darkest: #001E3C;
+	--grey: #6B7280;
+	--pink: #EC4899;
+	--purple: #8B5CF6;
+	--light: #EEE;
+	--background: #fffffff6;
+	--teamlist: #e9f7ff; 
+	--text: #2d3875; 
+	--deletebutton: #de4e4e;
+	--navbar: #565f90
+}
+
 .teamonmatch {
     border-style: solid;
     border-width: 1px;
-    border-color: black;
+    border-color: var(--background);
     margin-left: 50px;
     margin-right: 50px;
-    padding: 10px;
+    padding: 15px;
     margin-bottom: 5px;
     border-radius: 5px;
+    background-color: var(--teamlist);
 }
