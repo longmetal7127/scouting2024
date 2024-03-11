@@ -1,3 +1,5 @@
+import sql from 'mssql';
+
 const db = new Dexie("Team Tracking App");
 db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
@@ -23,6 +25,15 @@ Offline.options = {
   }
 };
 
+Offline.on('up', function() {
+  // Code to execute when the internet connection is detected
+  // Fetch data from IndexedDB and sync it to Azure SQL Server
+  syncDataToAzureSQL();
+});
+
+Offline.on('down', function() {
+  // Code to execute when the internet connection is lost
+});
 
 //add team
 form.onsubmit = async (event) => {
@@ -68,3 +79,25 @@ function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
+const config = {
+  user: 'admin@CityofSpringfield377.onmicrosoft.com',
+  password: '3P&tLBL7Xc7L6R5p',
+  server: 'scounting7127.database.windows.net',
+  database: 'scouting7127',
+  options: {
+      encrypt: true // Use this if you're on Windows Azure
+  }
+};
+
+async function connectToDatabase() {
+  try {
+      await sql.connect(config);
+      console.log('Connected to Azure SQL Database');
+  } catch (err) {
+      console.error('Error connecting to Azure SQL Database:', err);
+  }
+}
+
+// Call the function to connect
+connectToDatabase();
+//syncDataToAzureSQL();
