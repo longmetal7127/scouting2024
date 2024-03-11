@@ -144,10 +144,67 @@ const db = new Dexie("Team Tracking App");
 db.version(1).stores({ teams: "++id, globalid, teamnumber, rank, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap"});
 // what is "teams" referring to????
 
-document.addEventListener('DOMContentLoaded', async () => {
+var submitmatchinfo = document.getElementById("submitmatchinfo");
+
+// we don't need to load any info upon opening the page
+/*document.addEventListener('DOMContentLoaded', async () => {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const globalid = parseInt(urlParams.get('globalid'), 10);
 
+         // Use the globally initialized db instance
+         const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+         if (team) {
+         }
+            
+    } catch (error) {
+        console.error("Error: ", error);
     }
+}*/
+
+submitmatchinfo.addEventListener('click', async (event) => {
+    event.preventDefault();
+    
+    // not sure if you can .value a span html element
+
+    const matchnumber = document.getElementById("matchnumber").value;
+    const rank = document.getElementById("rank").value;
+    const teamnumber = document.getElementById("teamnumber").value;
+
+    const count1 = document.getElementById("count1").value;
+    const count2 = document.getElementById("count2").value;
+    const count3 = document.getElementById("count3").value;
+    const count4 = document.getElementById("count4").value;
+    const count5 = document.getElementById("count5").value;
+    const count6 = document.getElementById("count6").value;
+    const count7 = document.getElementById("count7").value;
+
+    const stage = document.getElementById("stage").checked;
+    const hangs = document.getElementById("hangs").checked;
+    const harmony = document.getElementById("harmony").checked;
+    const trap = document.getElementById("trap").checked;
+
+    try { // ????
+        const teammatchdata = {
+            teamnumber: teamnumber,
+            globalid: globalid,
+            matchnumber: matchnumber,
+
+            count1: count1,
+            count2: count2,
+            count3: count3,
+            count4: count4,
+            count5: count5,
+            count6: count6,
+            count7: count7,
+
+            stage: stage,
+            hangs: hangs,
+            harmony: harmony,
+            trap: trap
+        };
+    }
+
+    
+
 }
