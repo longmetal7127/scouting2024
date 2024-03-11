@@ -1,3 +1,4 @@
+// BUTTONS ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
 const countElement1 = document.getElementById('count1');
 const minusBtn1 = document.getElementById('minusBtn1');
@@ -134,3 +135,19 @@ plusBtn7.addEventListener('click', function() {
     updateCounter7(1);
 });
 });
+
+
+
+// DATABASE ---------------------------------------------------------------
+
+const db = new Dexie("Team Tracking App");
+db.version(1).stores({ teams: "++id, globalid, teamnumber, rank, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap"});
+// what is "teams" referring to????
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const globalid = parseInt(urlParams.get('globalid'), 10);
+
+    }
+}
