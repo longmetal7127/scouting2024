@@ -77,25 +77,7 @@ function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
-const config = {
-  user: 'admin@CityofSpringfield377.onmicrosoft.com',
-  password: '3P&tLBL7Xc7L6R5p',
-  server: 'scounting7127.database.windows.net',
-  database: 'scouting7127',
-  options: {
-      encrypt: true // Use this if you're on Windows Azure
-  }
-};
 
-async function connectToDatabase() {
-  try {
-      await connect(config);
-      console.log('Connected to Azure SQL Database');
-  } catch (err) {
-      console.error('Error connecting to Azure SQL Database:', err);
-  }
-}
 
 // Call the function to connect
-connectToDatabase();
 //syncDataToAzureSQL();
