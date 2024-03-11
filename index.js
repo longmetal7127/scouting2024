@@ -26,7 +26,7 @@ Offline.options = {
 Offline.on('up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
-  syncDataToAzureSQL();
+  //syncDataToAzureSQL();
 });
 
 Offline.on('down', function() {
@@ -76,8 +76,6 @@ const deleteTeams = async (event, id) => {
 function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
-
-
 
 // Call the function to connect
 //syncDataToAzureSQL();
