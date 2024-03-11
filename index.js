@@ -1,3 +1,5 @@
+import sql from 'mssql';
+
 const db = new Dexie("Team Tracking App");
 db.version(1).stores({ teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop" });
 
@@ -89,7 +91,7 @@ const config = {
 
 async function connectToDatabase() {
   try {
-      await sql.connect(config);
+      await connect(config);
       console.log('Connected to Azure SQL Database');
   } catch (err) {
       console.error('Error connecting to Azure SQL Database:', err);
