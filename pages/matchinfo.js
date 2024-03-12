@@ -161,6 +161,9 @@ var submitmatchinfo = document.getElementById("submitmatchinfo");
         console.error("Error: ", error);
     }
 }*/
+ 
+
+
 
 submitmatchinfo.addEventListener('click', async (event) => {
     event.preventDefault();
