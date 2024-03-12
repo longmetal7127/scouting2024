@@ -141,35 +141,65 @@ plusBtn7.addEventListener('click', function() {
 // DATABASE ---------------------------------------------------------------
 
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, globalid, teamnumber, rank, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap"});
+db.version(1).stores({ teams: "++id, rank, teamnumber,globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo"});
 // what is "teams" referring to????
-
-var submitmatchinfo = document.getElementById("submitmatchinfo");
-
-// we don't need to load any info upon opening the page
-/*document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const globalid = parseInt(urlParams.get('globalid'), 10);
-
-         // Use the globally initialized db instance
-         const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
-         if (team) {
-         }
-            
-    } catch (error) {
-        console.error("Error: ", error);
-    }
-}*/
  
+//insert team data
+async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo ) {
+    try {
+        const teammatchdata = {
+            rank: rank,
+            teamnumber: teamnumber,
+            globalid: globalid,
+            matchnumber: matchnumber,
+
+            count1: count1,
+            count2: count2,
+            count3: count3,
+            count4: count4,
+            count5: count5,
+            count6: count6,
+            count7: count7,
+
+            stage: stage,
+            hangs: hangs,
+            harmony: harmony,
+            trap: trap,
+            otherinfo: otherinfo
+        };
+
+        const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+
+        //if the team already exists then add match information
+        if (existingTeam) {
+            await db.teams.update(existingTeam.id, teamData);
+            console.log('Team data updated successfully:', existingTeam.id);
+            alert('Team data updated successfully:', existingTeam.id);
+        } else { //else create a new globalid for a new team and store
+            let DateObj = new Date();
+            const globalid = DateObj.getTime();
+            await db.teams.add({...teamData, globalid: parseInt(globalid,10)});
+            console.log('Match info added successfully:', teamnumber, globalid);
+            alert('Match info added successfully:', teamnumber, globalid);
+        }
+    } catch (error) {
+        console.error("Error accessing database:", error);
+    }
+}
 
 
-
-submitmatchinfo.addEventListener('click', async (event) => {
-    event.preventDefault();
+document.getElementById("submitmatchinfo").onclick = (event) => {
+    //event.preventDefault();
+    
+    alert("button pressed");
+    // ERROR: Button not communicating with Javascript file
+    
+    
+    /*event.preventDefault(); // Prevent default form submission behavior
     
     // not sure if you can .value a span html element
 
+    // match data:
     const matchnumber = document.getElementById("matchnumber").value;
     const rank = document.getElementById("rank").value;
     const teamnumber = document.getElementById("teamnumber").value;
@@ -186,28 +216,11 @@ submitmatchinfo.addEventListener('click', async (event) => {
     const hangs = document.getElementById("hangs").checked;
     const harmony = document.getElementById("harmony").checked;
     const trap = document.getElementById("trap").checked;
+    const otherinfo = document.getElementById("otherinfo").value;
 
-    try { // ????
-        const teammatchdata = {
-            teamnumber: teamnumber,
-            globalid: globalid,
-            matchnumber: matchnumber,
+    // submitting data:
+    const urlParams = new URLSearchParams(window.location.search);
+    const globalid = parseInt(urlParams.get("globalid"),10);
 
-            count1: count1,
-            count2: count2,
-            count3: count3,
-            count4: count4,
-            count5: count5,
-            count6: count6,
-            count7: count7,
-
-            stage: stage,
-            hangs: hangs,
-            harmony: harmony,
-            trap: trap
-        };
-    }
-
-    
-
-}
+    submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); */
+};

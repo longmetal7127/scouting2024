@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="../css/teams.css" />
     <link rel="stylesheet" href="css\offline-language-english.css" />
-    <link rel="stylesheet" href="css\offline-theme-default-indicator.css" />
+    <link rel="stylesheet" href="../css/" />
     <link rel="stylesheet" href="../css/matchinfo.css"/>
 
     <script src="../js/dexie.js"></script>
@@ -116,12 +116,17 @@
             <label for="action2.1"> Harmony Hangs</label><br>
             <input type="checkbox" id="trap" name="trap" value="trap">
             <label for="action3"> Scores in Trap</label>
-        </div>
+        </div><br>
+
+        <h2><b>Other Notes</b></h2><br><br>
+        <form>
+            <textarea class="otherinfo" name="otherinfo" rows="10" cols="100" placeholder="Add other text notes about the team here." id="otherinfo"> </textarea>
+        </form>
 
         <br><br>
 
     </section>
 
-    <button type="button" id="submitmatchinfo"> Submit </button>
+    <button type="button" id="submitmatchinfo"> Submit </button><br>
 </body>
 </html>
