@@ -26,6 +26,7 @@ Offline.options = {
 Offline.on('up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
+  console.log("syncDataToAzureSQL")
   syncDataToAzureSQL();
 });
 
