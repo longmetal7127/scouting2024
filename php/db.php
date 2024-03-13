@@ -35,7 +35,7 @@ $connectionInfo = array("UID" => "CloudSAcaf36d4a", "pwd" => "3P&tLBL7Xc7L6R5p",
 $serverName = "tcp:scounting7127.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-// if($conn) {
+if($conn) {
 //     // SQL query to insert data
 //     $sql = "INSERT INTO your_table_name (column1, column2) VALUES (?, ?)";
     
@@ -48,8 +48,8 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 //     } else {
 //         echo json_encode(array("message" => "Error in inserting data."));
 //     }
-// } else {
-//     die(print_r(sqlsrv_errors(), true));
-// }
+} else {
+    die(print_r(sqlsrv_errors(), true));
+}
 
 ?>
