@@ -26,6 +26,7 @@ Offline.options = {
 Offline.on('up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
+  console.log("syncDataToAzureSQL")
   syncDataToAzureSQL();
 });
 
@@ -67,6 +68,14 @@ const getTeams = async () => {
 };
 window.onload = getTeams;
 
+const getTeamList = async () => {
+  const teams = db.teams.reverse().toArray();
+  const data = {
+    teamname: '${teams.teamname',
+    globalid: '${teams.globalid'
+  };
+}
+
 //delete team
 const deleteTeams = async (event, id) => {
   await db.teams.delete(id);
@@ -75,6 +84,20 @@ const deleteTeams = async (event, id) => {
 
 function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
+}
+
+function syncDataToAzureSQL(teamarray){
+  // Using Fetch API to send data to PHP server-side script
+  fetch('php/dbconnect.php', {
+    method: 'POST', // or 'GET', depending on your preference
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // Convert data to JSON string
+  })
+  .then(response => response.json()) // Parsing the JSON response
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.error('Error:', error));
 }
 
 // Call the function to connect
