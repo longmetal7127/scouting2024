@@ -32,6 +32,7 @@ Offline.on('up', function() {
 
 Offline.on('down', function() {
   // Code to execute when the internet connection is lost
+  console.log("internet down")
 });
 
 //add team
@@ -102,16 +103,11 @@ function syncDataToAzureSQL(teamarray){
 
 // Call the function to connect
 function syncDataToAzureSQL(){
-  var data = getAllDataFromStore('Team Tracking App', teams);
-  data= formatDataForPhp(data);
+  var data = getAllDataFromStore('Team Tracking App', 'teams');
+  console.log(data);
   commitToAzureSQL(data);
 
 }
-
-// const data = {
-//   key1: 'value1',
-//   key2: 'value2'
-// };
 
 // Function to get all data from a specified store in IndexedDB
 function getAllDataFromStore(dbName, storeName) {
@@ -153,9 +149,9 @@ async function commitToAzureSQL(data) {
   getAllDataFromStore('Team Tracking App', 'teams').then(dataArray => {
     // Format the data
     const dataToPhp = formatDataForPhp(dataArray);
-
+    console.log(dataToPhp);
     // Sending the formatted data to PHP
-    fetch('your_php_script.php', {
+    fetch('php/db.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
