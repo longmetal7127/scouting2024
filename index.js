@@ -80,24 +80,81 @@ function editTeam(globalid) {
 // Call the function to connect
 //syncDataToAzureSQL();
 
-<?php
-    $serverName = "scounting7127.database.windows.net"; // update me
-    $connectionOptions = array(
-        "Database" => "scounting7127", // update me
-        "Uid" => "admin@CityofSpringfield377.onmicrosoft.com", // update me
-        "PWD" => "3P&tLBL7Xc7L6R5p" // update me
-    );
-    //Establishes the connection
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-    $tsql= "SELECT TOP 20 [UniqueID],[TeamName]
-         FROM [scounting7127].[Teams]";
-    $getResults= sqlsrv_query($conn, $tsql);
-    echo ("Reading data from table" . PHP_EOL);
-    if ($getResults == FALSE)
-        echo (sqlsrv_errors());
-    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-     echo ($row['CategoryName'] . " " . $row['ProductName'] . PHP_EOL);
-    }
-    sqlsrv_free_stmt($getResults);
-?>
 
+
+// const data = {
+//   key1: 'value1',
+//   key2: 'value2'
+// };
+
+// Function to get all data from a specified store in IndexedDB
+function getAllDataFromStore(dbName, storeName) {
+  return new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open(dbName);
+
+      openRequest.onupgradeneeded = () => {
+          // This event is only implemented in recent browsers
+          openRequest.result.createObjectStore(storeName, { autoIncrement: true });
+      };
+
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+          const db = openRequest.result;
+          const transaction = db.transaction(storeName, 'readonly');
+          const store = transaction.objectStore(storeName);
+          const request = store.getAll();
+
+          request.onerror = () => reject(request.error);
+          request.onsuccess = () => {
+              resolve(request.result);
+              db.close();
+          };
+      };
+  });
+}
+
+// Example function to convert an array of objects into a specific key-value structure
+function formatDataForPhp(dataArray) {
+  const formattedData = {};
+  dataArray.forEach((item, index) => {
+      formattedData[`key${index + 1}`] = item.value; // Assuming each object has a 'value' key
+  });
+  return formattedData;
+}
+
+async function commitToAzureSQL(data) {
+  // Assume 'dbName' and 'storeName' are defined
+  getAllDataFromStore('Team Tracking App', 'teams').then(dataArray => {
+    // Format the data
+    const dataToPhp = formatDataForPhp(dataArray);
+
+    // Sending the formatted data to PHP
+    fetch('your_php_script.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToPhp),
+    })
+    .then(response => response.json())
+    .then(data => console.log('Success:', data))
+    .catch((error) => console.error('Error:', error));
+  });
+}
+  
+//   getAllDataFromStore('Team Tracking App', 'teams').then(dataArray => {
+//   // Format the data
+//   const dataToPhp = formatDataForPhp(dataArray);
+//   // Using Fetch API to send data to PHP server-side script
+//   fetch('php/db.php', {
+//     method: 'POST', // or 'GET', depending on your preference
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(data), // Convert data to JSON string
+//   })
+//   .then(response => response.json()) // Parsing the JSON response
+//   .then(data => console.log('Success:', data))
+//   .catch((error) => console.error('Error:', error));
+
+// }
