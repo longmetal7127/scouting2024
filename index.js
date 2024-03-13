@@ -10,7 +10,7 @@ Offline.options = {
   checkOnLoad: true, // Whether to check the connection status immediately when the page loads
   reconnect: {
       initialDelay: 3, // Initial delay before attempting to reconnect (in seconds)
-      delay: 20 // Delay between reconnection attempts (in seconds)
+      delay: 10 // Delay between reconnection attempts (in seconds)
   },
   requests: false, // Whether to automatically intercept AJAX requests and retry them when the connection is back
   game: false, // Whether to simulate offline behavior for testing purposes
@@ -23,10 +23,15 @@ Offline.options = {
   }
 };
 
+Offline.on('confirmed-up', function() {
+  // Code to execute when the internet connection is detected
+  // Fetch data from IndexedDB and sync it to Azure SQL Server
+  syncDataToAzureSQL();
+});
+
 Offline.on('up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
-  console.log("syncDataToAzureSQL")
   syncDataToAzureSQL();
 });
 
@@ -88,6 +93,8 @@ function editTeam(globalid) {
 }
 
 function syncDataToAzureSQL(teamarray){
+  var data = getAllDataFromStore('Team Tracking App', 'teams');
+  console.log(data);
   // Using Fetch API to send data to PHP server-side script
   fetch('php/dbconnect.php', {
     method: 'POST', // or 'GET', depending on your preference
@@ -99,14 +106,6 @@ function syncDataToAzureSQL(teamarray){
   .then(response => response.json()) // Parsing the JSON response
   .then(data => console.log('Success:', data))
   .catch((error) => console.error('Error:', error));
-}
-
-// Call the function to connect
-function syncDataToAzureSQL(){
-  var data = getAllDataFromStore('Team Tracking App', 'teams');
-  console.log(data);
-  commitToAzureSQL(data);
-
 }
 
 // Function to get all data from a specified store in IndexedDB
@@ -135,34 +134,33 @@ function getAllDataFromStore(dbName, storeName) {
   });
 }
 
-// Example function to convert an array of objects into a specific key-value structure
-function formatDataForPhp(dataArray) {
-  const formattedData = {};
-  dataArray.forEach((item, index) => {
-      formattedData[`key${index + 1}`] = item.value; // Assuming each object has a 'value' key
-  });
-  return formattedData;
-}
+// // Example function to convert an array of objects into a specific key-value structure
+// function formatDataForPhp(dataArray) {
+//   const formattedData = {};
+//   dataArray.forEach((item, index) => {
+//       formattedData[`key${index + 1}`] = item.value; // Assuming each object has a 'value' key
+//   });
+//   return formattedData;
+// }
 
-async function commitToAzureSQL(data) {
-  // Assume 'dbName' and 'storeName' are defined
-  getAllDataFromStore('Team Tracking App', 'teams').then(dataArray => {
-    // Format the data
-    const dataToPhp = formatDataForPhp(dataArray);
-    console.log(dataToPhp);
-    // Sending the formatted data to PHP
-    fetch('php/db.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToPhp),
-    })
-    .then(response => response.json())
-    .then(data => console.log('Success:', data))
-    .catch((error) => console.error('Error:', error));
-  });
-}
+// async function commitToAzureSQL(data) {
+//   // Assume 'dbName' and 'storeName' are defined
+//   getAllDataFromStore('Team Tracking App', 'teams').then(dataArray => {
+//     // Format the data
+//     //const dataToPhp = formatDataForPhp(dataArray);
+//     // Sending the formatted data to PHP
+//     fetch('php/db.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(dataToPhp),
+//     })
+//     .then(response => response.json())
+//     .then(data => console.log('Success:', data))
+//     .catch((error) => console.error('Error:', error));
+//   });
+// }
   
 //   getAllDataFromStore('Team Tracking App', 'teams').then(dataArray => {
 //   // Format the data
