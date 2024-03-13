@@ -26,7 +26,7 @@ Offline.options = {
 Offline.on('up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
-  //syncDataToAzureSQL();
+  syncDataToAzureSQL();
 });
 
 Offline.on('down', function() {
@@ -78,9 +78,12 @@ function editTeam(globalid) {
 }
 
 // Call the function to connect
-//syncDataToAzureSQL();
+function syncDataToAzureSQL(){
+  var data = getAllDataFromStore('Team Tracking App', teams);
+  data= formatDataForPhp(data);
+  commitToAzureSQL(data);
 
-
+}
 
 // const data = {
 //   key1: 'value1',
