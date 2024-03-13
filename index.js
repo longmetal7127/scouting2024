@@ -104,9 +104,8 @@ function syncDataToAzureSQL(teamarray){
 // Call the function to connect
 function syncDataToAzureSQL(){
   var data = getAllDataFromStore('Team Tracking App', 'teams');
-  //data= formatDataForPhp(data);
   console.log(data);
-  // commitToAzureSQL(data);
+  commitToAzureSQL(data);
 
 }
 
