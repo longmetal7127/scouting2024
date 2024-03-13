@@ -32,6 +32,7 @@ Offline.on('up', function() {
 
 Offline.on('down', function() {
   // Code to execute when the internet connection is lost
+  console.log("internet down")
 });
 
 //add team
@@ -102,9 +103,10 @@ function syncDataToAzureSQL(teamarray){
 
 // Call the function to connect
 function syncDataToAzureSQL(){
-  var data = getAllDataFromStore('Team Tracking App', teams);
+  var data = getAllDataFromStore('Team Tracking App', 'teams');
   data= formatDataForPhp(data);
-  commitToAzureSQL(data);
+  console.log(data);
+  // commitToAzureSQL(data);
 
 }
 
