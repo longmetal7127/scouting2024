@@ -109,11 +109,6 @@ function syncDataToAzureSQL(){
 
 }
 
-// const data = {
-//   key1: 'value1',
-//   key2: 'value2'
-// };
-
 // Function to get all data from a specified store in IndexedDB
 function getAllDataFromStore(dbName, storeName) {
   return new Promise((resolve, reject) => {
@@ -156,7 +151,7 @@ async function commitToAzureSQL(data) {
     const dataToPhp = formatDataForPhp(dataArray);
 
     // Sending the formatted data to PHP
-    fetch('your_php_script.php', {
+    fetch('php/db.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

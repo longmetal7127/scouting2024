@@ -7,8 +7,8 @@ $data = json_decode(file_get_contents('php://input'), true);
 $key1 = $data['key1'];
 $key2 = $data['key2'];
 
-echo $key1;
-echo $key2;
+print($key1);
+print($key2);
 // Database connection parameters
 // $serverName = "scounting7127.database.windows.net"; // Update with your server name
 // $connectionOptions = array(
