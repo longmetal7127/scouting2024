@@ -138,17 +138,35 @@ plusBtn7.addEventListener('click', function() {
     updateCounter7(1);
 });
 });
-/*
 
-
-*/
 
 // DATABASE ---------------------------------------------------------------
 
 const db = new Dexie("Team Tracking App");
 db.version(1).stores({ teams: "++id, teamname, globalid, rank, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo"});
-// what is "teams" referring to????
+// db = database
+// teams = table in database db
  
+/* Steps to submitting data (theoretically)
+1. Input information in match form, press the submit button
+2. Collect the teamnumber (required? if so, must be required in teamdetails page)
+3. Find the globalid associated with that teamnumber
+4. Submit match data to the team with that globalid?
+5. (TBD) Each team on the team list page should have a new button for "Matches"?
+    - opens unique (by globalid, like teamdetails) match summary page (see concept page)
+    - depicts list of matches by match number 
+    - opening a match will show the data that you inputted originally in match form
+*/
+
+
+
+
+teamnumber = document.getElementById("teamnumber").value;
+// in order to submit match data for a specific team from the general match info page,
+// you need to get the globalid of an existing, matching team entry with the teamnumber submitted on matchinfo.html?
+
+
+
 //insert team data
 async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo ) {
     try {
