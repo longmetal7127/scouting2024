@@ -192,7 +192,7 @@ document.getElementById("submitmatchinfo").onclick = (event) => {
     //event.preventDefault();
     
     alert("button pressed");
-    // ERROR: Button not communicating with Javascript file
+    // ERROR: Button not communicating with Javascript file 
     
     
     /*event.preventDefault(); // Prevent default form submission behavior
