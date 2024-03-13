@@ -3,12 +3,6 @@
 // Assuming you're sending data via POST and using JSON
 $data = json_decode(file_get_contents('php://input'), true);
 
-// Data received from JavaScript
-$key1 = $data['key1'];
-$key2 = $data['key2'];
-
-print($key1);
-print($key2);
 // Database connection parameters
 // $serverName = "scounting7127.database.windows.net"; // Update with your server name
 // $connectionOptions = array(
@@ -36,6 +30,23 @@ $serverName = "tcp:scounting7127.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if($conn) {
+
+    foreach ($data as $team) {
+        $columns = array_keys($team);
+        $values = array_map(function($value) {
+            if (is_string($value)) {
+                $value = str_replace("'", "\\'", $value); // Escape single quotes
+                return "'$value'";
+            } elseif (is_bool($value)) {
+                return $value ? 'TRUE' : 'FALSE';
+            } elseif ($value === null) {
+                return 'NULL';
+            }
+            return $value;
+        }, array_values($team));
+        
+        print($columns);s
+        print($values);
 //     // SQL query to insert data
 //     $sql = "INSERT INTO your_table_name (column1, column2) VALUES (?, ?)";
     
