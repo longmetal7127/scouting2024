@@ -1,3 +1,5 @@
+
+
 // BUTTONS ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
 const countElement1 = document.getElementById('count1');
@@ -19,6 +21,7 @@ minusBtn1.addEventListener('click', function() {
 plusBtn1.addEventListener('click', function() {
     updateCounter1(1);
 });
+
 
 const countElement2 = document.getElementById('count2');
 const minusBtn2 = document.getElementById('minusBtn2');
@@ -135,8 +138,10 @@ plusBtn7.addEventListener('click', function() {
     updateCounter7(1);
 });
 });
+/*
 
 
+*/
 
 // DATABASE ---------------------------------------------------------------
 
@@ -172,55 +177,66 @@ async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1,
 
         //if the team already exists then add match information
         if (existingTeam) {
-            await db.teams.update(existingTeam.id, teamData);
+            await db.teams.update(existingTeam.id, teammatchdata);
             console.log('Team data updated successfully:', existingTeam.id);
             alert('Team data updated successfully:', existingTeam.id);
         } else { //else create a new globalid for a new team and store
+            console.error("Team does not exist:", error);
+            /*
             let DateObj = new Date();
             const globalid = DateObj.getTime();
-            await db.teams.add({...teamData, globalid: parseInt(globalid,10)});
+            await db.teams.add({...teammatchdata, globalid: parseInt(globalid,10)});
             console.log('Match info added successfully:', teamnumber, globalid);
             alert('Match info added successfully:', teamnumber, globalid);
+            */
         }
     } catch (error) {
         console.error("Error accessing database:", error);
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    // the button was not working until I put it with the DOMContentLoaded
+    document.getElementById("submitmatchinfo").addEventListener('click', function(event){
+        event.preventDefault();
+         
+        // not sure if you can .value a span html element
 
-document.getElementById("submitmatchinfo").onclick = (event) => {
-    //event.preventDefault();
+        // match data:
+        const matchnumber = document.getElementById("matchnumber").value;
+        const rank = document.getElementById("rank").value;
+        const teamnumber = document.getElementById("teamnumber").value;
+
+        const count1 = document.getElementById("count1").value;
+        const count2 = document.getElementById("count2").value;
+        const count3 = document.getElementById("count3").value;
+        const count4 = document.getElementById("count4").value;
+        const count5 = document.getElementById("count5").value;
+        const count6 = document.getElementById("count6").value;
+        const count7 = document.getElementById("count7").value;
+
+        const stage = document.getElementById("stage").checked;
+        const hangs = document.getElementById("hangs").checked;
+        const harmony = document.getElementById("harmony").checked;
+        const trap = document.getElementById("trap").checked;
+        const otherinfo = document.getElementById("otherinfo").value;
+
+        // submitting data:
+        const urlParams = new URLSearchParams(window.location.search);
+        const globalid = parseInt(urlParams.get("globalid"),10);
+
+        submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); 
+     
     
-    alert("button pressed");
-    // ERROR: Button not communicating with Javascript file 
-    
-    
-    /*event.preventDefault(); // Prevent default form submission behavior
-    
-    // not sure if you can .value a span html element
+        alert("Match info submitted!");
+    });
+});
 
-    // match data:
-    const matchnumber = document.getElementById("matchnumber").value;
-    const rank = document.getElementById("rank").value;
-    const teamnumber = document.getElementById("teamnumber").value;
-
-    const count1 = document.getElementById("count1").value;
-    const count2 = document.getElementById("count2").value;
-    const count3 = document.getElementById("count3").value;
-    const count4 = document.getElementById("count4").value;
-    const count5 = document.getElementById("count5").value;
-    const count6 = document.getElementById("count6").value;
-    const count7 = document.getElementById("count7").value;
-
-    const stage = document.getElementById("stage").checked;
-    const hangs = document.getElementById("hangs").checked;
-    const harmony = document.getElementById("harmony").checked;
-    const trap = document.getElementById("trap").checked;
-    const otherinfo = document.getElementById("otherinfo").value;
-
-    // submitting data:
-    const urlParams = new URLSearchParams(window.location.search);
-    const globalid = parseInt(urlParams.get("globalid"),10);
-
-    submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); */
-};
+async function printMatches() {
+    try {
+        const allMatches = await db.teams.toArray();
+        console.log("Matches", allMatches);
+    } catch (error) {
+        console.error("Failed to print matches:", error);
+    }
+}
