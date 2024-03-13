@@ -95,7 +95,6 @@ function editTeam(globalid) {
 function syncDataToAzureSQL(teamarray){
   var data = getAllDataFromStore('Team Tracking App', 'teams');
   console.log(data);
-  console.log(formatDataForPhp(data));
   // Using Fetch API to send data to PHP server-side script
   fetch('php/dbconnect.php', {
     method: 'POST', // or 'GET', depending on your preference
