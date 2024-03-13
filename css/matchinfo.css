@@ -30,3 +30,15 @@ p {
 .endgame input{
     margin-left: 10%;
 }
+
+.otherinfo {
+    resize: none; 
+    margin-left: 10%;
+    margin-right: auto;
+}
+
+#submitmatchinfo {
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+}

@@ -1,3 +1,5 @@
+
+
 // BUTTONS ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
 const countElement1 = document.getElementById('count1');
@@ -19,6 +21,7 @@ minusBtn1.addEventListener('click', function() {
 plusBtn1.addEventListener('click', function() {
     updateCounter1(1);
 });
+
 
 const countElement2 = document.getElementById('count2');
 const minusBtn2 = document.getElementById('minusBtn2');
@@ -135,19 +138,107 @@ plusBtn7.addEventListener('click', function() {
     updateCounter7(1);
 });
 });
+/*
 
 
+*/
 
 // DATABASE ---------------------------------------------------------------
 
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, globalid, teamnumber, rank, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap"});
+db.version(1).stores({ teams: "++id, rank, teamnumber,globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo"});
 // what is "teams" referring to????
-
-document.addEventListener('DOMContentLoaded', async () => {
+ 
+//insert team data
+async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo ) {
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const globalid = parseInt(urlParams.get('globalid'), 10);
+        const teammatchdata = {
+            rank: rank,
+            teamnumber: teamnumber,
+            globalid: globalid,
+            matchnumber: matchnumber,
 
+            count1: count1,
+            count2: count2,
+            count3: count3,
+            count4: count4,
+            count5: count5,
+            count6: count6,
+            count7: count7,
+
+            stage: stage,
+            hangs: hangs,
+            harmony: harmony,
+            trap: trap,
+            otherinfo: otherinfo
+        };
+
+        const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+
+        //if the team already exists then add match information
+        if (existingTeam) {
+            await db.teams.update(existingTeam.id, teammatchdata);
+            // does this not work bc teammatchdata is not yet a field in db?
+            console.log('Team data updated successfully:', existingTeam.id);
+            alert('Team data updated successfully:', existingTeam.id);
+        } else { //else, error
+            console.error("Team does not exist:", error);
+            /*
+            let DateObj = new Date();
+            const globalid = DateObj.getTime();
+            await db.teams.add({...teammatchdata, globalid: parseInt(globalid,10)});
+            console.log('Match info added successfully:', teamnumber, globalid);
+            alert('Match info added successfully:', teamnumber, globalid);
+            */
+        }
+    } catch (error) {
+        console.error("Error accessing database:", error);
+    }
+}
+
+document.getElementById("submitmatchinfo").addEventListener('click', function(event){
+    // Lesson Learned: I was having trouble with button communication and it resolved after I put it with a DOMContentLoaded (which waits until entire html is loaded)
+    // because w/o DOMContentLoaded, the script was initialized before the button, so it cannot "see" the button
+    // It works now because the js script was initialized AFTER the button (vs. in the head, when I used DOMContentLoaded)
+
+    event.preventDefault();
+     
+    // not sure if you can .value a span html element
+
+    // match data:
+    const matchnumber = document.getElementById("matchnumber").value;
+    const rank = document.getElementById("rank").value;
+    const teamnumber = document.getElementById("teamnumber").value;
+
+    const count1 = document.getElementById("count1").value;
+    const count2 = document.getElementById("count2").value;
+    const count3 = document.getElementById("count3").value;
+    const count4 = document.getElementById("count4").value;
+    const count5 = document.getElementById("count5").value;
+    const count6 = document.getElementById("count6").value;
+    const count7 = document.getElementById("count7").value;
+
+    const stage = document.getElementById("stage").checked;
+    const hangs = document.getElementById("hangs").checked;
+    const harmony = document.getElementById("harmony").checked;
+    const trap = document.getElementById("trap").checked;
+    const otherinfo = document.getElementById("otherinfo").value;
+
+    // submitting data:
+    const urlParams = new URLSearchParams(window.location.search);
+    const globalid = parseInt(urlParams.get("globalid"),10);
+
+    submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); 
+ 
+
+    alert("Match info submitted!");
+});
+
+async function printMatches() {
+    try {
+        const allMatches = await db.teams.toArray();
+        console.log("Matches", allMatches);
+    } catch (error) {
+        console.error("Failed to print matches:", error);
     }
 }
