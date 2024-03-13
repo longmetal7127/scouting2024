@@ -1,5 +1,7 @@
 <?php
 
+echo 'hello';
+
 // Assuming you're sending data via POST and using JSON
 $data = json_decode(file_get_contents('php://input'), true);
 
