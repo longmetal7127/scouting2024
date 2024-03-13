@@ -26,7 +26,8 @@ Offline.options = {
 Offline.on('up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
-  //syncDataToAzureSQL();
+  const teamlist = getTeamList();
+  syncDataToAzureSQL(teamlist);
 });
 
 Offline.on('down', function() {
@@ -67,6 +68,14 @@ const getTeams = async () => {
 };
 window.onload = getTeams;
 
+const getTeamList = async () => {
+  const teams = db.teams.reverse().toArray();
+  const data = {
+    teamname: '${teams.teamname',
+    globalid: '${teams.globalid'
+  };
+}
+
 //delete team
 const deleteTeams = async (event, id) => {
   await db.teams.delete(id);
@@ -77,27 +86,22 @@ function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
+function syncDataToAzureSQL(teamarray){
+  // Using Fetch API to send data to PHP server-side script
+  fetch('php/dbconnect.php', {
+    method: 'POST', // or 'GET', depending on your preference
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // Convert data to JSON string
+  })
+  .then(response => response.json()) // Parsing the JSON response
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.error('Error:', error));
+}
+
 // Call the function to connect
 //syncDataToAzureSQL();
 
-<?php
-    $serverName = "scounting7127.database.windows.net"; // update me
-    $connectionOptions = array(
-        "Database" => "scounting7127", // update me
-        "Uid" => "admin@CityofSpringfield377.onmicrosoft.com", // update me
-        "PWD" => "3P&tLBL7Xc7L6R5p" // update me
-    );
-    //Establishes the connection
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-    $tsql= "SELECT TOP 20 [UniqueID],[TeamName]
-         FROM [scounting7127].[Teams]";
-    $getResults= sqlsrv_query($conn, $tsql);
-    echo ("Reading data from table" . PHP_EOL);
-    if ($getResults == FALSE)
-        echo (sqlsrv_errors());
-    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-     echo ($row['CategoryName'] . " " . $row['ProductName'] . PHP_EOL);
-    }
-    sqlsrv_free_stmt($getResults);
-?>
+
 
