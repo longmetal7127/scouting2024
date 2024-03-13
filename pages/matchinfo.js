@@ -178,9 +178,10 @@ async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1,
         //if the team already exists then add match information
         if (existingTeam) {
             await db.teams.update(existingTeam.id, teammatchdata);
+            // does this not work bc teammatchdata is not yet a field in db?
             console.log('Team data updated successfully:', existingTeam.id);
             alert('Team data updated successfully:', existingTeam.id);
-        } else { //else create a new globalid for a new team and store
+        } else { //else, error
             console.error("Team does not exist:", error);
             /*
             let DateObj = new Date();
