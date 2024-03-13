@@ -195,41 +195,42 @@ async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1,
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    // the button was not working until I put it with the DOMContentLoaded
-    document.getElementById("submitmatchinfo").addEventListener('click', function(event){
-        event.preventDefault();
-         
-        // not sure if you can .value a span html element
+document.getElementById("submitmatchinfo").addEventListener('click', function(event){
+    // Lesson Learned: I was having trouble with button communication and it resolved after I put it with a DOMContentLoaded (which waits until entire html is loaded)
+    // because w/o DOMContentLoaded, the script was initialized before the button, so it cannot "see" the button
+    // It works now because the js script was initialized AFTER the button (vs. in the head, when I used DOMContentLoaded)
 
-        // match data:
-        const matchnumber = document.getElementById("matchnumber").value;
-        const rank = document.getElementById("rank").value;
-        const teamnumber = document.getElementById("teamnumber").value;
-
-        const count1 = document.getElementById("count1").value;
-        const count2 = document.getElementById("count2").value;
-        const count3 = document.getElementById("count3").value;
-        const count4 = document.getElementById("count4").value;
-        const count5 = document.getElementById("count5").value;
-        const count6 = document.getElementById("count6").value;
-        const count7 = document.getElementById("count7").value;
-
-        const stage = document.getElementById("stage").checked;
-        const hangs = document.getElementById("hangs").checked;
-        const harmony = document.getElementById("harmony").checked;
-        const trap = document.getElementById("trap").checked;
-        const otherinfo = document.getElementById("otherinfo").value;
-
-        // submitting data:
-        const urlParams = new URLSearchParams(window.location.search);
-        const globalid = parseInt(urlParams.get("globalid"),10);
-
-        submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); 
+    event.preventDefault();
      
-    
-        alert("Match info submitted!");
-    });
+    // not sure if you can .value a span html element
+
+    // match data:
+    const matchnumber = document.getElementById("matchnumber").value;
+    const rank = document.getElementById("rank").value;
+    const teamnumber = document.getElementById("teamnumber").value;
+
+    const count1 = document.getElementById("count1").value;
+    const count2 = document.getElementById("count2").value;
+    const count3 = document.getElementById("count3").value;
+    const count4 = document.getElementById("count4").value;
+    const count5 = document.getElementById("count5").value;
+    const count6 = document.getElementById("count6").value;
+    const count7 = document.getElementById("count7").value;
+
+    const stage = document.getElementById("stage").checked;
+    const hangs = document.getElementById("hangs").checked;
+    const harmony = document.getElementById("harmony").checked;
+    const trap = document.getElementById("trap").checked;
+    const otherinfo = document.getElementById("otherinfo").value;
+
+    // submitting data:
+    const urlParams = new URLSearchParams(window.location.search);
+    const globalid = parseInt(urlParams.get("globalid"),10);
+
+    submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); 
+ 
+
+    alert("Match info submitted!");
 });
 
 async function printMatches() {
