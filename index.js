@@ -105,6 +105,7 @@ function syncDataToAzureSQL(teamarray){
 function syncDataToAzureSQL(){
   var data = getAllDataFromStore('Team Tracking App', 'teams');
   console.log(data);
+  console.log(formatDataForPhp(data));
   commitToAzureSQL(data);
 
 }
@@ -149,7 +150,6 @@ async function commitToAzureSQL(data) {
   getAllDataFromStore('Team Tracking App', 'teams').then(dataArray => {
     // Format the data
     const dataToPhp = formatDataForPhp(dataArray);
-    console.log(dataToPhp);
     // Sending the formatted data to PHP
     fetch('php/db.php', {
         method: 'POST',
