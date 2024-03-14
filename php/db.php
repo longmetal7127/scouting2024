@@ -16,7 +16,7 @@ try {
     // Connection using PDO
     $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting7127", "CloudSAcaf36d4a", "3P&tLBL7Xc7L6R5p");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $response['debug1'] = 'Connected to database successfully';
+    $response['debug'] = 'Connected to database successfully';
 
     // Assuming $data is an array of teams
     foreach ($data as $team) {
@@ -26,7 +26,7 @@ try {
         
         $stmt = $conn->prepare($sql);
         if ($stmt->execute(array_values($team))) {
-            $response['success1'] = true;
+            $response['success'] = true;
             $response['data'][] = 'Inserted: ' . json_encode($team);
         } else {
             $response['debug'] = true;
@@ -34,10 +34,10 @@ try {
         }
     }
 } catch (PDOException $e) {
-    $response['debug2'] = 'Error connecting to SQL Server.';
+    $response['debug'] = 'Error connecting to SQL Server.';
     $response['data'] = $e->getMessage();
 } catch (Exception $e) {
-    $response['debug3'] = 'An error occurred.';
+    $response['debug'] = 'An error occurred.';
     $response['data'] = $e->getMessage();
 }
 

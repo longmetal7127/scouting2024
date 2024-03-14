@@ -107,9 +107,7 @@ function editTeam(globalid) {
 }
 
 async function syncDataToAzureSQL(){
-  console.log("inside syncDataToAzureSQL");
   var data = await getAllDataFromStore('Team Tracking App', 'teams');
-  console.log(data.length);
   if(data && data.length > 0){
     console.log(data);
     // Using Fetch API to send data to PHP server-side script
@@ -124,7 +122,9 @@ async function syncDataToAzureSQL(){
       console.log('Success:', data);
       // Check if debug information is available and log it
       if (data.debug) {
-          console.log('Debug info:', data.data);
+          console.log('Debug info:', data.debug);
+      }else if(data.data){
+        console.log('Data:', data.data);
       }
     })
     .catch((error) => console.error('Error:', error));
