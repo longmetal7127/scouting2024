@@ -106,11 +106,11 @@ function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
-function syncDataToAzureSQL(){
+async function syncDataToAzureSQL(){
   console.log("inside syncDataToAzureSQL");
-  var data = getAllDataFromStore('Team Tracking App', 'teams');
+  var data = await getAllDataFromStore('Team Tracking App', 'teams');
   console.log(data.length);
-  if(data.length > 0){
+  if(data && data.length > 0){
     console.log(data);
     // Using Fetch API to send data to PHP server-side script
     fetch('php/db.php', {
