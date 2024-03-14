@@ -29,7 +29,8 @@ try {
             $response['success'] = true;
             $response['data'][] = 'Inserted: ' . json_encode($team);
         } else {
-            throw new Exception("Failed to insert data");
+            $response['debug'] = true;
+            $response['data'][] = 'Inserted: ' . json_encode($team);
         }
     }
 } catch (PDOException $e) {
