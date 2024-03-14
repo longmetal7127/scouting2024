@@ -62,7 +62,7 @@ nav {
 	min-height: 8vh;
 	background-color: var(--navbar);
 	font-family: "Montserrat", sans-serif;
-	color: var(--background)
+	color: var(--background);
 }
 
 .topnav a{

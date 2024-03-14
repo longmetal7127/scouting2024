@@ -251,8 +251,10 @@ document.getElementById("submitmatchinfo").addEventListener('click', function(ev
     alert("Match info submitted!");
 });
 
+// Function to print all db matches to the console for debugging
 async function printMatches() {
     try {
+        // Use Dexie's toArray() to get all records from the teams table
         const allMatches = await db.teams.toArray();
         console.log("Matches", allMatches);
     } catch (error) {
