@@ -1,13 +1,13 @@
 <?php
 // Assuming you're sending data via POST and using JSON
 $data = json_decode(file_get_contents('php://input'), true);
-$response = [
-    'success' => true,
-    'data' => $data, // Assume $data is some data you want to return
-    'debug' => 'Connected to database successfully', // Example debug message
-];
-header('Content-Type: application/json');
-echo json_encode($response);
+// $response = [
+//     'success' => true,
+//     'data' => $data, // Assume $data is some data you want to return
+//     'debug' => 'Connected to database successfully', // Example debug message
+// ];
+// header('Content-Type: application/json');
+// echo json_encode($response);
 
 try {
     $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting7127", "CloudSAcaf36d4a", "3P&tLBL7Xc7L6R5p");
