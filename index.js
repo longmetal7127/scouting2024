@@ -128,7 +128,7 @@ function getAllDataFromStore(dbName, storeName) {
           request.onerror = () => reject(request.error);
           request.onsuccess = () => {
               resolve(request.result);
-              db.close();
+              //db.close();
           };
       };
   });
