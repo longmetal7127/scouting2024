@@ -120,8 +120,13 @@ async function syncDataToAzureSQL(){
       },
       body: JSON.stringify(data), // Convert data to JSON string
     })
-    .then(response => response.json()) // Parsing the JSON response
-    .then(data => console.log('Success:', data))
+    .then(data => {
+      console.log('Success:', data);
+      // Check if debug information is available and log it
+      if (data.debug) {
+          console.log('Debug info:', data.debug);
+      }
+    })
     .catch((error) => console.error('Error:', error));
   }
 } 

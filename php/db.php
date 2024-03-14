@@ -1,79 +1,44 @@
 <?php
-// Assuming you're sending data via POST and using JSON
+
+header('Content-Type: application/json');
+
+// Decode the received JSON data
 $data = json_decode(file_get_contents('php://input'), true);
-// $response = [
-//     'success' => true,
-//     'data' => $data, // Assume $data is some data you want to return
-//     'debug' => 'Connected to database successfully', // Example debug message
-// ];
-// header('Content-Type: application/json');
-// echo json_encode($response);
+
+// Initialize a response array
+$response = [
+    'success' => false,
+    'data' => null,
+    'debug' => ''
+];
 
 try {
+    // Connection using PDO
     $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting7127", "CloudSAcaf36d4a", "3P&tLBL7Xc7L6R5p");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) {
-    print("Error connecting to SQL Server.");
-    die(print_r($e));
-}
+    $response['debug'] = 'Connected to database successfully';
 
-// SQL Server Extension Sample Code:
-$connectionInfo = array("UID" => "CloudSAcaf36d4a", "pwd" => "3P&tLBL7Xc7L6R5p", "Database" => "scouting7127", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
-$serverName = "tcp:scounting7127.database.windows.net,1433";
-$conn = sqlsrv_connect($serverName, $connectionInfo);
-
-if($conn) {
-
+    // Assuming $data is an array of teams
     foreach ($data as $team) {
         $columns = array_keys($team);
-        $values = array_map(function($value) {
-            if (is_string($value)) {
-                $value = str_replace("'", "\\'", $value); // Escape single quotes
-                return "'$value'";
-            } elseif (is_bool($value)) {
-                return $value ? 'TRUE' : 'FALSE';
-            } elseif ($value === null) {
-                return 'NULL';
-            }
-            return $value;
-        }, array_values($team));
+        $placeholders = array_map(function($value) { return '?'; }, $team);
+        $sql = "INSERT INTO teams (" . implode(", ", $columns) . ") VALUES (" . implode(", ", $placeholders) . ")";
         
-        $sql = "INSERT INTO teams (" . implode(", ", $columns) . ") VALUES (" . implode(", ", $values) . ");";
-        $response = [
-            'success' => true,
-            'data' => $sql, // Assume $data is some data you want to return
-            'debug' => 'Connected to database successfully', // Example debug message
-        ];
-        header('Content-Type: application/json');
-        echo json_encode($response);
+        $stmt = $conn->prepare($sql);
+        if ($stmt->execute(array_values($team))) {
+            $response['success'] = true;
+            $response['data'][] = 'Inserted: ' . json_encode($team);
+        } else {
+            throw new Exception("Failed to insert data");
+        }
     }
-
-        // print($columns);
-        // print($values);
-
-//     // SQL query to insert data
-//     $sql = "INSERT INTO your_table_name (column1, column2) VALUES (?, ?)";
-    
-//     // Preparing and executing the statement
-//     $params = array($key1, $key2);
-//     $stmt = sqlsrv_prepare($conn, $sql, $params);
-
-//     if(sqlsrv_execute($stmt)) {
-//         echo json_encode(array("message" => "Data inserted successfully."));
-//     } else {
-//         echo json_encode(array("message" => "Error in inserting data."));
-//     }
-} else {
-    die(print_r(sqlsrv_errors(), true));
+} catch (PDOException $e) {
+    $response['debug'] = 'Error connecting to SQL Server.';
+    $response['data'] = $e->getMessage();
+} catch (Exception $e) {
+    $response['debug'] = 'An error occurred.';
+    $response['data'] = $e->getMessage();
 }
 
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}
-
+echo json_encode($response);
 ?>
