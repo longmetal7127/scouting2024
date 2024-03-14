@@ -1,6 +1,11 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, teamname, globalid, rank, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo" });
+db.version(2).stores({ 
+    teams: "++id, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop", 
+    matches: "++id, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+});
+    // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
