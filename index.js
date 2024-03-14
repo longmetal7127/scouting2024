@@ -1,5 +1,5 @@
 const db = new Dexie("Team Tracking App");
-//trap was in there twice throwing errors so I removed the last one of them
+//trap was in there twice throwing errors so I removed the last one of them (2nd to last entry)
 db.version(1).stores({ teams: "++id, teamname, globalid, rank, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"});
 
 const form = document.querySelector("#new-team-form");
@@ -54,25 +54,35 @@ form.onsubmit = async (event) => {
 
 //display team
 const getTeams = async () => {
-  const allTeams = await db.teams.reverse().toArray();
-  list_el.innerHTML = allTeams
-    .map(
-      (teams) => `
-	
-	<div class="team">
-	<div class="content">
-	<input id="edit" class="text" readonly="readonly" type="text" value= ${teams.teamname}>
-  </div>  
-	<div class="actions">
-  <div>${teams.globalid}</div>
-	<button class="delete" onclick="deleteTeams(event, ${teams.id})">Delete</button>
-  <button class="edit" onclick="editTeam(${teams.globalid})">Edit</button>
-	</div>
-	</div>
-	`
-    )
-    .join("");
-};
+  try {
+    const allTeams = await db.teams.reverse().toArray();
+    
+    // Check if allTeams is not empty
+    if (allTeams && allTeams.length > 0) {
+      list_el.innerHTML = allTeams
+        .map(teams => `
+          <div class="team">
+            <div class="content">
+              <input id="edit" class="text" readonly="readonly" type="text" value="${teams.teamname}">
+            </div>  
+            <div class="actions">
+              <div>${teams.globalid}</div>
+              <button class="delete" onclick="deleteTeams(event, ${teams.id})">Delete</button>
+              <button class="edit" onclick="editTeam(${teams.globalid})">Edit</button>
+            </div>
+          </div>
+        `)
+        .join("");
+    } else {
+      // Handle case when no teams are found
+      list_el.innerHTML = "<p>No teams found.</p>";
+    }
+  } catch (error) {
+    // Handle the error
+    console.error("Failed to retrieve teams:", error);
+    // Optionally, display an error message to the user
+    list_el.innerHTML = "<p>Error loading teams. Please try again later.</p>";
+  };
 window.onload = getTeams;
 
 const getTeamList = async () => {
