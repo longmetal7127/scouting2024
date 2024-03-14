@@ -109,6 +109,7 @@ function editTeam(globalid) {
 function syncDataToAzureSQL(){
   console.log("inside syncDataToAzureSQL");
   var data = getAllDataFromStore('Team Tracking App', 'teams');
+  console.log(data.length);
   if(data.length > 0){
     console.log(data);
     // Using Fetch API to send data to PHP server-side script
@@ -145,7 +146,7 @@ function getAllDataFromStore(dbName, storeName) {
           request.onerror = () => reject(request.error);
           request.onsuccess = () => {
               resolve(request.result);
-              //db.close();
+              db.close();
           };
       };
   });
