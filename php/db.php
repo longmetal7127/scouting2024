@@ -9,14 +9,15 @@ $data = json_decode(file_get_contents('php://input'), true);
 $response = [
     'success' => false,
     'data' => null,
-    'debug' => ''
+    'debug' => '',
+    'connection' => ''
 ];
 
 try {
     // Connection using PDO
     $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting7127", "CloudSAcaf36d4a", "3P&tLBL7Xc7L6R5p");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $response['debug'] = 'Connected to database successfully';
+    $response['connection'] = 'Connected to database successfully';
 
     // Assuming $data is an array of teams
     foreach ($data as $team) {
@@ -27,10 +28,10 @@ try {
         $stmt = $conn->prepare($sql);
         if ($stmt->execute(array_values($team))) {
             $response['success'] = true;
-            $response['data'][] = 'Inserted: ' . json_encode($team);
+            $response['data'][] = 'Inserted: ' . json_encode($sql);
         } else {
             $response['debug'] = true;
-            $response['data'][] = 'Inserted: ' . json_encode($team);
+            $response['data'][] = 'Inserted: ' . json_encode($sql);
         }
     }
 } catch (PDOException $e) {

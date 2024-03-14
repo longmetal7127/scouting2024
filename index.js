@@ -109,7 +109,7 @@ function editTeam(globalid) {
 async function syncDataToAzureSQL(){
   var data = await getAllDataFromStore('Team Tracking App', 'teams');
   if(data && data.length > 0){
-    console.log(data);
+    console.log('Sending data to server:', data);
     // Using Fetch API to send data to PHP server-side script
     fetch('php/db.php', {
       method: 'POST', // or 'GET', depending on your preference
@@ -118,18 +118,28 @@ async function syncDataToAzureSQL(){
       },
       body: JSON.stringify(data), // Convert data to JSON string
     })
-    .then(data => {
-      console.log('Success:', data);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json(); // Parse the response as JSON
+    })
+    .then(jsonData => {
+      console.log('Success:', jsonData);
       // Check if debug information is available and log it
-      if (data.debug) {
-          console.log('Debug info:', data.debug);
-      }else if(data.data){
-        console.log('Data:', data.data);
+      if (jsonData.debug) {
+          console.log('Debug info:', jsonData.debug);
+      }
+      if (jsonData.data) {
+        console.log('Data:', jsonData.data);
       }
     })
     .catch((error) => console.error('Error:', error));
   }
-} 
+  else {
+    console.log('No data to sync.');
+  }
+}
 
 // Function to get all data from a specified store in IndexedDB
 function getAllDataFromStore(dbName, storeName) {
