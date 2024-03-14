@@ -94,19 +94,21 @@ function editTeam(globalid) {
 
 function syncDataToAzureSQL(teamarray){
   var data = getAllDataFromStore('Team Tracking App', 'teams');
-  console.log(data);
-  // Using Fetch API to send data to PHP server-side script
-  fetch('php/db.php', {
-    method: 'POST', // or 'GET', depending on your preference
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data), // Convert data to JSON string
-  })
-  .then(response => response.json()) // Parsing the JSON response
-  .then(data => console.log('Success:', data))
-  .catch((error) => console.error('Error:', error));
-}
+  if(data.length > 0){
+    console.log(data);
+    // Using Fetch API to send data to PHP server-side script
+    fetch('php/db.php', {
+      method: 'POST', // or 'GET', depending on your preference
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data), // Convert data to JSON string
+    })
+    .then(response => response.json()) // Parsing the JSON response
+    .then(data => console.log('Success:', data))
+    .catch((error) => console.error('Error:', error));
+  }
+} 
 
 // Function to get all data from a specified store in IndexedDB
 function getAllDataFromStore(dbName, storeName) {
