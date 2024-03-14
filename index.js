@@ -1,5 +1,6 @@
 const db = new Dexie("Team Tracking App");
-db.version(1).stores({ teams: "++id, teamname, globalid, rank, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo"});
+//trap was in there twice throwing errors so I removed the last one of them
+db.version(1).stores({ teams: "++id, teamname, globalid, rank, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"});
 
 const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
