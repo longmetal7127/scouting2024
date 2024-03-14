@@ -27,12 +27,14 @@ Offline.options = {
 Offline.on('confirmed-up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
+  console.log("internet confirmed-up")
   syncDataToAzureSQL();
 });
 
 Offline.on('up', function() {
   // Code to execute when the internet connection is detected
   // Fetch data from IndexedDB and sync it to Azure SQL Server
+  console.log("internet up")
   syncDataToAzureSQL();
 });
 
