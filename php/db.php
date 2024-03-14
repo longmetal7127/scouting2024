@@ -1,7 +1,7 @@
 <?php
 // Assuming you're sending data via POST and using JSON
 $data = json_decode(file_get_contents('php://input'), true);
-print($data);
+print('data: ' . $data);
 
 // try {
 //     $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting7127", "CloudSAcaf36d4a", "3P&tLBL7Xc7L6R5p");
