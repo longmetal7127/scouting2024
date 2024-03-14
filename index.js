@@ -106,7 +106,8 @@ function editTeam(globalid) {
   window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
-function syncDataToAzureSQL(teamarray){
+function syncDataToAzureSQL(){
+  console.log("inside syncDataToAzureSQL");
   var data = getAllDataFromStore('Team Tracking App', 'teams');
   if(data.length > 0){
     console.log(data);
