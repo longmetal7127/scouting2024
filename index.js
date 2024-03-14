@@ -124,7 +124,7 @@ async function syncDataToAzureSQL(){
       console.log('Success:', data);
       // Check if debug information is available and log it
       if (data.debug) {
-          console.log('Debug info:', data.debug);
+          console.log('Debug info:', data.data);
       }
     })
     .catch((error) => console.error('Error:', error));
