@@ -83,6 +83,7 @@ const getTeams = async () => {
     // Optionally, display an error message to the user
     list_el.innerHTML = "<p>Error loading teams. Please try again later.</p>";
   };
+}
 window.onload = getTeams;
 
 const getTeamList = async () => {
