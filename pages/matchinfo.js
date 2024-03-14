@@ -159,12 +159,11 @@ db.version(1).stores({ teams: "++id, teamname, globalid, rank, teamnumber, teams
 */
 
 
-
-
-teamnumber = document.getElementById("teamnumber").value;
+const teamnumber = document.getElementById("teamnumber").value;
 // in order to submit match data for a specific team from the general match info page,
 // you need to get the globalid of an existing, matching team entry with the teamnumber submitted on matchinfo.html?
 
+//const globalid = ????
 
 
 //insert team data
