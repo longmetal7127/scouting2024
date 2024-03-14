@@ -1,7 +1,7 @@
 <?php
 // Assuming you're sending data via POST and using JSON
 $data = json_decode(file_get_contents('php://input'), true);
-print('data: ' . $data);
+debug_to_console('data: ' . $data);
 
 // try {
 //     $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting7127", "CloudSAcaf36d4a", "3P&tLBL7Xc7L6R5p");
@@ -50,5 +50,13 @@ print('data: ' . $data);
 // } else {
 //     die(print_r(sqlsrv_errors(), true));
 // }
+
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 
 ?>
