@@ -1,5 +1,17 @@
 <?php
 
+/*
+
+TODO: 
+    Add check to see if team globalid exists and update instead of insert
+    Add check that the team data being updated is more recent then the data in the database
+    
+FOR THE SYNC FUNCTION
+    Add check to make sure we are not syncing duplicate data (timestamps everywhere) back to the ipads or whatever
+    Add check to make sure we are not syncing old data back to the . . .    
+
+*/
+
 header('Content-Type: application/json');
 
 // Decode the received JSON data
