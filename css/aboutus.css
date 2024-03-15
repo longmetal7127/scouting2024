@@ -1,3 +1,19 @@
+:root {
+	--dark: #05152E;
+	--darker: #1F2937;
+	--darkest: #001E3C;
+	--grey: #6B7280;
+	--pink: #EC4899;
+	--purple: #8B5CF6;
+	--light: #EEE;
+	--background: #fffffff6;
+	--teamlist: #e9f7ff; 
+	--text: #2d3875; 
+	--deletebutton: #de4e4e;
+	--navbar: #565f90;
+    --teamcolor: #3EADE0;
+}
+
 /* CSS for centering */
 body {
     /*text-align: center;*/
@@ -6,6 +22,7 @@ body {
 .indented {
     margin-left: 150px; /* Adjust the value as needed */
     text-align: left; /* Reset text alignment for indented text */
+    margin-right: 60px;
 }
 .bullet-list {
     margin-left: 180px; /* Adjust the value to indent the bullets further */
@@ -22,6 +39,10 @@ body {
 /* CSS for input box */
 .ranking-input {
     width: 50px; /* Adjust the width as needed */
+}
+
+.teamcolor {
+    color: var(--teamcolor);
 }
 
 #longmetalfulllogo {
