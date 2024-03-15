@@ -151,7 +151,7 @@ db.version(3).stores({
     // db = database
     // teams = table in database db
  
-/* Steps to submitting data (theoretically)
+/* Steps to submitting data (theoretically)???????
 1. Input information in match form, press the submit button
 2. Collect the teamnumber (required? if so, must be required in teamdetails page)
 3. Find the globalid associated with that teamnumber
@@ -167,9 +167,15 @@ const teamnumber = document.getElementById("teamnumber").value;
 // in order to submit match data for a specific team from the general match info page,
 // you need to get the globalid of an existing, matching team entry with the teamnumber submitted on matchinfo.html?
 
-const teamsDB = db.teams.toArray();
-console.log(teamsDB);
-//const globalid = ;
+
+//const teamsDB = db.teams.toArray();
+try {
+    const team = db.teams.where(parseInt('teamnumber')).equals(parseInt(teamnumber));
+    const globalid = team.globalid;
+} catch (error){
+    console.log("The team number for the selected team was not inputted in the team details page. Please add team number.");
+    console.error(error);
+}
 
 
 //insert team data
@@ -257,8 +263,8 @@ document.getElementById("submitmatchinfo").addEventListener('click', function(ev
     alert("Match info submitted!");
 });
 
-// Function to print all db matches to the console for debugging
-async function printMatches() {
+// Function to print all db matches to the console for debugging, BROKEN
+/*async function printMatches() {
     try {
         // Use Dexie's toArray() to get all records from the teams table
         const allMatches = await db.teams.toArray();
@@ -266,4 +272,4 @@ async function printMatches() {
     } catch (error) {
         console.error("Failed to print matches:", error);
     }
-}
+}*/
