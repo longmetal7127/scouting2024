@@ -15,7 +15,7 @@ $response = [
 
 try {
     // Connection using PDO
-    $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting7127", "CloudSAcaf36d4a", "3HKEkfjD3Q@!S#r9"); //CloudSAcaf36d4a
+    $conn = new PDO("sqlsrv:server = tcp:scounting7127.database.windows.net,1433; Database = scouting_7127", "CloudSAcaf36d4a", "3HKEkfjD3Q@!S#r9"); //CloudSAcaf36d4a
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $response['connection'] = 'Connected to database successfully';
 
