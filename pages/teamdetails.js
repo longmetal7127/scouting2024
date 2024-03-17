@@ -1,7 +1,7 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(4).stores({ 
-    teams: "++indexid, session, remoteid, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop", 
+db.version(5).stores({ 
+    teams: "++indexid, session, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop", 
     matches: "++indexid, session, globalid, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
   });
 
@@ -90,7 +90,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 //insert/update team data
-async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
+async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake,
+   spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
     try {
         const teamData = { 
             teamname: teamname, 
@@ -130,15 +131,16 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
 
         //if a team already exists then update it
         if (existingTeam) {
-            await db.teams.update(existingTeam.id, teamData);
-            console.log('Team data updated successfully:', existingTeam.id);
-            alert('Team data updated successfully:', existingTeam.id);
+          console.log(`Type of existingTeam.id: ${typeof existingTeam.indexid}`);
+            await db.teams.update(existingTeam.indexid, teamData);
+            console.log('Team data updated successfully:', existingTeam.indexid);
+            alert('Team data updated successfully:', existingTeam.indexid);
         } else { //else create a new globalid for a new team and store
             let DateObj = new Date();
-            const globalid = DateObj.getTime();
-            await db.teams.add({...teamData, globalid: parseInt(globalid,10)});
-            console.log('New team added successfully:', teamname, teamnumber, globalid);
-            alert('New team added successfully:', teamname, teamnumber, globalid);
+            const newglobalid = DateObj.getTime();
+            await db.teams.add({...teamData, globalid: parseInt(newglobalid,10)});
+            console.log('New team added successfully:', teamname, teamnumber, newglobalid);
+            alert('New team added successfully:', teamname, teamnumber, newglobalid);
         }
     } catch (error) {
         console.error("Error accessing database:", error);

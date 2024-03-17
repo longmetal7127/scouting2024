@@ -37,18 +37,18 @@ try {
     if (file_exists($localEnvFile)) {
         // The file exists, so we're in a local development environment
         // Set your local database connection settings
-        $dbHost = 'GOLD\GOLD';
-        $dbName = 'scouting_7127';
-        $dbUser = 'teams7127';
-        $dbPassword = 'abcdefg123';
+        $dbHost = '';
+        $dbName = '';
+        $dbUser = '';
+        $dbPassword = '';
         $response['connection'] = 'Local DB Connected';
     } else {
         // The file does not exist, so we're in the production environment
         // Set your production database connection settings
-        $dbHost = 'tcp:scounting7127.database.windows.net,1433;';
-        $dbName = 'scouting_7127';
-        $dbUser = 'CloudSAcaf36d4a';
-        $dbPassword = '3HKEkfjD3Q@!S#r9';
+        $dbHost = '';
+        $dbName = '';
+        $dbUser = '';
+        $dbPassword = '';
         $response['connection'] = 'Production DB Connected';
     }
 
@@ -76,16 +76,14 @@ try {
             $placeholders = array_map(function($value) { return '?'; }, $team);
             $sql = "INSERT INTO teams (" . implode(", ", $columns) . ") VALUES (" . implode(", ", $placeholders) . ")";
             
-            // $stmt = $conn->prepare($sql);
-            // if ($stmt->execute(array_values($team))) {
-            //     $response['success'] = true;
-                 //$response['data'][] = 'Inserted: ' . json_encode($team);
-                 $response['sql'][] = 'sql ' . $sql;
-
-            // } else {
-            //     $response['debug'] = true;
-            //     $response['data'][] = 'Failed to insert: ' . json_encode($team);
-            // }
+            $stmt = $conn->prepare($sql);
+            if ($stmt->execute(array_values($team))) {
+                $response['success'] = true;
+                $response['data'][] = 'Inserted: ' . json_encode($team);
+            } else {
+                $response['debug'] = true;
+                $response['data'][] = 'Failed to insert: ' . json_encode($team);
+            }
         } else {
             // Handle the case where the record exists. You might want to skip or update the record.
             $response['data'][] = 'Record already exists for globalid ' . $team['globalid'] . ' at timestamp ' . $team['indexid'];
@@ -100,12 +98,5 @@ try {
     $response['data'] = $e->getMessage();
 }
 
-$jsonResponse = json_encode($response);
-if (json_last_error() !== JSON_ERROR_NONE) {
-    // Log the error or handle it accordingly
-    error_log('JSON encode error: ' . json_last_error_msg());
-    // Optionally, set a response indicating an error
-    $jsonResponse = json_encode(['error' => 'Internal server error']);
-}
-echo $jsonResponse;
+echo json_encode($response);
 ?>

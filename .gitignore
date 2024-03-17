@@ -1,5 +1,8 @@
 # ignore ALL .log files
 *.log
+.local
+db.config
+dbtest.php
 
 # ignore ALL files in ANY directory named temp
 temp/

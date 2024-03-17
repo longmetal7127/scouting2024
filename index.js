@@ -1,13 +1,12 @@
 const db = new Dexie("Team Tracking App");
 //trap was in there twice throwing errors so I removed the last one of them (2nd to last entry)
 
-db.version(4).stores({ 
-  teams: "++indexid, session, remoteid, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop", 
+db.version(5).stores({ 
+  teams: "++indexid, session, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop", 
   matches: "++indexid, session, globalid, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
   // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
 
-session
 const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
 const list_el = document.querySelector("#teams");
@@ -23,7 +22,7 @@ Offline.options = {
   game: false, // Whether to simulate offline behavior for testing purposes
   checks: {
     google: {
-        url: 'http://www.google.com/', // URL to check for internet connectivity
+        url: 'https://www.google.com/', // URL to check for internet connectivity
         timeout: 5000, // Timeout for the check (in milliseconds)
         type: 'GET' // HTTP method to use for the check
     }
