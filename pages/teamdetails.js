@@ -1,9 +1,10 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(5).stores({ 
-    teams: "++indexid, session, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop", 
-    matches: "++indexid, session, globalid, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
-  });
+db.version(6).stores({ 
+  teams: "++indexid, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, active", 
+  preferences: "startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+  matches: "++indexid, session, globalid, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+});
 
     //i CHANGED ID TO INDEXID AS ID WAS CONFLICTING WITH THE AUTO INCREMENTED ID IN THE TABLE ON THE SQL SERVER ***********************
 

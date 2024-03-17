@@ -12,6 +12,12 @@ FOR THE SYNC FUNCTION
 
 BOTH
     How to handle deletes
+
+OTHER
+    add timestamp field defaults
+    split out submits according to new tables
+    what fields are accoring to match and applied to team overall - which values are constant from match to match and which change over time
+
 */
 
 header('Content-Type: application/json');
@@ -65,7 +71,7 @@ try {
 //     // Assuming $data is an array of teams, each with 'globalid' and 'timestamp'
     foreach ($data as $team) {
         // Check if a record with the same globalid and timestamp already exists
-        $checkSql = "SELECT COUNT(*) FROM teams WHERE globalid = ? AND remoteid = ?";
+        $checkSql = "SELECT COUNT(*) FROM teams WHERE globalid = ? AND indexid = ?";
         $checkStmt = $conn->prepare($checkSql);
         $checkStmt->execute([$team['globalid'], $team['indexid']]);
         $exists = $checkStmt->fetchColumn() > 0;
@@ -76,16 +82,16 @@ try {
             $placeholders = array_map(function($value) { return '?'; }, $team);
             $sql = "INSERT INTO teams (" . implode(", ", $columns) . ") VALUES (" . implode(", ", $placeholders) . ")";
             
-            // $stmt = $conn->prepare($sql);
-            // if ($stmt->execute(array_values($team))) {
-            //     $response['success'] = true;
-                 //$response['data'][] = 'Inserted: ' . json_encode($team);
+            $stmt = $conn->prepare($sql);
+            if ($stmt->execute(array_values($team))) {
+                $response['success'] = true;
+                 $response['data'][] = 'Inserted: ' . json_encode($team);
                  $response['sql'][] = 'sql ' . $sql;
 
-            // } else {
-            //     $response['debug'] = true;
-            //     $response['data'][] = 'Failed to insert: ' . json_encode($team);
-            // }
+            } else {
+                $response['debug'] = true;
+                $response['data'][] = 'Failed to insert: ' . json_encode($team);
+            }
         } else {
             // Handle the case where the record exists. You might want to skip or update the record.
             $response['data'][] = 'Record already exists for globalid ' . $team['globalid'] . ' at timestamp ' . $team['indexid'];
