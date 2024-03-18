@@ -31,6 +31,10 @@
 	text-indent: 25px;
 }
 
+.teamnameeditable {
+	display: inline;
+}
+
 p {
 	margin-left: 50px;
 }
