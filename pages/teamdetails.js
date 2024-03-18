@@ -1,9 +1,9 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
 db.version(15).stores({ 
-  teams: "++indexid, clienttimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
-  preferences: "++indexid, globalid, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, clienttimestamp",
-  matches: "++indexid, globalid, match, remoteid, active, clienttimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+  teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active", 
+  preferences: "++indexid, globalid, clienttimestamp, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+  matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
 
     //I CHANGED ID TO INDEXID AS ID WAS CONFLICTING WITH THE AUTO INCREMENTED ID IN THE TABLE ON THE SQL SERVER *********************** Scrub that, I made a ton of changes :-\
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake,
    spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
     try {
-      var now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      let clienttimestamp = moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
       //has to have a comma even after the last element
         const teamData = { 
             teamname: teamname, 
@@ -116,7 +116,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             teamnumber: teamnumber, 
             teamschool: teamschool,
             alliancescore: alliancescore,
-            clienttimestamp: now,
+            clienttimestamp: clienttimestamp,
         };
 
         const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
@@ -156,7 +156,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             hangsWithAnother: hangsWithAnother,
             attemptsSpotlight: attemptsSpotlight,
             coop: coop,
-            clienttimestamp: now,
+            clienttimestamp: clienttimestamp,
         };
 
         const existingPreferences = await db.preferences.where({

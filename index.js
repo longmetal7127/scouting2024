@@ -2,9 +2,9 @@ const db = new Dexie("Team Tracking App");
 //trap was in there twice throwing errors so I removed the last one of them (2nd to last entry)
 
 db.version(15).stores({ 
-  teams: "++indexid, clienttimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
-  preferences: "++indexid, globalid, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, clienttimestamp",
-  matches: "++indexid, globalid, match, remoteid, active, clienttimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+  teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active", 
+  preferences: "++indexid, globalid, clienttimestamp, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+  matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
 
 // Assuming 'db' is your Dexie database instance
@@ -63,7 +63,7 @@ form.onsubmit = async (event) => {
   const teamname = input.value;
   let DateObj = new Date();
   const globalid = parseInt(DateObj.getTime(),10);
-  let clienttimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  let clienttimestamp = moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
   await db.teams.add({ teamname , globalid, clienttimestamp });
   await getTeams();
   form.reset();
