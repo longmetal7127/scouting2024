@@ -6,7 +6,7 @@ db.version(15).stores({
   matches: "++indexid, globalid, match, remoteid, active, clienttimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
 
-    //i CHANGED ID TO INDEXID AS ID WAS CONFLICTING WITH THE AUTO INCREMENTED ID IN THE TABLE ON THE SQL SERVER ***********************
+    //I CHANGED ID TO INDEXID AS ID WAS CONFLICTING WITH THE AUTO INCREMENTED ID IN THE TABLE ON THE SQL SERVER *********************** Scrub that, I made a ton of changes :-\
 
     // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
     
@@ -116,7 +116,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             teamnumber: teamnumber, 
             teamschool: teamschool,
             alliancescore: alliancescore,
-            remotetimestamp: now,
+            clienttimestamp: now,
         };
 
         const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
@@ -156,7 +156,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             hangsWithAnother: hangsWithAnother,
             attemptsSpotlight: attemptsSpotlight,
             coop: coop,
-            remotetimestamp: now,
+            clienttimestamp: now,
         };
 
         const existingPreferences = await db.preferences.where({
@@ -190,7 +190,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const teamschool = document.getElementById('teamschool').value;
     const alliancescore = document.getElementById('alliancescore').value;
     const startingpos = document.getElementById('startingpos').value;
-	const moreinfo = document.getElementById('moreinfo').value;
+	  const moreinfo = document.getElementById('moreinfo').value;
 
     const Leaveszone = document.getElementById('Leaveszone').checked;
     const scores1amp = document.getElementById('scores1amp').checked;

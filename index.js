@@ -16,6 +16,8 @@ const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
 const list_el = document.querySelector("#teams");
 
+/* begin offline --------------------------------------------------------------------------- */
+
 //options for the internet check (offline.js).  It looks to google for the internet and if it does not find it knows we have no internet (unless google goes down)
 Offline.options = {
   checkOnLoad: true, // Whether to check the connection status immediately when the page loads
@@ -53,13 +55,16 @@ Offline.on('down', function() {
   console.log("internet down")
 });
 
+/* End offline --------------------------------------------------------------------------- */
+
 //add team
 form.onsubmit = async (event) => {
   event.preventDefault();
   const teamname = input.value;
   let DateObj = new Date();
   const globalid = parseInt(DateObj.getTime(),10);
-  await db.teams.add({ teamname , globalid });
+  let clienttimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  await db.teams.add({ teamname , globalid, clienttimestamp });
   await getTeams();
   form.reset();
 };
