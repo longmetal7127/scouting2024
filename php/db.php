@@ -1,6 +1,14 @@
 <?php
 
 /*
+
+I created a few new pages
+    /testing/dexie.html - displays dexie database contents
+    /testing/deletedexie.html - deletes the local dexie db to avoid those can't upgrade issues
+    /php/php/dbtest.php - if you set up a local environment on your computer this will test the connection to your local sql server (makes development alot faster)
+    a few template files to the php folder - since we don't want to upload credentials to github we put those in file that we can put in our gitignore file and if someone wants to download the app they have something to work off of but not the credentials themselves
+        since in order to need those credentials you have to be connected to the internet, we don't need those files to be on our local machine for offline use
+
 TODO: 
 FOR THE PUSH FUNCTION
     Add check to see if team globalid exists and update instead of insert
