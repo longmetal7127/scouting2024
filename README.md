@@ -1,4 +1,8 @@
 # scouting2024
+
+We need a whiteboard
+
+
 scouting app for competitions written with xcode/vscode
 // 
 current HTML page references the link below for experimental purposes
