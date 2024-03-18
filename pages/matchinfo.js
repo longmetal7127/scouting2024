@@ -174,16 +174,22 @@ const teamnumber = document.getElementById("teamnumber").value;
 // in order to submit match data for a specific team from the general match info page,
 // you need to get the globalid of an existing, matching team entry with the teamnumber submitted on matchinfo.html?
 
-
 //const teamsDB = db.teams.toArray();
-try {
-    const team = db.teams.where(parseInt('teamnumber')).equals(parseInt(teamnumber));
-    const globalid = team.globalid;
-} catch (error){
-    console.log("The team number for the selected team was not inputted in the team details page. Please add team number.");
-    console.error(error);
+
+function getTeamWithNumber(teamnumber) {
+    try {
+        const team = db.teams.where(parseInt('teamnumber')).equals(parseInt(teamnumber));
+        return team;
+        //const globalid = team.globalid;
+    } catch (error){
+        console.log("The team number for the selected team was not inputted in the team details page. Please add team number.");
+        console.error(error);
+    }
 }
 
+function getTeamWithGlobalID(team) {
+    
+}
 
 //insert team data
 async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo ) {
