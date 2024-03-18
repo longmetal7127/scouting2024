@@ -23,6 +23,20 @@
 	margin-left: 50px;
 }
 
+.viewmatchsummary {
+	width: 300px;
+	background-color: var(--background);
+	border-width: 1px;
+	border-radius: 4px;
+	font-size: 20px;
+	font-family: monospace;
+	font-weight: bold;
+	color: var(--text);
+	align-self: center;
+	margin: auto;
+
+}
+
 .basicinfo {
 	width: 30%;
 	margin-left: 10px;

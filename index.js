@@ -119,7 +119,7 @@ const deleteTeams = async (event, id) => {
 };
 
 function editTeam(globalid) {
-  window.open(`pages/teamdetails.html?globalid=${globalid}&match=1`, "_self");  //well, it defaults to new page so we will try _self
+  window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
 function newMatch(globalid) {
