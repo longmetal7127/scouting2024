@@ -46,28 +46,3 @@ self.addEventListener('fetch', event => {
     })
   );
 });
-
-// // Fetching resources
-// self.addEventListener('fetch', event => {
-//   event.respondWith(
-//     // Try fetching from the network first
-//     fetch(event.request)
-//       .then(response => {
-//         // If request succeeds, clone the response to cache and return the response
-//         if (response && response.status === 200) {
-//           const responseToCache = response.clone();
-//           caches.open(cacheName)
-//             .then(cache => {
-//               cache.put(event.request, responseToCache);
-//             });
-//           return response;
-//         }
-//         // If request fails (e.g., network error), fall back to the cache
-//         return caches.match(event.request);
-//       })
-//       .catch(error => {
-//         // If fetch from network fails, try serving from cache
-//         return caches.match(event.request);
-//       })
-//   );
-// });

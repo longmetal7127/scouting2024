@@ -19,6 +19,7 @@ OTHER
     what fields are accoring to match and applied to team overall - which values are constant from match to match and which change over time
     initialize the match number and track it so a duplicate cannot be entered when inserting new match
     add new match to the homescreen for each team that links to tyhe match summary page for that team and creates a new match
+    if you see any undefined in the db get rid of them (give a default value) undefined or NULL is bad news in databases
 */
 
 header('Content-Type: application/json');
@@ -66,7 +67,7 @@ try {
         echo json_encode($response);
     }
 
-//     // Assuming $data is an array of teams, each with 'globalid' and 'timestamp'
+    // Assuming $data is an array of teams, each with 'globalid' and 'timestamp'
     foreach ($data as $team) {
         // Check if a record with the same globalid and timestamp already exists
         $checkSql = "SELECT COUNT(*) FROM teams WHERE globalid = ? AND indexid = ?";

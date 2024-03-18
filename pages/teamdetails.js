@@ -1,9 +1,9 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
 db.version(15).stores({ 
-  teams: "++indexid, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
-  preferences: "++indexid, globalid, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
-  matches: "++indexid, globalid, match, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+  teams: "++indexid, clienttimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
+  preferences: "++indexid, globalid, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, clienttimestamp",
+  matches: "++indexid, globalid, match, remoteid, active, clienttimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
 
     //i CHANGED ID TO INDEXID AS ID WAS CONFLICTING WITH THE AUTO INCREMENTED ID IN THE TABLE ON THE SQL SERVER ***********************
@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', async () => {
          if (team) {
             //text values
              const teamNameElm = document.getElementById('teamname');
-             teamNameElm.value = team.teamname;
+             teamNameElm.value = team.teamname  || '';
              const teamNumElm = document.getElementById('teamnumber');
-             teamNumElm.value = team.teamnumber;
+             teamNumElm.value = team.teamnumber  || '';
              const teamSchoolElm = document.getElementById('teamschool');
-             teamSchoolElm.value = team.teamschool;
+             teamSchoolElm.value = team.teamschool  || '';
              const allianceScoreElm = document.getElementById('alliancescore');
-             allianceScoreElm.value = team.alliancescore;         
+             allianceScoreElm.value = team.alliancescore  || '';         
          } else {
              console.log(`Team with ID ${globalid} not found.`);
          }
@@ -108,12 +108,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake,
    spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
     try {
+      var now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      //has to have a comma even after the last element
         const teamData = { 
             teamname: teamname, 
             globalid: globalid,
             teamnumber: teamnumber, 
             teamschool: teamschool,
             alliancescore: alliancescore,
+            remotetimestamp: now,
         };
 
         const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
@@ -132,6 +135,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             // alert('New team added successfully:', teamname, teamnumber, newglobalid);
         }
 
+        //has to have a comma even after the last element
         const preferencesData = { 
             globalid: globalid,
             match: thismatch, 
@@ -152,6 +156,7 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             hangsWithAnother: hangsWithAnother,
             attemptsSpotlight: attemptsSpotlight,
             coop: coop,
+            remotetimestamp: now,
         };
 
         const existingPreferences = await db.preferences.where({
