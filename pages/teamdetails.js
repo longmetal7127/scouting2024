@@ -1,21 +1,21 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(6).stores({ 
-  teams: "++indexid, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, active", 
-  preferences: "startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
-  matches: "++indexid, session, globalid, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+db.version(15).stores({ 
+  teams: "++indexid, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
+  preferences: "++indexid, globalid, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+  matches: "++indexid, globalid, match, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
 
     //i CHANGED ID TO INDEXID AS ID WAS CONFLICTING WITH THE AUTO INCREMENTED ID IN THE TABLE ON THE SQL SERVER ***********************
 
     // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
-
+    
+const urlParams = new URLSearchParams(window.location.search);
+const globalid = parseInt(urlParams.get('globalid'), 10);
+const thismatch = urlParams.get('match');
     
 document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const globalid = parseInt(urlParams.get('globalid'), 10);
-        
+    try {       
          // Use the globally initialized db instance
          const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
          if (team) {
@@ -27,32 +27,45 @@ document.addEventListener('DOMContentLoaded', async () => {
              const teamSchoolElm = document.getElementById('teamschool');
              teamSchoolElm.value = team.teamschool;
              const allianceScoreElm = document.getElementById('alliancescore');
-             allianceScoreElm.value = team.alliancescore;
-             const moreInfoElm = document.getElementById('moreinfo');
-             moreInfoElm.value = team.moreinfo;
-             const startingPosElm = document.getElementById('startingpos');
-             startingPosElm.value = team.startingpos;
-             
-             //checkbox values - checked
-             const LeavesZone = document.getElementById('Leaveszone');
-             LeavesZone.checked = team.Leaveszone;
-             const scores1Amp = document.getElementById('scores1amp');
-             scores1Amp.checked = team.scores1amp;
-             const scores1Speaker = document.getElementById('scores1speaker');
-             scores1Speaker.checked = team.scores1speaker;
+             allianceScoreElm.value = team.alliancescore;         
+         } else {
+             console.log(`Team with ID ${globalid} not found.`);
+         }
 
-             const picksUp = document.getElementById('picksup');
-             picksUp.checked = team.picksup;
+        // Use the globally initialized db instance
+        const preferences = await db.preferences.where({
+            globalid: parseInt(globalid, 10), 
+            match: thismatch}).first();
 
-             const scores2Amp = document.getElementById('scores2amp');
-             scores2Amp.checked = team.scores2amp;
-             const scores2SpeakerElm = document.getElementById('scores2speaker');
-             scores2SpeakerElm.checked = team.scores2speaker;
+        if (preferences) {
+            //text values
+            // const matchElm = document.getElementById('match');
+            // matchElm.value = preferences.match;
+            const moreInfoElm = document.getElementById('moreinfo');
+            moreInfoElm.value = preferences.moreinfo || '';
+            const startingPosElm = document.getElementById('startingpos');
+            startingPosElm.value = preferences.startingpos || '';
             
-             //radio elements - if set then true
-             const scoreRadios = document.querySelectorAll('input[name="score"]');
-             scoreRadios.forEach((radio) => {
-                if (radio.value === team.preferredScoringMethod) {
+            //checkbox values - checked
+            const LeavesZone = document.getElementById('Leaveszone');
+            LeavesZone.checked = preferences.Leaveszone || false;
+            const scores1Amp = document.getElementById('scores1amp');
+            scores1Amp.checked = preferences.scores1amp || false;
+            const scores1Speaker = document.getElementById('scores1speaker');
+            scores1Speaker.checked = preferences.scores1speaker || false;
+
+            const picksUp = document.getElementById('picksup');
+            picksUp.checked = preferences.picksup || false;
+
+            const scores2Amp = document.getElementById('scores2amp');
+            scores2Amp.checked = preferences.scores2amp || false;
+            const scores2SpeakerElm = document.getElementById('scores2speaker');
+            scores2SpeakerElm.checked = preferences.scores2speaker || false;
+            
+            //radio elements - if set then true
+            const scoreRadios = document.querySelectorAll('input[name="score"]');
+            scoreRadios.forEach((radio) => {
+                if (radio.value === preferences.preferredScoringMethod) {
                   radio.checked = true; // Set the matching radio button as checked
                 }
               });
@@ -60,31 +73,32 @@ document.addEventListener('DOMContentLoaded', async () => {
               //radio elements
               const intakeRadios = document.querySelectorAll('input[name="intake"]');
               intakeRadios.forEach((radio) => {
-                 if (radio.value === team.preferredIntakeMethod) {
-                   radio.checked = true; // Set the matching radio button as checked
-                 }
-               });
+                if (radio.value === preferences.preferredIntakeMethod) {
+                  radio.checked = true; // Set the matching radio button as checked
+                }
+              });
 
-             const prefintake = document.getElementById('prefintake');
-             prefintake.value = team.prefintake;
+            const prefintake = document.getElementById('prefintake');
+            prefintake.value = preferences.prefintake || '';
 
-             const spotlight = document.getElementById('spotlight');
-             spotlight.checked = team.spotlight;
-             const trap = document.getElementById('trap');
-             trap.checked = team.trap;
-             const alone = document.getElementById('alone');
-             alone.checked = team.alone;
-             const hangsWithAnother = document.getElementById('hangsWithAnother');
-             hangsWithAnother.checked = team.hangsWithAnother;
+            const spotlight = document.getElementById('spotlight');
+            spotlight.checked = preferences.spotlight || false;
+            const trap = document.getElementById('trap');
+            trap.checked = preferences.trap || false;
+            const alone = document.getElementById('alone');
+            alone.checked = preferences.alone || false;
+            const hangsWithAnother = document.getElementById('hangsWithAnother');
+            hangsWithAnother.checked = preferences.hangsWithAnother || false;
 
-             const attemptsSpotlight = document.getElementById('attemptsSpotlight');
-             attemptsSpotlight.checked = team.attemptsSpotlight;
-             const coop = document.getElementById('coop');
-             coop.checked = team.coop;
-             
-         } else {
-             console.log(`Team with ID ${globalid} not found.`);
-         }
+            const attemptsSpotlight = document.getElementById('attemptsSpotlight');
+            attemptsSpotlight.checked = preferences.attemptsSpotlight || false;
+            const coop = document.getElementById('coop');
+            coop.checked = preferences.coop || false;
+            
+        } else {
+            console.log(`Team with ID ${globalid} not found.`);
+        }
+
      } catch (error) {
          console.error("Error accessing database:", error);
      }
@@ -100,48 +114,61 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             teamnumber: teamnumber, 
             teamschool: teamschool,
             alliancescore: alliancescore,
-
-            moreinfo: moreinfo,
-            startingpos: startingpos,
-
-            Leaveszone: Leaveszone,
-            scores1amp: scores1amp,
-            scores1speaker: scores1speaker,
-
-            picksup: picksup,
-
-            scores2amp: scores2amp,
-            scores2speaker: scores2speaker,
-            
-            preferredScoringMethod: preferredScoringMethod,
-
-            preferredIntakeMethod: preferredIntakeMethod,
-
-            prefintake: prefintake,
-
-            spotlight: spotlight,
-            trap: trap,
-            alone: alone,
-            hangsWithAnother: hangsWithAnother,
-
-            attemptsSpotlight: attemptsSpotlight,
-            coop: coop
         };
 
         const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
 
-        //if a team already exists then update it
+        //if a team already exists in teams table then update it
         if (existingTeam) {
-          console.log(`Type of existingTeam.id: ${typeof existingTeam.indexid}`);
+            // console.log(`Type of existingTeam.id: ${typeof existingTeam.indexid}`);
             await db.teams.update(existingTeam.indexid, teamData);
-            console.log('Team data updated successfully:', existingTeam.indexid);
-            alert('Team data updated successfully:', existingTeam.indexid);
+            //console.log('Team data updated successfully:', existingTeam.indexid);
+            // alert('Team data updated successfully:', existingTeam.indexid);
         } else { //else create a new globalid for a new team and store
             let DateObj = new Date();
             const newglobalid = DateObj.getTime();
             await db.teams.add({...teamData, globalid: parseInt(newglobalid,10)});
-            console.log('New team added successfully:', teamname, teamnumber, newglobalid);
-            alert('New team added successfully:', teamname, teamnumber, newglobalid);
+            // console.log('New team added successfully:', teamname, teamnumber, newglobalid);
+            // alert('New team added successfully:', teamname, teamnumber, newglobalid);
+        }
+
+        const preferencesData = { 
+            globalid: globalid,
+            match: thismatch, 
+            moreinfo: moreinfo,
+            startingpos: startingpos,
+            Leaveszone: Leaveszone,
+            scores1amp: scores1amp,
+            scores1speaker: scores1speaker,
+            picksup: picksup,
+            scores2amp: scores2amp,
+            scores2speaker: scores2speaker,            
+            preferredScoringMethod: preferredScoringMethod,
+            preferredIntakeMethod: preferredIntakeMethod,
+            prefintake: prefintake,
+            spotlight: spotlight,
+            trap: trap,
+            alone: alone,
+            hangsWithAnother: hangsWithAnother,
+            attemptsSpotlight: attemptsSpotlight,
+            coop: coop,
+        };
+
+        const existingPreferences = await db.preferences.where({
+            globalid: parseInt(globalid, 10), 
+            match: thismatch}).first();
+
+        //if a team already exists in teams table then update it
+        if (existingPreferences) {            
+            await db.preferences.update(existingPreferences.indexid, preferencesData);
+            console.log('Team data updated successfully:', existingPreferences.indexid);
+            //alert('Preferences data updated successfully:', existingPreferences.indexid);
+        } else { //else create a new globalid for a new team and store
+            let DateObj = new Date();
+            const newglobalid = DateObj.getTime();
+            await db.preferences.add(preferencesData);
+            console.log('New Preferences added successfully:', globalid + ' ' + thismatch);
+            //alert('New Preferences added successfully:', globalid, match);
         }
     } catch (error) {
         console.error("Error accessing database:", error);
@@ -177,14 +204,14 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const preferredIntakeMethodElement = document.querySelector('input[name="intake"]:checked');
     const preferredIntakeMethod = preferredIntakeMethodElement ? preferredIntakeMethodElement.value : undefined;
 
-	const prefintake = document.getElementById('prefintake').value;
-	
+    const prefintake = document.getElementById('prefintake').value;
+    
     const spotlight = document.getElementById('spotlight').checked;
-	const trap = document.getElementById('trap').checked;
-	const alone = document.getElementById('alone').checked;
-	const hangsWithAnother = document.getElementById('hangsWithAnother').checked;
-	const attemptsSpotlight = document.getElementById('attemptsSpotlight').checked;
-	const coop = document.getElementById('coop').checked;
+    const trap = document.getElementById('trap').checked;
+    const alone = document.getElementById('alone').checked;
+    const hangsWithAnother = document.getElementById('hangsWithAnother').checked;
+    const attemptsSpotlight = document.getElementById('attemptsSpotlight').checked;
+    const coop = document.getElementById('coop').checked;
 
     const urlParams = new URLSearchParams(window.location.search);
     const globalid = parseInt(urlParams.get("globalid"),10);

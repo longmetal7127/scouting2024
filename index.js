@@ -1,12 +1,16 @@
 const db = new Dexie("Team Tracking App");
 //trap was in there twice throwing errors so I removed the last one of them (2nd to last entry)
 
-db.version(6).stores({ 
-  teams: "++indexid, active, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
-  preferences: "moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
-  matches: "++indexid, session, globalid, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+db.version(15).stores({ 
+  teams: "++indexid, localtimestamp, remotetimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
+  preferences: "++indexid, globalid, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+  matches: "++indexid, globalid, match, remoteid, active,localtimestamp, remotetimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
-  // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
+
+// Assuming 'db' is your Dexie database instance
+const dbName = db.name; // Get the name of the database you want to delete
+
+// Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
 
 const form = document.querySelector("#new-team-form");
 const input = document.querySelector("#new-team-input");
@@ -109,7 +113,7 @@ const deleteTeams = async (event, id) => {
 };
 
 function editTeam(globalid) {
-  window.open(`pages/teamdetails.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
+  window.open(`pages/teamdetails.html?globalid=${globalid}&match=1`, "_self");  //well, it defaults to new page so we will try _self
 }
 
 async function syncDataToAzureSQL(){

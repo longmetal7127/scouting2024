@@ -17,13 +17,11 @@ OTHER
     add timestamp field defaults
     split out submits according to new tables
     what fields are accoring to match and applied to team overall - which values are constant from match to match and which change over time
-
+    initialize the match number and track it so a duplicate cannot be entered when inserting new match
+    add new match to the homescreen for each team that links to tyhe match summary page for that team and creates a new match
 */
 
 header('Content-Type: application/json');
-
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL);
 
 // Decode the received JSON data
 $data = json_decode(file_get_contents('php://input'), true);

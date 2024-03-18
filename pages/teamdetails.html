@@ -90,13 +90,15 @@
             <br>
 
     <!-- Teleop Survey-->
-    <p>Preferred scoring method:</p>
+    <p  class="ptext">Preferred scoring method:</p>
     <input type="radio" id="amp" name="score" value="amp">
     <label for="amp">Amp</label><br>
     <input type="radio" id="speaker" name="score" value="speaker">
-    <label for="speaker">Speaker</label><br> <!-- Fixed the for attribute -->
+    <label for="speaker">Speaker</label><br>
     <input type="radio" id="scoreEither" name="score" value="either">
-    <label for="scoreEither">Either</label><br><br>
+    <label for="scoreEither">Either</label><br>
+    <input type="radio" id="scoreEither" name="score" value="none" checked>
+    <label for="scoreEither">None</label><br><br>
     
     <p class="ptext">Preferred Intake method:</p>
     <input type="radio" class="radio" id="ground" name="intake" value="ground">
@@ -104,7 +106,9 @@
     <input type="radio" class="radio" id="human" name="intake" value="human">
     <label for="human">Human Player</label><br>
     <input type="radio" class="radio" id="either" name="intake" value="either">
-    <label for="intakeEither">Either</label><br><br>
+    <label for="intakeEither">Either</label><br>
+    <input type="radio" class="radio" id="either" name="intake" value="none" checked>
+    <label for="intakeEither">None</label><br><br>
     
     <label for="othertext">Other: </label>
     <input type="text" name="prefintake" id="prefintake" maxlength="100"><br><br>
