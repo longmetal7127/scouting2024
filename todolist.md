@@ -26,4 +26,6 @@ steps to create the world's best scouting app (in no particular order)
 7. hopefully done :D ?
 
 8. i forgot. we need to teach the scouts how to use the app, even if this app is not used this year. that way, they have some familiarity when they look at it next year
+
+9. should we consider exporting the data somehow to somewhere else? ie excel, sheets, etc. to archive data or to compile it all? 
     
