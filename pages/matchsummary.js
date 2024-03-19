@@ -10,6 +10,21 @@ const urlParams = new URLSearchParams(window.location.search);
 const globalid = parseInt(urlParams.get('globalid'), 10);
 //const thismatch = urlParams.get('match'); NOT NEEDED
 
-document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById("teamnameeditable").textContent = "hello world";
+//document.getElementById("teamnameeditable").textContent = "hello world";
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {      
+        const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+        if (team) {
+            
+            document.getElementById("teamnameeditable").innerHTML = team.teamname;
+            document.getElementById("teamnumbereditable").innerHTML = team.teamnumber;
+            // FIX BROKEN TEAM NUMBER UPDATE ^^^ 
+            
+        } else {
+            console.log(`Team with ID ${globalid} not found.`);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
 });
