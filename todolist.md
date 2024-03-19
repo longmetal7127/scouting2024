@@ -24,4 +24,6 @@ steps to create the world's best scouting app (in no particular order)
 6. (maybe very last thing we consider) review code, season-specific variable names (i.e. speaker, amp scoring) and add appropriate notes to reskinning-instructions.md about how to change the code next year to adapt
 
 7. hopefully done :D ?
+
+8. i forgot. we need to teach the scouts how to use the app, even if this app is not used this year. that way, they have some familiarity when they look at it next year
     
