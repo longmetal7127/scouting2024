@@ -1,4 +1,4 @@
-things that need to be completed asap (in no particular order)
+steps to create the world's best scouting app (in no particular order)
 
 1. making sure the match info page can actually communicate with the database and submit info
     a. should we make team number a required field to fill out in the team details page? if so:
