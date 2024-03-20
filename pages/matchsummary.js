@@ -1,9 +1,8 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
-db.version(15).stores({ 
-  teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active", 
-  preferences: "++indexid, globalid, clienttimestamp, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
-  matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+db.version(16).stores({ 
+    teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+    matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -35,7 +34,7 @@ const getMatches = async () => {
         const allMatches = await db.matches.toArray();
         // check if allMatches is not empty
         if (allMatches && allMatches.length > 0) {
-            /*match_list.innerHTML = allMatches
+            match_list.innerHTML = allMatches
             .map(matches =>
                 <div class="match">
                 <div class="content">
@@ -47,9 +46,9 @@ const getMatches = async () => {
                     </div>
                 </div>
                 
-                //BROKEN CODE //////////
+                // BROKEN CODE //////////
             )
-            .join("");*/
+            .join("");
         } else {
             //Handle case when no matches are found
             match_list.innerHTML = "<p> No matches found. </p>";
