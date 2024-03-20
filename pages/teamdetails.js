@@ -1,8 +1,7 @@
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
 db.version(15).stores({ 
-  teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active", 
-  preferences: "++indexid, globalid, clienttimestamp, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+  teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
   matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 });
 
@@ -20,52 +19,41 @@ document.addEventListener('DOMContentLoaded', async () => {
          const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
          if (team) {
             //text values
-             const teamNameElm = document.getElementById('teamname');
-             teamNameElm.value = team.teamname  || '';
-             const teamNumElm = document.getElementById('teamnumber');
-             teamNumElm.value = team.teamnumber  || '';
-             const teamSchoolElm = document.getElementById('teamschool');
-             teamSchoolElm.value = team.teamschool  || '';
-             const allianceScoreElm = document.getElementById('alliancescore');
-             allianceScoreElm.value = team.alliancescore  || '';         
-         } else {
-             console.log(`Team with ID ${globalid} not found.`);
-         }
+            const teamNameElm = document.getElementById('teamname');
+            teamNameElm.value = team.teamname  || '';
+            const teamNumElm = document.getElementById('teamnumber');
+            teamNumElm.value = team.teamnumber  || '';
+            const teamSchoolElm = document.getElementById('teamschool');
+            teamSchoolElm.value = team.teamschool  || '';
+            const allianceScoreElm = document.getElementById('alliancescore');
+            allianceScoreElm.value = team.alliancescore  || '';         
 
-        // Use the globally initialized db instance
-        const preferences = await db.preferences.where({
-            globalid: parseInt(globalid, 10), 
-            match: thismatch}).first();
 
-        if (preferences) {
-            //text values
-            // const matchElm = document.getElementById('match');
-            // matchElm.value = preferences.match;
             const moreInfoElm = document.getElementById('moreinfo');
-            moreInfoElm.value = preferences.moreinfo || '';
+            moreInfoElm.value = team.moreinfo || '';
             const startingPosElm = document.getElementById('startingpos');
-            startingPosElm.value = preferences.startingpos || '';
+            startingPosElm.value = team.startingpos || '';
             
             //checkbox values - checked
             const LeavesZone = document.getElementById('Leaveszone');
-            LeavesZone.checked = preferences.Leaveszone || false;
+            LeavesZone.checked = team.Leaveszone || false;
             const scores1Amp = document.getElementById('scores1amp');
-            scores1Amp.checked = preferences.scores1amp || false;
+            scores1Amp.checked = team.scores1amp || false;
             const scores1Speaker = document.getElementById('scores1speaker');
-            scores1Speaker.checked = preferences.scores1speaker || false;
+            scores1Speaker.checked = team.scores1speaker || false;
 
             const picksUp = document.getElementById('picksup');
-            picksUp.checked = preferences.picksup || false;
+            picksUp.checked = team.picksup || false;
 
             const scores2Amp = document.getElementById('scores2amp');
-            scores2Amp.checked = preferences.scores2amp || false;
+            scores2Amp.checked = team.scores2amp || false;
             const scores2SpeakerElm = document.getElementById('scores2speaker');
-            scores2SpeakerElm.checked = preferences.scores2speaker || false;
+            scores2SpeakerElm.checked = team.scores2speaker || false;
             
             //radio elements - if set then true
             const scoreRadios = document.querySelectorAll('input[name="score"]');
             scoreRadios.forEach((radio) => {
-                if (radio.value === preferences.preferredScoringMethod) {
+                if (radio.value === team.preferredScoringMethod) {
                   radio.checked = true; // Set the matching radio button as checked
                 }
               });
@@ -73,27 +61,27 @@ document.addEventListener('DOMContentLoaded', async () => {
               //radio elements
               const intakeRadios = document.querySelectorAll('input[name="intake"]');
               intakeRadios.forEach((radio) => {
-                if (radio.value === preferences.preferredIntakeMethod) {
+                if (radio.value === team.preferredIntakeMethod) {
                   radio.checked = true; // Set the matching radio button as checked
                 }
               });
 
             const prefintake = document.getElementById('prefintake');
-            prefintake.value = preferences.prefintake || '';
+            prefintake.value = team.prefintake || '';
 
             const spotlight = document.getElementById('spotlight');
-            spotlight.checked = preferences.spotlight || false;
+            spotlight.checked = team.spotlight || false;
             const trap = document.getElementById('trap');
-            trap.checked = preferences.trap || false;
+            trap.checked = team.trap || false;
             const alone = document.getElementById('alone');
-            alone.checked = preferences.alone || false;
+            alone.checked = team.alone || false;
             const hangsWithAnother = document.getElementById('hangsWithAnother');
-            hangsWithAnother.checked = preferences.hangsWithAnother || false;
+            hangsWithAnother.checked = team.hangsWithAnother || false;
 
             const attemptsSpotlight = document.getElementById('attemptsSpotlight');
-            attemptsSpotlight.checked = preferences.attemptsSpotlight || false;
+            attemptsSpotlight.checked = team.attemptsSpotlight || false;
             const coop = document.getElementById('coop');
-            coop.checked = preferences.coop || false;
+            coop.checked = team.coop || false;
             
         } else {
             console.log(`Team with ID ${globalid} not found.`);
@@ -105,8 +93,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 //insert/update team data
-async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake,
-   spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
+async function submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, 
+    Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake,
+      spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop ) {
     try {
       let clienttimestamp = moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
       //has to have a comma even after the last element
@@ -117,28 +106,6 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             teamschool: teamschool,
             alliancescore: alliancescore,
             clienttimestamp: clienttimestamp,
-        };
-
-        const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
-
-        //if a team already exists in teams table then update it
-        if (existingTeam) {
-            // console.log(`Type of existingTeam.id: ${typeof existingTeam.indexid}`);
-            await db.teams.update(existingTeam.indexid, teamData);
-            //console.log('Team data updated successfully:', existingTeam.indexid);
-            // alert('Team data updated successfully:', existingTeam.indexid);
-        } else { //else create a new globalid for a new team and store
-            let DateObj = new Date();
-            const newglobalid = DateObj.getTime();
-            await db.teams.add({...teamData, globalid: parseInt(newglobalid,10)});
-            // console.log('New team added successfully:', teamname, teamnumber, newglobalid);
-            // alert('New team added successfully:', teamname, teamnumber, newglobalid);
-        }
-
-        //has to have a comma even after the last element
-        const preferencesData = { 
-            globalid: globalid,
-            match: thismatch, 
             moreinfo: moreinfo,
             startingpos: startingpos,
             Leaveszone: Leaveszone,
@@ -156,24 +123,22 @@ async function submitTeamData( teamname, globalid, teamnumber, teamschool, allia
             hangsWithAnother: hangsWithAnother,
             attemptsSpotlight: attemptsSpotlight,
             coop: coop,
-            clienttimestamp: clienttimestamp,
         };
 
-        const existingPreferences = await db.preferences.where({
-            globalid: parseInt(globalid, 10), 
-            match: thismatch}).first();
+        const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
 
         //if a team already exists in teams table then update it
-        if (existingPreferences) {            
-            await db.preferences.update(existingPreferences.indexid, preferencesData);
-            console.log('Team data updated successfully:', existingPreferences.indexid);
-            //alert('Preferences data updated successfully:', existingPreferences.indexid);
+        if (existingTeam) {
+            // console.log(`Type of existingTeam.id: ${typeof existingTeam.indexid}`);
+            await db.teams.update(existingTeam.indexid, teamData);
+            //console.log('Team data updated successfully:', existingTeam.indexid);
+            // alert('Team data updated successfully:', existingTeam.indexid);
         } else { //else create a new globalid for a new team and store
             let DateObj = new Date();
             const newglobalid = DateObj.getTime();
-            await db.preferences.add(preferencesData);
-            console.log('New Preferences added successfully:', globalid + ' ' + thismatch);
-            //alert('New Preferences added successfully:', globalid, match);
+            await db.teams.add({...teamData, globalid: parseInt(newglobalid,10)});
+            // console.log('New team added successfully:', teamname, teamnumber, newglobalid);
+            // alert('New team added successfully:', teamname, teamnumber, newglobalid);
         }
     } catch (error) {
         console.error("Error accessing database:", error);
