@@ -1,3 +1,4 @@
+
 // Global Dexie database initialization
 const db = new Dexie("Team Tracking App");
 db.version(16).stores({ 
@@ -36,7 +37,7 @@ const getMatches = async () => {
         if (allMatches && allMatches.length > 0) {
             match_list.innerHTML = allMatches
             .map(matches =>
-                /*<div class="match">
+                <div class="match">
                 <div class="content">
                     <input id="edit" class="text" readonly="readonly" type="text" value="${matches.matchnumber}">
                 </div>  
@@ -46,9 +47,9 @@ const getMatches = async () => {
                     </div>
                 </div>
                 
-                // BROKEN CODE //////////
+                
             )
-            .join("");*/
+            .join("");
         } else {
             //Handle case when no matches are found
             match_list.innerHTML = "<p> No matches found. </p>";
