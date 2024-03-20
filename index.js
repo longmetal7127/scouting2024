@@ -122,7 +122,7 @@ function editTeam(globalid) {
 }
 
 function newMatch(globalid) {
-  window.open(`pages/matchInfo.html?globalid=${globalid}&match=1`, "_self");  //well, it defaults to new page so we will try _self
+  window.open(`pages/matchinfo.html?globalid=${globalid}&match=1`, "_self");  //well, it defaults to new page so we will try _self
 }
 
 async function syncDataToAzureSQL(){

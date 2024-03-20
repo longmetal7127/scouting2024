@@ -1,5 +1,4 @@
 
-
 // BUTTONS ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
 const countElement1 = document.getElementById('count1');
