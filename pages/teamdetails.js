@@ -13,6 +13,12 @@ const urlParams = new URLSearchParams(window.location.search);
 const globalid = parseInt(urlParams.get('globalid'), 10);
 const thismatch = urlParams.get('match');
     
+
+document.getElementById("viewmatchsummary").addEventListener('click', function(event){
+    window.open(`matchsummary.html?globalid=${globalid}&match=1`, "_self"); 
+});
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {       
          // Use the globally initialized db instance
