@@ -76,5 +76,31 @@ window.onload = getMatches;
     window.open('')
 }*/
 
+// does this need to be synced to Azure SQL? if so, add function syncDataToAzureSQL
 
 
+// Function to get all data from a specified store in IndexedDB
+function getAllDataFromStore(dbName, storeName) {
+    return new Promise((resolve, reject) => {
+        const openRequest = indexedDB.open(dbName);
+
+        openRequest.onupgradeneeded = () => {
+            // This event is only implemented in recent browsers
+            openRequest.result.createObjectStore(storeName, { autoIncrement: true });
+        };
+  
+        openRequest.onerror = () => reject(openRequest.error);
+        openRequest.onsuccess = () => {
+            const db = openRequest.result;
+            const transaction = db.transaction(storeName, 'readonly');
+            const store = transaction.objectStore(storeName);
+            const request = store.getAll();
+  
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => {
+                resolve(request.result);
+                db.close();
+            };
+        };
+    })
+}
