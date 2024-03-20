@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const otherinfoElm = document.getElementById("otherinfo");
             otherinfoElm.value = match.otherinfo || '';
         } else {
-            console.log(`Match ${match} not found`);
+            console.log(`Match ${matchnumber} not found`);
         }
          
     } catch (error) {
@@ -257,7 +257,7 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber,
             otherinfo: otherinfo,
         };
 
-        const existingMatch = await db.matches.where('match').equals(parseInt(match)).first();
+        const existingMatch = await db.matches.where('match').equals(parseInt(matchnumber)).first();
 
         //if the team already exists then add match information
         if (existingMatch) {
