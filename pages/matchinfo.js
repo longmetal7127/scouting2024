@@ -147,9 +147,9 @@ const db = new Dexie("Team Tracking App");
 //     matches: "++indexid, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 // });
 
-db.version(16).stores({ 
+db.version(17).stores({ 
     teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
-    matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+    matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo"
 });
 
     // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
@@ -229,9 +229,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 //insert/update match data
-async function submitMatchData(rank, teamnumber, globalid, matchnumber, 
-    count1, count2, count3, count4, count5, count6, count7,
-    stage, hangs, harmony, trap, otherinfo ) {
+async function submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo ) {
 
     try {
         let clienttimestamp = moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
@@ -257,24 +255,39 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber,
             otherinfo: otherinfo,
         };
 
-        const existingMatch = await db.matches.where('match').equals(parseInt(matchnumber)).first();
+        //Joy - you were on the right track here - but there can be multiple teams in the same match?  Or do they each get their own match number?
+        const existingMatch = await db.matches.where('matchnumber').equals(matchnumber).and(match => match.globalid === parseInt(globalid, 10)).first();
 
         //if the team already exists then add match information
         if (existingMatch) {
-            await db.matches.update(existingMatch.id, teammatchdata);
-            // does this not work bc teammatchdata is not yet a field in db?
-            console.log('Team data updated successfully:', existingTeam.id);
-            alert('Team data updated successfully:', existingTeam.id);
+            existingMatch.rank = rank;
+            existingMatch.teamnumber = teamnumber;
+            existingMatch.count1 = count1;
+            existingMatch.count2 = count2;
+            existingMatch.count3 = count3;
+            existingMatch.count4 = count4;
+            existingMatch.count5 = count5;
+            existingMatch.count6 = count6;
+            existingMatch.count7 = count7;
+            existingMatch.stage = stage;
+            existingMatch.hangs = hangs;
+            existingMatch.harmony = harmony;
+            existingMatch.trap = trap;
+            existingMatch.otherinfo = otherinfo;
+        
+            await db.matches
+                .where('matchnumber')
+                .equals(matchnumber)
+                .and(match => match.globalid === parseInt(globalid, 10))
+                .modify(existingMatch);
+            
+            console.log('Team data updated successfully:', existingMatch.teamnumber);
+            alert('Team data updated successfully:', existingMatch.teamnumber);
         } else { //else create new match for the team and store????
-            console.error("Match does not exist:", error);
-            let DateObj = new Date();
-            //const globalid = DateObj.getTime();
+            console.log("Match does not exist for this team: creating it");
             await db.matches.add({...teammatchdata, globalid: parseInt(globalid,10)});
             console.log('Match info added successfully:', teamnumber, globalid);
-            alert('Match info added successfully:', teamnumber, globalid);
-            
-            // PROBABLY BROKEN HERE **********************************
-
+            alert('Match info added successfully:', teamnumber, globalid);            
         }
     } catch (error) {
         console.error("Error accessing database:", error);
@@ -286,8 +299,7 @@ document.getElementById("submitmatchinfo").addEventListener('click', function(ev
     // because w/o DOMContentLoaded, the script was initialized before the button, so it cannot "see" the button
     // It works now because the js script was initialized AFTER the button (vs. in the head, when I used DOMContentLoaded)
 
-    event.preventDefault();
-     
+    event.preventDefault();     
     // not sure if you can .value a span html element
 
     // match data:
@@ -311,10 +323,8 @@ document.getElementById("submitmatchinfo").addEventListener('click', function(ev
 
     // submitting data:
 
-    submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); 
- 
-
-    alert("Match info submitted!");
+    submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo);
+    //alert("Match info submitted!");
 });
 
 // Function to print all db matches to the console for debugging, BROKEN
