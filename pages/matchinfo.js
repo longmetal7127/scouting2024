@@ -1,5 +1,4 @@
 
-
 // BUTTONS ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
 const countElement1 = document.getElementById('count1');
@@ -148,11 +147,10 @@ const db = new Dexie("Team Tracking App");
 //     matches: "++indexid, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
 // });
 
-db.version(15).stores({ 
-    teams: "++indexid, clienttimestamp, teamname, globalid, teamnumber, teamschool, alliancescore, active", 
-    preferences: "++indexid, globalid, match, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop, clienttimestamp",
-    matches: "++indexid, globalid, match, remoteid, active, clienttimestamp, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
-  });
+db.version(16).stores({ 
+    teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
+    matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
+});
 
     // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
     // db = database
@@ -169,31 +167,75 @@ db.version(15).stores({
     - opening a match will show the data that you inputted originally in match form
 */
 
-
-const teamnumber = document.getElementById("teamnumber").value;
-// in order to submit match data for a specific team from the general match info page,
-// you need to get the globalid of an existing, matching team entry with the teamnumber submitted on matchinfo.html?
-
 //const teamsDB = db.teams.toArray();
 
-function getTeamWithNumber(teamnumber) {
-    try {
-        const team = db.teams.where(parseInt('teamnumber')).equals(parseInt(teamnumber));
-        return team;
-        //const globalid = team.globalid;
-    } catch (error){
-        console.log("The team number for the selected team was not inputted in the team details page. Please add team number.");
-        console.error(error);
-    }
-}
+const urlParams = new URLSearchParams(window.location.search);
+const globalid = parseInt(urlParams.get('globalid'), 10);
+const thismatch = urlParams.get('match');
 
-function getTeamWithGlobalID(team) {
+document.addEventListener('DOMContentLoaded', async () => {
     
-}
+    
+    try {       
+         // Use the globally initialized db instance
+         const match = await db.matches.where('match').equals(parseInt(thismatch)).first();
+         const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+            // is match of type int?
 
-//insert team data
-async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo ) {
+        if(match) { // if match exists, AKA accessing it from match summary page after creation of match
+            //text values
+            const matchnumberElm = document.getElementById("matchnumber");
+            matchnumberElm.value = match.matchnumber || '';
+            const rankElm = document.getElementById("rank");
+            rankElm.value = match.rank || '';
+            const teamnumberElm = document.getElementById("teamnumber");
+            teamnumberElm.value = team.teamnumber || '';
+        
+            const count1Elm = document.getElementById("count1");
+            count1Elm.innerHTML = match.count1 || ''; // since the counts are span elements, use innerHTML?
+            const count2Elm = document.getElementById("count2");
+            count2Elm.innerHTML = match.count2 || '';
+            const count3Elm = document.getElementById("count3");
+            count3Elm.innerHTML = match.count3 || '';
+            const count4Elm = document.getElementById("count4");
+            count4Elm.innerHTML = match.count4 || '';
+            const count5Elm = document.getElementById("count5");
+            count5Elm.innerHTML = match.count5 || '';
+            const count6Elm = document.getElementById("count6");
+            count6Elm.innerHTML = match.count6 || '';
+            const count7Elm = document.getElementById("count7");
+            count7Elm.innerHTML = match.count7 || '';
+        
+            //checkbox values - checked
+            const stageElm = document.getElementById("stage");
+            stageElm.checked = match.stage || false;
+            const hangsElm = document.getElementById("hangs");
+            hangsElm.checked = match.hangs || false;
+            const harmonyElm = document.getElementById("harmony");
+            harmonyElm.checked = match.harmony || false;
+            const trapElm = document.getElementById("trap");
+            trapElm.checked = match.trap || false;
+
+            //also text value
+            const otherinfoElm = document.getElementById("otherinfo");
+            otherinfoElm.value = match.otherinfo || '';
+        } else {
+            console.log(`Match ${matchnumber} not found`);
+        }
+         
+    } catch (error) {
+        console.error("Error accessing database:", error);
+    }
+});
+
+//insert/update match data
+async function submitMatchData(rank, teamnumber, globalid, matchnumber, 
+    count1, count2, count3, count4, count5, count6, count7,
+    stage, hangs, harmony, trap, otherinfo ) {
+
     try {
+        let clienttimestamp = moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
+        //has to have a comma even after the last element
         const teammatchdata = {
             rank: rank,
             teamnumber: teamnumber,
@@ -212,26 +254,27 @@ async function submitMatchData( rank, teamnumber, globalid, matchnumber, count1,
             hangs: hangs,
             harmony: harmony,
             trap: trap,
-            otherinfo: otherinfo
+            otherinfo: otherinfo,
         };
 
-        const existingTeam = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+        const existingMatch = await db.matches.where('match').equals(parseInt(matchnumber)).first();
 
         //if the team already exists then add match information
-        if (existingTeam) {
-            await db.teams.update(existingTeam.id, teammatchdata);
+        if (existingMatch) {
+            await db.matches.update(existingMatch.id, teammatchdata);
             // does this not work bc teammatchdata is not yet a field in db?
             console.log('Team data updated successfully:', existingTeam.id);
             alert('Team data updated successfully:', existingTeam.id);
-        } else { //else, error
-            console.error("Team does not exist:", error);
-            /*
+        } else { //else create new match for the team and store????
+            console.error("Match does not exist:", error);
             let DateObj = new Date();
-            const globalid = DateObj.getTime();
-            await db.teams.add({...teammatchdata, globalid: parseInt(globalid,10)});
+            //const globalid = DateObj.getTime();
+            await db.matches.add({...teammatchdata, globalid: parseInt(globalid,10)});
             console.log('Match info added successfully:', teamnumber, globalid);
             alert('Match info added successfully:', teamnumber, globalid);
-            */
+            
+            // PROBABLY BROKEN HERE **********************************
+
         }
     } catch (error) {
         console.error("Error accessing database:", error);
@@ -252,13 +295,13 @@ document.getElementById("submitmatchinfo").addEventListener('click', function(ev
     const rank = document.getElementById("rank").value;
     const teamnumber = document.getElementById("teamnumber").value;
 
-    const count1 = document.getElementById("count1").value;
-    const count2 = document.getElementById("count2").value;
-    const count3 = document.getElementById("count3").value;
-    const count4 = document.getElementById("count4").value;
-    const count5 = document.getElementById("count5").value;
-    const count6 = document.getElementById("count6").value;
-    const count7 = document.getElementById("count7").value;
+    const count1 = document.getElementById("count1").innerHTML;
+    const count2 = document.getElementById("count2").innerHTML;
+    const count3 = document.getElementById("count3").innerHTML;
+    const count4 = document.getElementById("count4").innerHTML;
+    const count5 = document.getElementById("count5").innerHTML;
+    const count6 = document.getElementById("count6").innerHTML;
+    const count7 = document.getElementById("count7").innerHTML;
 
     const stage = document.getElementById("stage").checked;
     const hangs = document.getElementById("hangs").checked;
@@ -267,8 +310,6 @@ document.getElementById("submitmatchinfo").addEventListener('click', function(ev
     const otherinfo = document.getElementById("otherinfo").value;
 
     // submitting data:
-    const urlParams = new URLSearchParams(window.location.search);
-    const globalid = parseInt(urlParams.get("globalid"),10);
 
     submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); 
  
