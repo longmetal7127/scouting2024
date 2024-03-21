@@ -43,7 +43,7 @@
 		    <a href="pages/matchinfo.html"> Match Info </a> 
 			<a href="pages/matchsummary.html"> Match Summary </a>
 			<a href="pages/aboutus.html"> About Us </a> 
-			<button onclick="" style></button><input type="button" value="Submit" style="background: url(assets/refresh.jpg) no-repeat; width:70px; height:70px;">
+			<!-- <button onclick="" style></button><input type="button" value="Submit" style="background: url(assets/refresh.jpg) no-repeat; width:70px; height:70px;"> -->
 
 		</div>
 	</nav>
@@ -69,8 +69,24 @@
 		<!-- Alternatively, convert the website to a PWA for more native experience -->
 
 	</main>
-
 	<script src="index.js"></script>
 </body>
+<footer>
+	<div id="notes">
+	<p>I added some links to the bottom of the index page to help with troubleshooting, display the databases to a page, and delete the databases in the event you get those out of sync messages or wrong db version</p>
 
+	<p>			
+		TODO:<br><br>
+			<ul>
+				<li>Add link to remote database to display contents</li>
+				<li>add local timestamp to matches table</li>
+				<li>fill out match summary page</li>
+				<li>sync databases across devices</li>
+				<li>add url identifier to match info to pull up match info</li>
+				<li>fix syncing for match info</li>
+			</ul>
+	</p>
+	</div>
+	<p style="margin-bottom: 50px;"><center><a href="/testing/dexie.html" target="_blank">Dispaly Database Contents</a> &nbsp;<a href="/testing/dexie.html" target="_blank">Delete Dexie Databases and Reload</a></center></p>
+  </footer>
 </html>
