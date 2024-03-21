@@ -50,7 +50,7 @@ try {
     if (file_exists($localEnvFile)) {
         // The file exists, so we're in a local development environment
         // Set your local database connection settings
-        $dbHost = 'GOLD\GOLD';
+        $dbHost = 'DESKTOP-EO6NA6L'; //GOLD\GOLD';
         $dbName = 'scouting_7127';
         $dbUser = 'teams7127';
         $dbPassword = 'abcdefg123';
