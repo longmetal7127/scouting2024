@@ -155,32 +155,26 @@ db.version(16).stores({
     // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
     // db = database
     // teams = table in database db
- 
-/* Steps to submitting data (theoretically)???????
-1. Input information in match form, press the submit button
-2. Collect the teamnumber (required? if so, must be required in teamdetails page)
-3. Find the globalid associated with that teamnumber
-4. Submit match data to the team with that globalid?
-5. (TBD) Each team on the team list page should have a new button for "Matches"?
-    - opens unique (by globalid, like teamdetails) match summary page (see concept page)
-    - depicts list of matches by match number 
-    - opening a match will show the data that you inputted originally in match form
-*/
 
-//const teamsDB = db.teams.toArray();
 
 const urlParams = new URLSearchParams(window.location.search);
 const globalid = parseInt(urlParams.get('globalid'), 10);
-const thismatch = urlParams.get('match');
+const thismatch = urlParams.get('match'); //matchnumber instead? does this update?
 
 document.addEventListener('DOMContentLoaded', async () => {
     
     
     try {       
          // Use the globally initialized db instance
-         const match = await db.matches.where('match').equals(parseInt(thismatch)).first();
+         // I changed .where('match') to .where('matchnumber'), not sure if this is right
+         const match = await db.matches.where('matchnumber').equals(parseInt(thismatch)).first();
          const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
             // is match of type int?
+        const teamnumberElm = document.getElementById("teamnumber");
+        teamnumberElm.value = team.teamnumber || '';
+
+        // QUESTION: There is only one unique globalid per team, but there can be multiple identical matchnumbers (up to 6 copies). How to differentiate?
+
 
         if(match) { // if match exists, AKA accessing it from match summary page after creation of match
             //text values
@@ -188,8 +182,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             matchnumberElm.value = match.matchnumber || '';
             const rankElm = document.getElementById("rank");
             rankElm.value = match.rank || '';
-            const teamnumberElm = document.getElementById("teamnumber");
-            teamnumberElm.value = team.teamnumber || '';
+            
         
             const count1Elm = document.getElementById("count1");
             count1Elm.innerHTML = match.count1 || ''; // since the counts are span elements, use innerHTML?
@@ -257,21 +250,21 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber,
             otherinfo: otherinfo,
         };
 
-        const existingMatch = await db.matches.where('match').equals(parseInt(matchnumber)).first();
+        const existingMatch = await db.matches.where('matchnumber').equals(parseInt(matchnumber)).first();
 
         //if the team already exists then add match information
         if (existingMatch) {
             await db.matches.update(existingMatch.id, teammatchdata);
             // does this not work bc teammatchdata is not yet a field in db?
-            console.log('Team data updated successfully:', existingTeam.id);
-            alert('Team data updated successfully:', existingTeam.id);
+            console.log('Team data updated successfully:', existingMatch.id);
+            alert('Team data updated successfully:', existingMatch.id);
         } else { //else create new match for the team and store????
             console.error("Match does not exist:", error);
             let DateObj = new Date();
             //const globalid = DateObj.getTime();
-            await db.matches.add({...teammatchdata, globalid: parseInt(globalid,10)});
-            console.log('Match info added successfully:', teamnumber, globalid);
-            alert('Match info added successfully:', teamnumber, globalid);
+            await db.matches.add({...teammatchdata, matchnumber: matchnumber});
+            console.log('Match info added successfully:', matchnumber, globalid);
+            alert('Match info added successfully:', matchnumber, globalid);
             
             // PROBABLY BROKEN HERE **********************************
 
@@ -282,13 +275,9 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber,
 }
 
 document.getElementById("submitmatchinfo").addEventListener('click', function(event){
-    // Lesson Learned: I was having trouble with button communication and it resolved after I put it with a DOMContentLoaded (which waits until entire html is loaded)
-    // because w/o DOMContentLoaded, the script was initialized before the button, so it cannot "see" the button
-    // It works now because the js script was initialized AFTER the button (vs. in the head, when I used DOMContentLoaded)
+    // Make sure not to initialize the script before the button, or else there will be no communication
 
     event.preventDefault();
-     
-    // not sure if you can .value a span html element
 
     // match data:
     const matchnumber = document.getElementById("matchnumber").value;
@@ -310,10 +299,8 @@ document.getElementById("submitmatchinfo").addEventListener('click', function(ev
     const otherinfo = document.getElementById("otherinfo").value;
 
     // submitting data:
-
     submitMatchData(rank, teamnumber, globalid, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo); 
  
-
     alert("Match info submitted!");
 });
 
