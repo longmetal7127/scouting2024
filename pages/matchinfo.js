@@ -249,6 +249,7 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber, count1, 
         };
 
         //Joy - you were on the right track here - but there can be multiple teams in the same match?  Or do they each get their own match number?
+        // Yep, I had about the same realization earlier today (that there are duplicate match numbers granted that there are 6 teams per match) but wasn't sure how to implement it. Thank you so much for correcting it!!
         const existingMatch = await db.matches.where('matchnumber').equals(matchnumber).and(match => match.globalid === parseInt(globalid, 10)).first();
 
         //if the team already exists then add match information
