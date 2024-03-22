@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (team) {
             document.getElementById("teamnameeditable").innerHTML = team.teamname;
             document.getElementById("teamnumbereditable").innerHTML = team.teamnumber;
+
         } else {
             console.log(`Team with ID ${globalid} not found.`);
         }
@@ -29,11 +30,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const getMatches = async () => {
     try {
-        const allMatches = await db.matches.where('matchnumber').equals(matchnumber).and(match => match.globalid === parseInt(globalid, 10)).toArray();
+        const allMatches = await db.matches.where(match => match.globalid === parseInt(globalid, 10)).toArray();
+        // ???????
+
+
         // check if allMatches is not empty
         if (allMatches && allMatches.length > 0) {
+            
+            
+            // BROKEN CODE HERE
            match_list.innerHTML = allMatches
-            .map(matches =>
+            .map(matches => `
                 <div class="match">
                 <div class="content">
                     <input id="edit" class="text" readonly="readonly" type="text" value="Match ${matches.matchnumber}"></input>
@@ -42,7 +49,8 @@ const getMatches = async () => {
                         <div>${teams.globalid}</div>
                         <button class="edit" onclick="editMatch(${teams.globalid}, ${matches.matchnumber})">Edit</button>
                     </div>
-                </div>   
+                </div>` 
+                // make sure to use those backticks, I spent forever trying to find out why the template literals were not right and completely missing those tiny stupid backticks  
             )
             .join("");
         } else {
