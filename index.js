@@ -83,7 +83,7 @@ const getTeams = async () => {
             <div class="actions">
               <div>${teams.globalid}</div>
               <button class="edit" onclick="newMatch(${teams.globalid})">New Match</button>
-              <button class="delete" onclick="deleteTeams(event, ${teams.id})">Delete</button>
+              <button class="delete" onclick="deleteTeams(event, ${teams.indexid})">Delete</button>
               <button class="edit" onclick="editTeam(${teams.globalid})">Edit</button>
             </div>
           </div>

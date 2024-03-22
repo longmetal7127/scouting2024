@@ -17,11 +17,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {      
         const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
         if (team) {
-            
             document.getElementById("teamnameeditable").innerHTML = team.teamname;
             document.getElementById("teamnumbereditable").innerHTML = team.teamnumber;
-           
-            
         } else {
             console.log(`Team with ID ${globalid} not found.`);
         }
@@ -32,22 +29,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const getMatches = async () => {
     try {
-        const allMatches = await db.matches.toArray();
+        const allMatches = await db.matches.where('matchnumber').equals(matchnumber).and(match => match.globalid === parseInt(globalid, 10)).toArray();
         // check if allMatches is not empty
         if (allMatches && allMatches.length > 0) {
-            match_list.innerHTML = allMatches
+           match_list.innerHTML = allMatches
             .map(matches =>
                 <div class="match">
                 <div class="content">
-                    <input id="edit" class="text" readonly="readonly" type="text" value="${matches.matchnumber}">
+                    <input id="edit" class="text" readonly="readonly" type="text" value="Match ${matches.matchnumber}"></input>
                 </div>  
                     <div class="actions">
                         <div>${teams.globalid}</div>
-                        <button class="edit" onclick="editMatch(${teams.globalid})">Edit</button>
+                        <button class="edit" onclick="editMatch(${teams.globalid}, ${matches.matchnumber})">Edit</button>
                     </div>
-                </div>
-                
-                
+                </div>   
             )
             .join("");
         } else {
@@ -63,6 +58,10 @@ const getMatches = async () => {
 }
 
 window.onload = getMatches;
+
+function editMatch(globalid, matchnumber) {
+    window.open(`matchinfo.html?globalid=${globalid}&match=${matchnumber}`, "_self");
+}
 
 /*const getMatchList = async () => {
     const matches = db.matches.toArray();
