@@ -46,10 +46,10 @@ const getTeams = async () => {
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count5')}</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count6')}</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count7')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action1')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action2')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action2.1')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action3')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'stage')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'hangs')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'harmony')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'trap')}</td>
                     </tr>      
                 </table>
           `;
@@ -105,8 +105,7 @@ const getTeams = async () => {
       
       // Loop through rows and count true values
       rows.forEach(row => {
-        // Check if the value in the specified column is 'true' (as a string)
-        if (row[columnName] === 'true') {
+        if (row[columnName] === true) {
           trueCount++;
         }
       });
@@ -117,7 +116,7 @@ const getTeams = async () => {
       return null;
     }
   }
-  
+
   window.onload = getTeams;
 
   const getTeamList = async () => {
