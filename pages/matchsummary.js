@@ -23,11 +23,33 @@ const getTeams = async () => {
           const teamHTML = `
             <div class="teams">
               <div class="content\s">
-                <h1 style="float:left; margin-left:50px; margin-top:20px;">${team.teamname}</h1>   
-                <table style="clear:both; margin-left:55px;border: 1px solid black; border-radius: 10px;border-collapse: collapse;margin-bottom:15px;">
+                <h1 style="float:left; margin-left:50px; margin-top:20px;margin-bottom:15px;">${team.teamname}</h1>   
+                <table style="clear:both; margin-left:55px;border: 1px solid black; border-radius: 10px;border-collapse: collapse;margin-bottom:15px;">                    
                     <tr>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Attempted</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Made</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Speaker Shots Attempted</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Speaker Shots Made</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Amp Shots Attempted</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Amp Shots Made</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Died/froze</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Stage</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Hangs</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Harmony Hangs</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Scores in Trap</td>
+                    </tr>   
+                    <tr>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count1')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count2')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count3')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count4')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count5')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count6')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count7')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action1')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action2')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action2.1')}</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'action3')}</td>
                     </tr>      
                 </table>
           `;
@@ -57,7 +79,45 @@ const getTeams = async () => {
       list_el.innerHTML = "<p>Error loading teams. Please try again later.</p>";
     }
   }
+  
+  const sumColumnForGlobalId = async (globalId, columnName) => {
+    try {
+      // Fetch rows from the database based on the provided globalId
+      const rows = await db.matches.where('globalid').equals(globalId).toArray();
+      
+      // Calculate the sum of the specified column
+      const sum = rows.reduce((accumulator, currentRow) => accumulator + parseInt(currentRow[columnName], 10), 0);
+      
+      return sum;
+    } catch (error) {
+      console.error("Failed to sum column for globalId:", error);
+      return null;
+    }
+  }
 
+  const countTrueValuesForGlobalId = async (globalId, columnName) => {
+    try {
+      // Fetch rows from the database based on the provided globalId
+      const rows = await db.matches.where('globalid').equals(globalId).toArray();
+      
+      // Initialize counter for true values
+      let trueCount = 0;
+      
+      // Loop through rows and count true values
+      rows.forEach(row => {
+        // Check if the value in the specified column is 'true' (as a string)
+        if (row[columnName] === 'true') {
+          trueCount++;
+        }
+      });
+      
+      return trueCount;
+    } catch (error) {
+      console.error("Failed to count true values for globalId:", error);
+      return null;
+    }
+  }
+  
   window.onload = getTeams;
 
   const getTeamList = async () => {
@@ -67,109 +127,3 @@ const getTeams = async () => {
       globalid: '${teams.globalid'
     };
   }
-
-  sumColumnForGlobalId(globalId, columnName)
-  .then(sum => {
-    if (sum !== null) {
-      console.log(`Sum of ${columnName} for globalId ${globalId}: ${sum}`);
-    } else {
-      console.log("Failed to calculate the sum.");
-    }
-  });
-
-// const urlParams = new URLSearchParams(window.location.search);
-// const globalid = parseInt(urlParams.get('globalid'), 10);
-// const match_list = document.querySelector("#matches");
-//const thismatch = urlParams.get('match'); NOT NEEDED
-
-//document.getElementById("teamnameeditable").textContent = "hello world";
-
-// document.addEventListener('DOMContentLoaded', async () => {
-//     try {      
-//         const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
-//         if (team) {
-            
-//             document.getElementById("teamnameeditable").innerHTML = team.teamname;
-//             document.getElementById("teamnumbereditable").innerHTML = team.teamnumber;
-           
-            
-//         } else {
-//             console.log(`Team with ID ${globalid} not found.`);
-//         }
-//     } catch (error) {
-//         console.error("Error:", error);
-//     }
-// });
-
-// const getMatches = async () => {
-//     try {
-//         const allMatches = await db.matches.toArray();
-//         // check if allMatches is not empty
-//         if (allMatches && allMatches.length > 0) {
-//             match_list.innerHTML = allMatches
-//             .map(matches =>
-//                 <div class="match">
-//                 <div class="content">
-//                     <input id="edit" class="text" readonly="readonly" type="text" value="${matches.matchnumber}">
-//                 </div>  
-//                     <div class="actions">
-//                         <div>${teams.globalid}</div>
-//                         <button class="edit" onclick="editMatch(${teams.globalid})">Edit</button>
-//                     </div>
-//                 </div>               
-//             )
-//             .join("");
-//         } else {
-//             //Handle case when no matches are found
-//             match_list.innerHTML = "<p> No matches found. </p>";
-//         }
-//     } catch (error) {
-//         // Handle the error
-//         console.error("Failed to retrieve matches:", error);
-//         // Optionally, display an error message to user
-//         match_list.innerHTML = "<p>Error loading matches. Please try again later.</p>";
-//     }
-// }
-
-// window.onload = getMatches;
-
-// /*const getMatchList = async () => {
-//     const matches = db.matches.toArray();
-//     const data = {
-//         matchnumber: '${matches.matchnumber',
-//         // ???????
-//     }
-// }*/
-
-// /*function editMatch(globalid) {
-//     window.open('')
-// }*/
-
-// // does this need to be synced to Azure SQL? if so, add function syncDataToAzureSQL
-
-
-// // Function to get all data from a specified store in IndexedDB
-// function getAllDataFromStore(dbName, storeName) {
-//     return new Promise((resolve, reject) => {
-//         const openRequest = indexedDB.open(dbName);
-
-//         openRequest.onupgradeneeded = () => {
-//             // This event is only implemented in recent browsers
-//             openRequest.result.createObjectStore(storeName, { autoIncrement: true });
-//         };
-  
-//         openRequest.onerror = () => reject(openRequest.error);
-//         openRequest.onsuccess = () => {
-//             const db = openRequest.result;
-//             const transaction = db.transaction(storeName, 'readonly');
-//             const store = transaction.objectStore(storeName);
-//             const request = store.getAll();
-  
-//             request.onerror = () => reject(request.error);
-//             request.onsuccess = () => {
-//                 resolve(request.result);
-//                 db.close();
-//             };
-//         };
-//     })
-// }
