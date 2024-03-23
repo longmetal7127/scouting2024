@@ -51,11 +51,7 @@ const getTeams = async () => {
       list_el.innerHTML = "<p>Error loading teams. Please try again later.</p>";
     }
   }
-  
-  
-  
-
-  
+    
   window.onload = getTeams;
 
   const getTeamList = async () => {
