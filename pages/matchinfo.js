@@ -151,19 +151,7 @@ db.version(17).stores({
     // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
     // db = database
     // teams = table in database db
- 
-/* Steps to submitting data (theoretically)???????
-1. Input information in match form, press the submit button
-2. Collect the teamnumber (required? if so, must be required in teamdetails page)
-3. Find the globalid associated with that teamnumber
-4. Submit match data to the team with that globalid?
-5. (TBD) Each team on the team list page should have a new button for "Matches"?
-    - opens unique (by globalid, like teamdetails) match summary page (see concept page)
-    - depicts list of matches by match number 
-    - opening a match will show the data that you inputted originally in match form
-*/
 
-//const teamsDB = db.teams.toArray();
 
 const urlParams = new URLSearchParams(window.location.search);
 const globalid = parseInt(urlParams.get('globalid'), 10);
@@ -254,6 +242,7 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber, count1, 
         };
 
         //Joy - you were on the right track here - but there can be multiple teams in the same match?  Or do they each get their own match number?
+        // Yep, I had about the same realization earlier today (that there are duplicate match numbers granted that there are 6 teams per match) but wasn't sure how to implement it. Thank you so much for correcting it!!
         const existingMatch = await db.matches.where('matchnumber').equals(matchnumber).and(match => match.globalid === parseInt(globalid, 10)).first();
 
         //if the team already exists then add match information
@@ -293,9 +282,7 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber, count1, 
 }
 
 document.getElementById("submitmatchinfo").addEventListener('click', function(event){
-    // Lesson Learned: I was having trouble with button communication and it resolved after I put it with a DOMContentLoaded (which waits until entire html is loaded)
-    // because w/o DOMContentLoaded, the script was initialized before the button, so it cannot "see" the button
-    // It works now because the js script was initialized AFTER the button (vs. in the head, when I used DOMContentLoaded)
+    // Make sure not to initialize the script before the button, or else there will be no communication
 
     event.preventDefault();     
     // not sure if you can .value a span html element

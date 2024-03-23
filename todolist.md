@@ -1,9 +1,5 @@
 steps to create the world's best scouting app (in no particular order)
 
-1. making sure the match info page can actually communicate with the database and submit info
-    a. should we make team number a required field to fill out in the team details page? if so:
-    b. the form element for team number should already be filled out on the match info page (but if not then no biggie, scouts can fill that in...???)
-
 2. remove that weird submit button that is on the navigation bar on main page (team list) 
 
 3. connect a team from its unique team details page to its unique match summary page
@@ -25,9 +21,6 @@ steps to create the world's best scouting app (in no particular order)
 
 7. hopefully done :D ?
 
-8. i forgot. we need to teach the scouts how to use the app, even if this app is not used this year. that way, they have some familiarity when they look at it next year
+8. should we consider exporting the data somehow to somewhere else? ie excel, sheets, etc. to archive data or to compile it all? 
 
-9. should we consider exporting the data somehow to somewhere else? ie excel, sheets, etc. to archive data or to compile it all? 
-
-10. pls fix delete button on team list page
     
