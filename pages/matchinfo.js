@@ -159,24 +159,27 @@ const thismatch = urlParams.get('matchnumber');
 
 document.addEventListener('DOMContentLoaded', async () => {
     
+    //Use the globally initialized db instance
+    const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+
+    const teamnameElm = document.getElementById("teamname");
+    teamnameElm.innerHTML = team.teamname || '';
+    const teamnumberElm = document.getElementById("teamnumber");
+    teamnumberElm.innerHTML = team.teamnumber || '';
+
     if (urlParams.has('globalid') && urlParams.has('matchnumber')) {
-        try {       
-            //Use the globally initialized db instance
+        try {      
+            
             const match = await db.matches.where('matchnumber').equals(thismatch).and(match => match.globalid === parseInt(globalid, 10)).first();
-            const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
-                // is match of type int?
 
             if(match) { // if match exists, AKA accessing it from match summary page after creation of match
                 //text values
-                const teamnameElm = document.getElementById("teamname");
-                teamnameElm.innerHTML = team.teamname || '';
                 const matchnumberElm = document.getElementById("matchnumber");
                 matchnumberElm.value = match.matchnumber || '';
                 const rankElm = document.getElementById("rank");
                 rankElm.value = match.rank || '';
-                const teamnumberElm = document.getElementById("teamnumber");
-                teamnumberElm.innerHTML = team.teamnumber || '';
-            
+
+
                 const count1Elm = document.getElementById("count1");
                 count1Elm.innerHTML = match.count1 || ''; // since the counts are span elements, use innerHTML?
                 const count2Elm = document.getElementById("count2");
