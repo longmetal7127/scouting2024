@@ -23,7 +23,13 @@ const getTeams = async () => {
           const teamHTML = `
             <div class="teams">
               <div class="content\s">
-                <h1 style="float:left; margin-left:50px; margin-top:20px;">${team.teamname}</h1>         
+                <h1 style="float:left; margin-left:50px; margin-top:20px;">${team.teamname}</h1>   
+                <table style="clear:both; margin-left:55px;border: 1px solid black; border-radius: 10px;border-collapse: collapse;margin-bottom:15px;">
+                    <tr>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Attempted</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Made</td>
+                    </tr>      
+                </table>
           `;
           
           let matchesHTML = "";
@@ -51,7 +57,7 @@ const getTeams = async () => {
       list_el.innerHTML = "<p>Error loading teams. Please try again later.</p>";
     }
   }
-    
+
   window.onload = getTeams;
 
   const getTeamList = async () => {
@@ -61,6 +67,15 @@ const getTeams = async () => {
       globalid: '${teams.globalid'
     };
   }
+
+  sumColumnForGlobalId(globalId, columnName)
+  .then(sum => {
+    if (sum !== null) {
+      console.log(`Sum of ${columnName} for globalId ${globalId}: ${sum}`);
+    } else {
+      console.log("Failed to calculate the sum.");
+    }
+  });
 
 // const urlParams = new URLSearchParams(window.location.search);
 // const globalid = parseInt(urlParams.get('globalid'), 10);
