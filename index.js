@@ -83,7 +83,7 @@ const getTeams = async () => {
             <div class="actions">
               <div>${teams.globalid}</div>
               <button class="edit" onclick="newMatch(${teams.globalid})">New Match</button>
-              <button class="delete" onclick="deleteTeams(event, ${teams.id})">Delete</button>
+              <!--<button class="delete" onclick="deleteTeams(event, ${teams.id})">Delete</button>-->
               <button class="edit" onclick="editTeam(${teams.globalid})">Edit</button>
             </div>
           </div>
@@ -122,7 +122,7 @@ function editTeam(globalid) {
 }
 
 function newMatch(globalid) {
-  window.open(`pages/matchinfo.html?globalid=${globalid}&match=1`, "_self");  //well, it defaults to new page so we will try _self
+  window.open(`pages/matchinfo.html?globalid=${globalid}`, "_self");  //well, it defaults to new page so we will try _self
 }
 
 async function syncDataToAzureSQL(){

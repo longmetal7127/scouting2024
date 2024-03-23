@@ -7,7 +7,6 @@
 
     <link rel="stylesheet" href="../css/teams.css" />
     <link rel="stylesheet" href="../css/offline-language-english.css" />
-    <link rel="stylesheet" href="../css/" />
     <link rel="stylesheet" href="../css/matchinfo.css"/>
 	<script src="../js/moment.min.js"></script>
 	<script src="../js/moment-timezone-with-data-10-year-range.min.js"></script>
@@ -26,8 +25,8 @@
         </div>
         <div class="topnav">
             <a href="../"> Teams </a> 
-            <a href="matchinfo.html"> Match Info </a> 
             <a href="matchsummary.html"> Match Summary </a>
+            <!-- <a href="matchsummary.html"> Match Summary </a> -->
             <a href="aboutus.html"> About Us </a> 
         </div>
     </nav>
@@ -39,17 +38,24 @@
     </header>
 
     <form>
-        <label for="ranking"> Ranking: </label>
-        <input type="text" class="rank" name="rank" id="rank" maxlength="10" style="display: inline-block; width: 60px;"><br>
+
+        <label for="teamname"> Team Name: </label>
+        <span name="teamname" id="teamname"></span><br>
 
         <label for="teamnumber"> Team Number: </label>
-        <input type="number" class="basicinfonumber" name="teamnumber" id="teamnumber" max="9999" min="0"><br>
+        <span name="teamnumber" id="teamnumber"></span><br>
+
+        <label for="ranking"> Ranking: </label>
+        <input type="number" class="basicinfonumber" name="rank" id="rank" maxlength="10" style="display: inline-block; width: 60px;"><br>
 
         <label for="matchnumber"> Match Number: </label>
         <input type="number" class="basicinfonumber" name="matchnumber" id="matchnumber" max="9999" min="0"><br>
 
     </form>
 
+    <p>&nbsp;</p>
+    <p>there are bugs here - if submit or reload the page the count starts over when you hit the plus button for each entry<br>
+    If you change the match number it creates a new match which could be the desired functionality or a bug</p>
 
     <section class="section">
 
@@ -67,8 +73,6 @@
             <span id="count2">0</span>
             <button id="plusBtn2">+</button>
         </div><br>
-
-
 
         <h2><b>TeleOp</b></h2><br>
 

@@ -142,15 +142,11 @@ plusBtn7.addEventListener('click', function() {
 // DATABASE ---------------------------------------------------------------
 
 const db = new Dexie("Team Tracking App");
-// db.version(3).stores({ 
-//     teams: "++indexid, teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop", 
-//     matches: "++indexid, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, otherinfo"
-// });
 
 db.version(17).stores({ 
     teams: "++indexid, globalid, clienttimestamp, teamname, teamnumber, teamschool, alliancescore, active, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop",
     matches: "++indexid, globalid, clienttimestamp, match, remoteid, active, rank, matchnumber, count1, count2, count3, count4, count5, count6, count7, stage, hangs, harmony, trap, otherinfo"
-});
+  });
 
     // Version numbers must be changed whenever database objects (schema) are edited? See "Modify Schema" in https://dexie.org/docs/Tutorial/Understanding-the-basics
     // db = database
@@ -171,60 +167,63 @@ db.version(17).stores({
 
 const urlParams = new URLSearchParams(window.location.search);
 const globalid = parseInt(urlParams.get('globalid'), 10);
-const thismatch = urlParams.get('match');
+const thismatch = urlParams.get('matchnumber');
 
 document.addEventListener('DOMContentLoaded', async () => {
     
-    
-    try {       
-         // Use the globally initialized db instance
-         const match = await db.matches.where('match').equals(parseInt(thismatch)).first();
-         const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
-            // is match of type int?
+    if (urlParams.has('globalid') && urlParams.has('matchnumber')) {
+        try {       
+            //Use the globally initialized db instance
+            const match = await db.matches.where('matchnumber').equals(thismatch).and(match => match.globalid === parseInt(globalid, 10)).first();
+            const team = await db.teams.where('globalid').equals(parseInt(globalid,10)).first();
+                // is match of type int?
 
-        if(match) { // if match exists, AKA accessing it from match summary page after creation of match
-            //text values
-            const matchnumberElm = document.getElementById("matchnumber");
-            matchnumberElm.value = match.matchnumber || '';
-            const rankElm = document.getElementById("rank");
-            rankElm.value = match.rank || '';
-            const teamnumberElm = document.getElementById("teamnumber");
-            teamnumberElm.value = team.teamnumber || '';
-        
-            const count1Elm = document.getElementById("count1");
-            count1Elm.innerHTML = match.count1 || ''; // since the counts are span elements, use innerHTML?
-            const count2Elm = document.getElementById("count2");
-            count2Elm.innerHTML = match.count2 || '';
-            const count3Elm = document.getElementById("count3");
-            count3Elm.innerHTML = match.count3 || '';
-            const count4Elm = document.getElementById("count4");
-            count4Elm.innerHTML = match.count4 || '';
-            const count5Elm = document.getElementById("count5");
-            count5Elm.innerHTML = match.count5 || '';
-            const count6Elm = document.getElementById("count6");
-            count6Elm.innerHTML = match.count6 || '';
-            const count7Elm = document.getElementById("count7");
-            count7Elm.innerHTML = match.count7 || '';
-        
-            //checkbox values - checked
-            const stageElm = document.getElementById("stage");
-            stageElm.checked = match.stage || false;
-            const hangsElm = document.getElementById("hangs");
-            hangsElm.checked = match.hangs || false;
-            const harmonyElm = document.getElementById("harmony");
-            harmonyElm.checked = match.harmony || false;
-            const trapElm = document.getElementById("trap");
-            trapElm.checked = match.trap || false;
+            if(match) { // if match exists, AKA accessing it from match summary page after creation of match
+                //text values
+                const teamnameElm = document.getElementById("teamname");
+                teamnameElm.innerHTML = team.teamname || '';
+                const matchnumberElm = document.getElementById("matchnumber");
+                matchnumberElm.value = match.matchnumber || '';
+                const rankElm = document.getElementById("rank");
+                rankElm.value = match.rank || '';
+                const teamnumberElm = document.getElementById("teamnumber");
+                teamnumberElm.innerHTML = team.teamnumber || '';
+            
+                const count1Elm = document.getElementById("count1");
+                count1Elm.innerHTML = match.count1 || ''; // since the counts are span elements, use innerHTML?
+                const count2Elm = document.getElementById("count2");
+                count2Elm.innerHTML = match.count2 || '';
+                const count3Elm = document.getElementById("count3");
+                count3Elm.innerHTML = match.count3 || '';
+                const count4Elm = document.getElementById("count4");
+                count4Elm.innerHTML = match.count4 || '';
+                const count5Elm = document.getElementById("count5");
+                count5Elm.innerHTML = match.count5 || '';
+                const count6Elm = document.getElementById("count6");
+                count6Elm.innerHTML = match.count6 || '';
+                const count7Elm = document.getElementById("count7");
+                count7Elm.innerHTML = match.count7 || '';
+            
+                //checkbox values - checked
+                const stageElm = document.getElementById("stage");
+                stageElm.checked = match.stage || false;
+                const hangsElm = document.getElementById("hangs");
+                hangsElm.checked = match.hangs || false;
+                const harmonyElm = document.getElementById("harmony");
+                harmonyElm.checked = match.harmony || false;
+                const trapElm = document.getElementById("trap");
+                trapElm.checked = match.trap || false;
 
-            //also text value
-            const otherinfoElm = document.getElementById("otherinfo");
-            otherinfoElm.value = match.otherinfo || '';
-        } else {
-            console.log(`Match ${matchnumber} not found`);
+                //also text value
+                const otherinfoElm = document.getElementById("otherinfo");
+                otherinfoElm.value = match.otherinfo || '';
+            } else {
+                console.log(`Match ${matchnumber} not found`);
+            }
+            
+        } catch (error) {
+            console.error("Error accessing database:", error);
         }
-         
-    } catch (error) {
-        console.error("Error accessing database:", error);
     }
 });
 
@@ -235,8 +234,7 @@ async function submitMatchData(rank, teamnumber, globalid, matchnumber, count1, 
         let clienttimestamp = moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
         //has to have a comma even after the last element
         const teammatchdata = {
-            rank: rank,
-            teamnumber: teamnumber,
+            rank: rank,            
             globalid: globalid,
             matchnumber: matchnumber,
 

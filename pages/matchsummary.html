@@ -15,9 +15,10 @@
         </div>
         <div class="topnav">
             <a href="../"> Teams </a> 
-            <a href="matchinfo.html"> Match Info </a> 
             <a href="matchsummary.html"> Match Summary </a>
+            <!-- <a href="matchsummary.html"> Match Summary </a> -->
             <a href="aboutus.html"> About Us </a> 
+            <a href="debug.html" target="_blank"> Debug </a>
         </div>
     </nav>
 
@@ -26,8 +27,24 @@
             <h1> Match Summary </h1>
         </div>
     </header>
+<body>
 
-    <form> 
+    <main>
+		<section class="Match-List-by-Team">
+
+			<h2>Match List by Team</h2>
+			<div id="teams">
+			</div>
+
+		</section>
+
+		<!-- NEXT GOAL: to sync across multiple devices on Azure site? -->
+		<!-- Alternatively, convert the website to a PWA for more native experience -->
+
+	</main>
+
+    <script src="matchsummary.js"></script>
+    <!-- <form> 
         <input type="search" placeholder="Search by match number"/>
     </form>
 
@@ -57,6 +74,6 @@
 
     <br>
 
-    <script src="matchsummary.js"></script>
+    <script src="matchsummary.js"></script> -->
 </body>
 </html>
