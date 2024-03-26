@@ -24,7 +24,10 @@ const getTeams = async () => {
             <div class="teams">
               <div class="content\s">
                 <h1 style="float:left; margin-left:50px; margin-top:20px;margin-bottom:15px;">${team.teamname}</h1>   
+                
                 <br><br><br><br>
+
+                <!-- <p> Team Number: ${db.teams.teamnumber}</p><br> --> 
               
                 <p> Average Autonomous Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count2')/await sumColumnForGlobalId(team.globalid, 'count1'))*100)}% </p>
                 <p> Average Teleop Speaker Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count4')/await sumColumnForGlobalId(team.globalid, 'count3'))*100)}%</p>
