@@ -24,7 +24,15 @@ const getTeams = async () => {
             <div class="teams">
               <div class="content\s">
                 <h1 style="float:left; margin-left:50px; margin-top:20px;margin-bottom:15px;">${team.teamname}</h1>   
+                <br><br><br><br>
+              
+                <p> Average Autonomous Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count2')/await sumColumnForGlobalId(team.globalid, 'count1'))*100)}% </p>
+                <p> Average Teleop Speaker Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count4')/await sumColumnForGlobalId(team.globalid, 'count3'))*100)}%</p>
+                <p> Average Teleop Amp Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count6')/await sumColumnForGlobalId(team.globalid, 'count5'))*100)}%</p>
+
+                <br>
                 <table style="clear:both; margin-left:55px;border: 1px solid black; border-radius: 10px;border-collapse: collapse;margin-bottom:15px;">                    
+                    
                     <tr>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Attempted</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Made</td>
@@ -32,11 +40,6 @@ const getTeams = async () => {
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Speaker Shots Made</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Amp Shots Attempted</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Amp Shots Made</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Died/froze</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Stage</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Hangs</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Harmony Hangs</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Scores in Trap</td>
                     </tr>   
                     <tr>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count1')}</td>
@@ -45,12 +48,24 @@ const getTeams = async () => {
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count4')}</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count5')}</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count6')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count7')}</td>
+                    </tr>      
+                </table>
+
+                <table style="clear:both; margin-left:55px;border: 1px solid black; border-radius: 10px;border-collapse: collapse;margin-bottom:15px;"> 
+                    <tr>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Stage</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Hangs</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Harmony Hangs</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Scores in Trap</td>
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Died/froze</td>
+                    </tr>
+                    <tr>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'stage')}</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'hangs')}</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'harmony')}</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'trap')}</td>
-                    </tr>      
+                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count7')}</td>
+                    </tr>
                 </table>
           `;
           
