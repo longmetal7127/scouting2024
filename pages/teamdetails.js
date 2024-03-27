@@ -193,6 +193,7 @@ document.getElementById("teaminfoform").addEventListener("submit", function(even
     const globalid = parseInt(urlParams.get("globalid"),10);
 
     submitTeamData( teamname, globalid, teamnumber, teamschool, alliancescore, moreinfo, startingpos, Leaveszone, scores1amp, scores1speaker, picksup, scores2amp, scores2speaker, preferredScoringMethod, preferredIntakeMethod, prefintake, spotlight, trap, alone, hangsWithAnother, attemptsSpotlight, coop);    
+    window.open("../index.HTML", "_self");
 });
 
 // Function to print all db teams to the console for debugging
