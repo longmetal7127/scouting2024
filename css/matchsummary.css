@@ -38,3 +38,17 @@
 p {
 	margin-left: 50px;
 }
+
+.datatables {
+	margin-right: 40px;
+	clear:both; 
+	margin-left:55px;
+	border: 1px solid black; 
+	border-radius: 10px;
+	border-collapse: collapse;
+	margin-bottom:15px;
+}
+
+#largedatatable {
+	text-align: center;
+}

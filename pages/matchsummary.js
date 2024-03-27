@@ -34,7 +34,7 @@ const getTeams = async () => {
                 <p> Average Teleop Amp Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count6')/await sumColumnForGlobalId(team.globalid, 'count5'))*100)}%</p>
 
                 <br>
-                <table style="clear:both; margin-left:55px;border: 1px solid black; border-radius: 10px;border-collapse: collapse;margin-bottom:15px;">                    
+                <table class="datatables" id="largedatatable">                    
                     
                     <tr>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Attempted</td>
@@ -54,7 +54,7 @@ const getTeams = async () => {
                     </tr>      
                 </table>
 
-                <table style="clear:both; margin-left:55px;border: 1px solid black; border-radius: 10px;border-collapse: collapse;margin-bottom:15px;"> 
+                <table class="datatables"> 
                     <tr>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Stage</td>
                         <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Hangs</td>
