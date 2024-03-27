@@ -27,7 +27,8 @@ const getTeams = async () => {
                 
                 <br><br><br><br>
 
-                <!-- <p> Team Number: ${db.teams.teamnumber}</p><br> --> 
+                <p> Team Number: TBD </p>
+                <p> Most Recent Ranking: TBD </p><br>
               
                 <p> Average Autonomous Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count2')/await sumColumnForGlobalId(team.globalid, 'count1'))*100)}% </p>
                 <p> Average Teleop Speaker Accuracy: ${Math.round(parseFloat(await sumColumnForGlobalId(team.globalid, 'count4')/await sumColumnForGlobalId(team.globalid, 'count3'))*100)}%</p>
