@@ -57,18 +57,18 @@ const getTeams = async () => {
 
                 <table class="datatables"> 
                     <tr>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Stage</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Hangs</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Harmony Hangs</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Scores in Trap</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Died/froze</td>
+                        <td class="datatablecell">Stage</td>
+                        <td class="datatablecell">Hangs</td>
+                        <td class="datatablecell">Harmony Hangs</td>
+                        <td class="datatablecell">Scores in Trap</td>
+                        <td class="datatablecell">Died/froze</td>
                     </tr>
                     <tr>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'stage')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'hangs')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'harmony')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await countTrueValuesForGlobalId(team.globalid, 'trap')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count7')}</td>
+                        <td class="datatablecell">${await countTrueValuesForGlobalId(team.globalid, 'stage')}</td>
+                        <td class="datatablecell">${await countTrueValuesForGlobalId(team.globalid, 'hangs')}</td>
+                        <td class="datatablecell">${await countTrueValuesForGlobalId(team.globalid, 'harmony')}</td>
+                        <td class="datatablecell"">${await countTrueValuesForGlobalId(team.globalid, 'trap')}</td>
+                        <td class="datatablecell">${await sumColumnForGlobalId(team.globalid, 'count7')}</td>
                     </tr>
                 </table>
           `;
