@@ -37,20 +37,20 @@ const getTeams = async () => {
                 <table class="datatables" id="largedatatable">                    
                     
                     <tr>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Attempted</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Autonomous Shots Made</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Speaker Shots Attempted</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Speaker Shots Made</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Amp Shots Attempted</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px">Amp Shots Made</td>
+                        <td class="datatablecell">Autonomous Shots Attempted</td>
+                        <td class="datatablecell">Autonomous Shots Made</td>
+                        <td class="datatablecell">Speaker Shots Attempted</td>
+                        <td class="datatablecell">Speaker Shots Made</td>
+                        <td class="datatablecell">Amp Shots Attempted</td>
+                        <td class="datatablecell">Amp Shots Made</td>
                     </tr>   
                     <tr>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count1')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count2')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count3')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count4')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count5')}</td>
-                        <td style="border: 1px solid black; border-radius: 10px;border-collapse: collapse;padding:5px;text-align: center;">${await sumColumnForGlobalId(team.globalid, 'count6')}</td>
+                        <td class="datatablecell">${await sumColumnForGlobalId(team.globalid, 'count1')}</td>
+                        <td class="datatablecell">${await sumColumnForGlobalId(team.globalid, 'count2')}</td>
+                        <td class="datatablecell">${await sumColumnForGlobalId(team.globalid, 'count3')}</td>
+                        <td class="datatablecell">${await sumColumnForGlobalId(team.globalid, 'count4')}</td>
+                        <td class="datatablecell">${await sumColumnForGlobalId(team.globalid, 'count5')}</td>
+                        <td class="datatablecell">${await sumColumnForGlobalId(team.globalid, 'count6')}</td>
                     </tr>      
                 </table>
 

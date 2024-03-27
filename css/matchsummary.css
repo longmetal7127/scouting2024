@@ -49,6 +49,19 @@ p {
 	margin-bottom:15px;
 }
 
+.matchlistbyteam {
+	text-align: center;
+	
+}
+
+.datatablecell {
+	border: 1px solid black;
+	border-radius: 10px;
+	border-collapse: collapse;
+	padding:5px;
+	
+}
+
 #largedatatable {
 	text-align: center;
 }
