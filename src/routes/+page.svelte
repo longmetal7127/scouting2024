@@ -3,19 +3,6 @@
 	import { page } from '$app/stores';
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-{JSON.stringify($page.data)}
-{#if $page.data.session}
-	<span class="signedInText">
-		{$page.data.session.user?.email ?? $page.data.session.user?.name}
-	</span>
-	<SignOut>
-		<div slot="submitButton" class="buttonPrimary">Sign out</div>
-	</SignOut>
-{:else}
-	<span class="notSignedInText">You are not signed in</span>
-	<SignIn>
-		<div slot="submitButton" class="buttonPrimary">Sign in</div>
-	</SignIn>
-{/if}
+<h1 class="text-4xl">MetalScout</h1>
+<p class="text-xl font-light italic">The only scouting app you'll ever need</p>
+<p>7127 only :)</p>

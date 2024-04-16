@@ -1,3 +1,3 @@
-import { signOut } from "../../auth"
+import { signOut } from '../../auth';
 
-export const actions = { default: signOut } //satisfies Actions
+export const actions = { default: signOut }; //satisfies Actions
