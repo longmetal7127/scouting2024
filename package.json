@@ -35,6 +35,7 @@
 	"dependencies": {
 		"@auth/mongodb-adapter": "^2.6.0",
 		"@auth/sveltekit": "^0.15.0",
+		"@sveltejs/adapter-node": "^5.0.1",
 		"dexie": "^4.0.4",
 		"dexie-observable": "^4.0.1-beta.13",
 		"dexie-syncable": "^4.0.1-beta.13",
