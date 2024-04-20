@@ -15,6 +15,6 @@ export default defineConfig({
 		})*/
 	],
 	build: {
-		//target: 'esnext' // or "es2019",
+		target: 'esnext' // or "es2019",
 	}
 });
