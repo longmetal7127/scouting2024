@@ -5,12 +5,14 @@
 
 <div class="navbar bg-base-100 drop-shadow-md rounded-box">
 	<div class="flex-1">
-		<a class="btn btn-ghost text-xl" href="/">MetalScout</a>
+        <img src="/longmetal.svg" class="h-8 w-8" />
+		<a class="btn btn-ghost text-xl font-display" href="/">MetalScout</a>
 	</div>
 	<div class="flex-none">
 		<ul class="menu menu-horizontal px-1">
-			<li><a class="" href="/protected/scout">Scout</a></li>
 			{#if $page.data.session}
+            			<li><a class="btn-secondary	" href="/protected/scout" >Scout</a></li>
+
 				<li>
 					<span class="signedInText">
 						{$page.data.session.user?.email ?? $page.data.session.user?.name}

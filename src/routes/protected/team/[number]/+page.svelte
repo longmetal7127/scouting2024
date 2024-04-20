@@ -24,7 +24,7 @@
 					$set: {
 						comment: value.comment,
 						capabilities: value.capabilities,
-                        autonomousDescription: value.autonomousDescription,
+						autonomousDescription: value.autonomousDescription,
 						updatedAt: new Date().getTime()
 					}
 				});
@@ -73,16 +73,18 @@
 					<!-- radio -->
 					<ul>
 						{#each abilities as ability}
-							<li>
-								<label class="cursor-pointer">
-									<input type="checkbox" bind:group={$team.capabilities} value={ability} />
-									<span class="ml-2">{ability}</span>
+							<div class="form-control">
+								<label class="label cursor-pointer">
+									<span class="label-text">{ability}</span>
+									<input type="checkbox" bind:group={$team.capabilities} value={ability} class="checkbox" />
 								</label>
-							</li>
+							</div>
+
+
 						{/each}
 					</ul>
 				</div>
-                				<label class="form-control w-full max-w-xs">
+				<label class="form-control w-full max-w-xs">
 					<div class="label">
 						<span class="label-text">Autonomous</span>
 					</div>
