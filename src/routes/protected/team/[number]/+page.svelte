@@ -2,14 +2,13 @@
 	export let data;
 	import { myRxCollection } from '$lib/rxdb.js';
 	import { writable } from 'svelte/store';
-	import MultiSelect from 'svelte-multiselect';
 	import FieldCanvas from '../../../../components/FieldCanvas.svelte';
 	const abilities = ['Amp', 'Speaker', 'Climb', 'Trap'];
 	let team = writable({});
 	let unsubscribe;
 	myRxCollection
 		.findOne({
-			selector: { number: { $eq: data.slug } }
+			selector: { id: { $eq: data.slug } }
 		})
 		.$.subscribe((docs) => {
             console.log('being subscribed', docs._data.startPositions)
@@ -43,7 +42,7 @@
 			<div class="breadcrumbs text-sm">
 				<ul>
 					<li><a href="/protected/scout">Team Scout</a></li>
-					<li><a href="#">{$team.number}</a></li>
+					<li><a href="#">{$team.number} - {$team.nickname}</a></li>
 				</ul>
 			</div>
 			<div class="sidebar">
@@ -56,7 +55,7 @@
 						<h2 class="card-title">Team {$team.number}</h2>
 						<p>{$team.nickname}</p>
 						<div class="card-actions justify-end">
-							<a href="/protected/match/{$team.number}" class="btn btn-primary">Scout Match</a>
+							<a href="/protected/match/{$team.id}" class="btn btn-primary">Scout Match</a>
 						</div>
 					</div>
 				</div>

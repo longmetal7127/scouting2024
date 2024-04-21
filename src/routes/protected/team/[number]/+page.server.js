@@ -1,7 +1,7 @@
 import { redirect } from "@sveltejs/kit";
 
 export const ssr = false;
-export const prerender = false;
+//export const prerender = false;
 
 export const load = async (event) => {
 	if (!( await event.locals.auth())) {
@@ -9,6 +9,6 @@ export const load = async (event) => {
 	}
 
 	return {
-		slug: parseInt(event.params.number)
+		slug: (event.params.number)
 	};
 };

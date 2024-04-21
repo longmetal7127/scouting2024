@@ -1,6 +1,6 @@
 import { getEventData } from '../../../lib/tba';
 import { redirect } from '@sveltejs/kit';
-export const prerender = false;
+//export const prerender = false;
 export const ssr = false;
 
 export const load = async (event) => {
@@ -9,7 +9,8 @@ export const load = async (event) => {
 	}
 
 	const data = await getEventData();
+	const currYear = new Date().getFullYear();
 	return {
-		events: data.filter((x) => x.year == 2024).map((event) => event.event_code)
+		events: data.filter((x) => x.year == currYear).map((event) => currYear+ event.event_code)
 	};
 };

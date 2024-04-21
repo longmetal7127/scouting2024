@@ -70,11 +70,13 @@
 <svelte:window on:resize={handleSize} />
 <div>
 	<canvas
+        class="rounded-box bg-base-200 "
 		{width}
 		{height}
 		style:background
 		bind:this={canvas}
 		on:mousedown={handleStart}
+
 		on:touchstart={(e) => {
 			const { clientX, clientY } = e.touches[0];
 			handleStart({
@@ -84,7 +86,7 @@
 		}}
 	/>
 	<!----><button
-		class="btn btn-primary rounded-t-none"
+		class="btn btn-primary rounded-box btn-square mt-2"
 		on:click={clear}
         
 		><svg

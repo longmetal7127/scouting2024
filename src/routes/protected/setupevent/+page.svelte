@@ -5,7 +5,7 @@
 	let event = '';
 
 	const setup = async () => {
-		const res = await fetch('/api/teams', {
+		const res = await fetch(`/api/teams/${event}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -13,7 +13,16 @@
 		});
 		const data = await res.json();
 		for (let team of data.body) {
-			await myRxCollection.insert({ id: team.key, number: team.team_number, nickname:team.nickname, comment: '', capabilities: [], updatedAt: new Date().getTime(), startPositions: []});
+			await myRxCollection.insert({
+				id: team.key + event,
+				number: team.team_number,
+				nickname: team.nickname,
+				comment: '',
+				capabilities: [],
+				updatedAt: new Date().getTime(),
+				startPositions: [],
+				event: event
+			});
 		}
 	};
 </script>

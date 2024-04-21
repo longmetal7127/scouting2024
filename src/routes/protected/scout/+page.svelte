@@ -44,9 +44,9 @@
 		</ul>
 		{#if scoutType == 'teamScout'}
 			<ul>
-				{#each teams as team}
+				{#each teams.filter((x)=> x.event == event) as team}
 					<li>
-						<a href={`/protected/team/${team.number}`}>
+						<a href={`/protected/team/${team.id}`}>
 							<div class="card card-side mb-4 bg-base-100 shadow-xl">
 								<figure>
 									<img src={`/api/avatar/${team.number}`} alt="Movie" class="h-24" />
@@ -55,7 +55,7 @@
 									<h2 class="card-title">{team.number}</h2>
 									<p>{team.nickname}</p>
 									<div class="card-actions justify-end">
-										<a href="/protected/match/{team.number}" class="btn btn-primary">Scout Match</a>
+										<a href="/protected/match/{team.id}" class="btn btn-primary">Scout Match</a>
 									</div>
 								</div>
 							</div></a
