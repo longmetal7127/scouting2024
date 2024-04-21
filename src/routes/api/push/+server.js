@@ -51,6 +51,7 @@ export async function POST({ params, url, headers, request, locals }) {
 						nickname: changeRow.newDocumentState.nickname,
 						autonomousDescription: changeRow.newDocumentState.autonomousDescription,
 						startPositions: changeRow.newDocumentState.startPositions,
+						event: changeRow.newDocumentState.event,
 					}
 				},
 				{ upsert: true }
