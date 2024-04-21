@@ -13,7 +13,7 @@
 		});
 		const data = await res.json();
 		for (let team of data.body) {
-			await myRxCollection.insert({ id: team.key, number: team.team_number, nickname:team.nickname, comment: '', capabilities: [], updatedAt: new Date().getTime()});
+			await myRxCollection.insert({ id: team.key, number: team.team_number, nickname:team.nickname, comment: '', capabilities: [], updatedAt: new Date().getTime(), startPositions: []});
 		}
 	};
 </script>

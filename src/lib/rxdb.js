@@ -7,9 +7,9 @@ import { deepEqual } from 'rxdb';
 import { addRxPlugin } from 'rxdb';
 import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
 import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
-
+import { RxDBMigrationPlugin } from 'rxdb/plugins/migration-schema';
 addRxPlugin(RxDBUpdatePlugin);
-
+addRxPlugin(RxDBMigrationPlugin);
 addRxPlugin(RxDBDevModePlugin);
 
 const myDatabase = await createRxDatabase({
@@ -26,8 +26,9 @@ eventSource.onmessage = (event) => {
 	});
 };
 eventSource.onerror = () => myPullStream$.next('RESYNC');
+
 const teamSchema = {
-	version: 0,
+	version: 1,
 	primaryKey: 'id',
 	type: 'object',
 	properties: {
@@ -44,7 +45,7 @@ const teamSchema = {
 		event: {
 			type: 'string'
 		},
-		nickname: {	
+		nickname: {
 			type: 'string'
 		},
 		autonomousDescription: {
@@ -78,6 +79,7 @@ const teamSchema = {
 	},
 	required: ['id', 'number']
 };
+
 const conflictHandler = function (
 	/**
 	 * The conflict handler gets 3 input properties:
@@ -96,7 +98,7 @@ const conflictHandler = function (
 	 * to compare specific properties of the document, like the updatedAt time,
 	 * for better performance because deepEqual() is expensive.
 	 */
-	
+
 	if (deepEqual(i.newDocumentState, i.realMasterState)) {
 		return Promise.resolve({
 			isEqual: true
@@ -121,9 +123,21 @@ const conflictHandler = function (
 		documentData: i.realMasterState
 	});
 };
-await myDatabase.addCollections({ todos: { schema: teamSchema, conflictHandler } });
+await myDatabase.addCollections({
+	teams: {
+		schema: teamSchema,
+		conflictHandler,
+		migrationStrategies: {
+			// 1 means, this transforms data from version 0 to version 1
+			1: function (oldDoc) {
+				oldDoc.startPositions = oldDoc.startPositions || [];
+				return oldDoc;
+			}
+		}
+	}
+});
 
-export const myRxCollection = myDatabase.todos;
+export const myRxCollection = myDatabase.teams;
 const replicationState = replicateRxCollection({
 	collection: myRxCollection,
 	replicationIdentifier: 'my-http-replication',
@@ -145,7 +159,6 @@ const replicationState = replicateRxCollection({
 	},
 	push: {
 		async handler(changeRows) {
-
 			const rawResponse = await fetch('/api/push', {
 				method: 'POST',
 				headers: {
@@ -170,5 +183,3 @@ replicationState.error$.subscribe((error) => {
 		location.reload();
 	}
 });
-
-

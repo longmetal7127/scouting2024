@@ -46,10 +46,11 @@ export async function POST({ params, url, headers, request, locals }) {
 					$set: {
 						number: changeRow.newDocumentState.number,
 						comment: changeRow.newDocumentState.comment,
-                        capabilities: changeRow.newDocumentState.capabilities,
-                        updatedAt: changeRow.newDocumentState.updatedAt,
-                        nickname: changeRow.newDocumentState.nickname,
-                        autonomousDescription: changeRow.newDocumentState.autonomousDescription,
+						capabilities: changeRow.newDocumentState.capabilities,
+						updatedAt: changeRow.newDocumentState.updatedAt,
+						nickname: changeRow.newDocumentState.nickname,
+						autonomousDescription: changeRow.newDocumentState.autonomousDescription,
+						startPositions: changeRow.newDocumentState.startPositions,
 					}
 				},
 				{ upsert: true }

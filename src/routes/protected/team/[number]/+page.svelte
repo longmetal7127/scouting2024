@@ -3,6 +3,7 @@
 	import { myRxCollection } from '$lib/rxdb.js';
 	import { writable } from 'svelte/store';
 	import MultiSelect from 'svelte-multiselect';
+	import FieldCanvas from '../../../../components/FieldCanvas.svelte';
 	const abilities = ['Amp', 'Speaker', 'Climb', 'Trap'];
 	let team = writable({});
 	let unsubscribe;
@@ -19,24 +20,18 @@
 					initialWrite = true;
 					return;
 				}
-				console.log('updating fsr????');
 				await docs.update({
 					$set: {
 						comment: value.comment,
 						capabilities: value.capabilities,
 						autonomousDescription: value.autonomousDescription,
-						updatedAt: new Date().getTime()
+						updatedAt: new Date().getTime(),
+						startPositions: value.startPositions
 					}
 				});
-				/*
-				await docs.incrementalModify((doc) => {
-					doc.comment = value.comment;
-                    doc.capabilities = value.capabilities;
-                    doc.updatedAt = new Date().getTime();
-					return doc;
-				});*/
 			});
 		});
+	let points = [];
 </script>
 
 <div>
@@ -69,34 +64,46 @@
 			<h1>{$team.number}</h1>
 			<label class="form-control w-full max-w-xs">
 				<div class="label">
-					<span class="label-text">Abilities</span>
-					<!-- radio -->
-					<ul>
-						{#each abilities as ability}
-							<div class="form-control">
-								<label class="label cursor-pointer">
-									<span class="label-text">{ability}</span>
-									<input type="checkbox" bind:group={$team.capabilities} value={ability} class="checkbox" />
-								</label>
-							</div>
-
-
-						{/each}
-					</ul>
+					<span
+						class="label-text
+                    ">Start Positions</span
+					>
 				</div>
-				<label class="form-control w-full max-w-xs">
-					<div class="label">
-						<span class="label-text">Autonomous</span>
-					</div>
-					<textarea class="textarea textarea-bordered" bind:value={$team.autonomousDescription} />
-				</label>
+				<FieldCanvas bind:points={$team.startPositions} />
+			</label>
+			<label class="form-control w-full max-w-xs">
+				<div class="label">
+					<span class="label-text">Abilities</span>
+				</div>
+				<!-- radio -->
+				<ul class="ml-4">
+					{#each abilities as ability}
+						<div class="form-control">
+							<label class="label cursor-pointer">
+								<span class="label-text">{ability}</span>
+								<input
+									type="checkbox"
+									bind:group={$team.capabilities}
+									value={ability}
+									class="checkbox"
+								/>
+							</label>
+						</div>
+					{/each}
+				</ul>
+			</label>
+			<label class="form-control w-full max-w-xs">
+				<div class="label">
+					<span class="label-text">Autonomous</span>
+				</div>
+				<textarea class="textarea textarea-bordered" bind:value={$team.autonomousDescription} />
+			</label>
 
-				<label class="form-control w-full max-w-xs">
-					<div class="label">
-						<span class="label-text">Extra comments</span>
-					</div>
-					<textarea class="textarea textarea-bordered" bind:value={$team.comment} />
-				</label>
+			<label class="form-control w-full max-w-xs">
+				<div class="label">
+					<span class="label-text">Extra comments</span>
+				</div>
+				<textarea class="textarea textarea-bordered" bind:value={$team.comment} />
 			</label>
 		</div>
 	{/if}
