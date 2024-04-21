@@ -60,6 +60,11 @@
 		t = top;
 		l = left;
 	};
+    const clear = () => 
+    {
+        console.log('clear?')
+        points = [];
+    }
 </script>
 
 <svelte:window on:resize={handleSize} />
@@ -78,7 +83,10 @@
 			});
 		}}
 	/>
-	<button class="btn btn-primary rounded-t-none" on:click={() => (points = [])}
+	<!----><button
+		class="btn btn-primary rounded-t-none"
+		on:click={clear}
+        
 		><svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"

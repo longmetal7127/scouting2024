@@ -12,6 +12,7 @@
 			selector: { number: { $eq: data.slug } }
 		})
 		.$.subscribe((docs) => {
+            console.log('being subscribed', docs._data.startPositions)
 			if (unsubscribe) unsubscribe();
 			team = writable(Object.assign({}, docs._data));
 			let initialWrite = false;
@@ -62,7 +63,7 @@
 			</div>
 
 			<h1>{$team.number}</h1>
-			<label class="form-control w-full max-w-xs">
+			<label for="" class="form-control w-full max-w-xs">
 				<div class="label">
 					<span
 						class="label-text
