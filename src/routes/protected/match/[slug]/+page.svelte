@@ -41,11 +41,11 @@
 		const nameFromEnum = (value) => {
 			switch (value) {
 				case 'qf':
-					return 'Quarterfinals';
+					return 'Quarterfinal';
 				case 'sf':
 					return 'Semifinal';
 				case 'f':
-					return 'Finals';
+					return 'Final';
 				default:
 					return 'Qualification';
 			}

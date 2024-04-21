@@ -10,7 +10,9 @@ import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 import { RxDBMigrationPlugin } from 'rxdb/plugins/migration-schema';
 addRxPlugin(RxDBUpdatePlugin);
 addRxPlugin(RxDBMigrationPlugin);
-addRxPlugin(RxDBDevModePlugin);
+if (import.meta.env.DEV) {
+	addRxPlugin(RxDBDevModePlugin);
+}
 
 const myDatabase = await createRxDatabase({
 	name: 'mydatabase',
