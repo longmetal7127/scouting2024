@@ -15,7 +15,7 @@ if (import.meta.env.DEV) {
 }
 
 const myDatabase = await createRxDatabase({
-	name: 'mydatabase',
+	name: 'database',
 	storage: getRxStorageDexie()
 });
 const myPullStream$ = new Subject();
@@ -50,6 +50,18 @@ const teamSchema = {
 		nickname: {
 			type: 'string'
 		},
+		/*matches: {
+			type: 'array',
+			items: {
+				type: 'object',
+				properties: {
+					matchNumber: { type: 'integer' },
+					stage: { type: 'string' },
+					updatedAt: { type: 'number' }
+				}
+			}
+		},*/
+
 		autonomousDescription: {
 			type: 'string'
 		},

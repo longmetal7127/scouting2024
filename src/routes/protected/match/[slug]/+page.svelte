@@ -60,7 +60,7 @@
 			<li><a href="">Scout Match</a></li>
 		</ul>
 	</div>
-	<select class="select">
+	<select class="select select-bordered">
 		
 	{#each matches as match}
 		<option value={match.number}>{nameFromEnum(match.stage)} {match.number} </option>
