@@ -11,7 +11,7 @@
 			selector: { id: { $eq: data.slug } }
 		})
 		.$.subscribe((docs) => {
-            console.log('being subscribed', docs._data.startPositions)
+			console.log('being subscribed', docs._data.startPositions);
 			if (unsubscribe) unsubscribe();
 			team = writable(Object.assign({}, docs._data));
 			let initialWrite = false;

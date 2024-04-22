@@ -44,7 +44,7 @@
 		</ul>
 		{#if scoutType == 'teamScout'}
 			<ul>
-				{#each teams.filter((x)=> x.event == event) as team}
+				{#each teams.filter((x) => x.event == event) as team}
 					<li>
 						<a href={`/protected/team/${team.id}`}>
 							<div class="card card-side mb-4 bg-base-100 shadow-xl">

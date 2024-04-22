@@ -1,10 +1,10 @@
 import { pullStream$ } from '../../../lib/pullstream';
 export async function GET({ url, locals }) {
-    // Check if the request is authenticated
-    const session = await locals.auth();
-    if (!session) {
-        return error(401, 'Unauthorized');
-    }
+	// Check if the request is authenticated
+	const session = await locals.auth();
+	if (!session) {
+		return error(401, 'Unauthorized');
+	}
 	let subscription;
 	const stream = new ReadableStream({
 		start(controller) {

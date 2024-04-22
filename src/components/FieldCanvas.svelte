@@ -60,23 +60,21 @@
 		t = top;
 		l = left;
 	};
-    const clear = () => 
-    {
-        console.log('clear?')
-        points = [];
-    }
+	const clear = () => {
+		console.log('clear?');
+		points = [];
+	};
 </script>
 
 <svelte:window on:resize={handleSize} />
 <div>
 	<canvas
-        class="rounded-box bg-base-200 "
+		class="rounded-box bg-base-200"
 		{width}
 		{height}
 		style:background
 		bind:this={canvas}
 		on:mousedown={handleStart}
-
 		on:touchstart={(e) => {
 			const { clientX, clientY } = e.touches[0];
 			handleStart({
@@ -85,10 +83,7 @@
 			});
 		}}
 	/>
-	<!----><button
-		class="btn btn-primary rounded-box btn-square mt-2"
-		on:click={clear}
-        
+	<!----><button class="btn btn-square btn-primary mt-2 rounded-box" on:click={clear}
 		><svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"

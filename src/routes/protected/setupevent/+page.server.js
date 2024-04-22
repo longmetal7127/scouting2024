@@ -11,6 +11,6 @@ export const load = async (event) => {
 	const data = await getEventData();
 	const currYear = new Date().getFullYear();
 	return {
-		events: data.filter((x) => x.year == currYear).map((event) => currYear+ event.event_code)
+		events: data.filter((x) => x.year == currYear).map((event) => currYear + event.event_code)
 	};
 };

@@ -6,10 +6,10 @@ import { pullStream$ } from '../../../lib/pullstream.js';
 import { update } from 'rxdb/plugins/update';
 
 export async function POST({ params, url, headers, request, locals }) {
-    const session = await locals.auth();
-    if (!session) {
-        return error(401, 'Unauthorized');
-    }
+	const session = await locals.auth();
+	if (!session) {
+		return error(401, 'Unauthorized');
+	}
 	const client = await clientPromise;
 	const database = client.db('scout');
 	const mongoCollection = database.collection('teams');
@@ -36,7 +36,7 @@ export async function POST({ params, url, headers, request, locals }) {
 		) {
 			// we have a conflict
 			conflicts.push(realMasterState);
-            console.log('conflict!!')
+			console.log('conflict!!');
 		} else {
 			console.log('updating');
 			// no conflict -> write the document
@@ -51,7 +51,7 @@ export async function POST({ params, url, headers, request, locals }) {
 						nickname: changeRow.newDocumentState.nickname,
 						autonomousDescription: changeRow.newDocumentState.autonomousDescription,
 						startPositions: changeRow.newDocumentState.startPositions,
-						event: changeRow.newDocumentState.event,
+						event: changeRow.newDocumentState.event
 					}
 				},
 				{ upsert: true }

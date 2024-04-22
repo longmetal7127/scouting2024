@@ -1,7 +1,6 @@
 export const load = async (event) => {
-	
 	return {
-		slug: (event.params.slug)
+		slug: event.params.slug
 	};
 };
 

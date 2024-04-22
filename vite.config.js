@@ -1,12 +1,12 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import { SvelteKitPWA } from '@vite-pwa/sveltekit'
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
 export default defineConfig({
 	plugins: [
 		sveltekit(),
-		SvelteKitPWA(),
+		SvelteKitPWA()
 		/*topLevelAwait({
 			// The export name of top-level await promise for each chunk module
 			promiseExportName: '__tla',

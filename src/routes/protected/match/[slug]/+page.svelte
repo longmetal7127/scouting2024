@@ -38,18 +38,18 @@
 				});
 			});
 		});
-		const nameFromEnum = (value) => {
-			switch (value) {
-				case 'qf':
-					return 'Quarterfinal';
-				case 'sf':
-					return 'Semifinal';
-				case 'f':
-					return 'Final';
-				default:
-					return 'Qualification';
-			}
-		};
+	const nameFromEnum = (value) => {
+		switch (value) {
+			case 'qf':
+				return 'Quarterfinal';
+			case 'sf':
+				return 'Semifinal';
+			case 'f':
+				return 'Final';
+			default:
+				return 'Qualification';
+		}
+	};
 </script>
 
 <div>
@@ -61,8 +61,8 @@
 		</ul>
 	</div>
 	<select class="select select-bordered">
-		
-	{#each matches as match}
-		<option value={match.number}>{nameFromEnum(match.stage)} {match.number} </option>
-	{/each}</select>
+		{#each matches as match}
+			<option value={match.number}>{nameFromEnum(match.stage)} {match.number} </option>
+		{/each}</select
+	>
 </div>

@@ -15,4 +15,3 @@ export const getTeams = async (event) => {
 	const team = await res.json();
 	return team;
 };
-

@@ -1,6 +1,5 @@
 <script>
-    import Protected from "../../components/Protected.svelte";
+	import Protected from '../../components/Protected.svelte';
 </script>
-<Protected>
-    
-</Protected>
+
+<Protected></Protected>

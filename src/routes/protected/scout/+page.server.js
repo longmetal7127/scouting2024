@@ -5,8 +5,8 @@ import { getEventData } from '../../../lib/tba';
 export const ssr = false;
 
 export const load = async (event) => {
-	if (!await event.locals.auth()) {
-		throw redirect(302,'/protected');
+	if (!(await event.locals.auth())) {
+		throw redirect(302, '/protected');
 	}
 	const data = await getEventData();
 	const currYear = new Date().getFullYear();
