@@ -62,7 +62,7 @@
 			</div>
 
 			<h1>{$team.number}</h1>
-			<label for="" class="form-control w-full max-w-xs">
+			<label for="" class="form-control w-full max-w-md">
 				<div class="label">
 					<span
 						class="label-text

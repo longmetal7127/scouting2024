@@ -11,7 +11,7 @@
 	let context;
 	let img;
 	let t, l;
-
+	let scale = 1;
 	onMount(() => {
 		context = canvas.getContext('2d');
 		context.lineWidth = 3;
@@ -20,20 +20,24 @@
 		// fill background with image
 		img = new Image();
 		img.src = '/field.png';
+		scale = 600 / canvas.width;
+
 		img.onload = () => {
-			context.drawImage(img, 0, 0, width, height);
+			context.drawImage(img, 0, 0, width / scale, height / scale);
 		};
 
+		console.log('scale', scale);
 		// draw points
 		requestAnimationFrame(render);
 	});
 	const render = () => {
-		context.drawImage(img, 0, 0, width, height);
+		context.drawImage(img, 0, 0, width / scale, height / scale);
 
 		points.forEach(({ x, y }) => {
 			//console.log('drawing point');
 			context.beginPath();
-			context.arc(x, y, 8, 0, 2 * Math.PI);
+			//console.log(x, y);
+			context.arc(x, y , 8/scale, 0, 2 * Math.PI);
 			context.fill();
 			context.closePath();
 		});
@@ -45,11 +49,12 @@
 	}
 
 	const handleStart = ({ offsetX: x, offsetY: y }) => {
-		console.log(points);
 
-		points = [...points, { x, y }];
+		points = [...points, { x: x , y: y  }];
+				console.log(x,y, x * scale, y * scale);
+
 		context.beginPath();
-		context.arc(x, y, 8, 0, 2 * Math.PI);
+		context.arc(x , y , 8, 0, 2 * Math.PI);
 		context.fill();
 
 		context.closePath();
@@ -59,6 +64,8 @@
 		const { top, left } = canvas.getBoundingClientRect();
 		t = top;
 		l = left;
+		// scale canvas if window width smaller than current width
+		scale = 600 / canvas.width;
 	};
 	const clear = () => {
 		console.log('clear?');
@@ -67,11 +74,9 @@
 </script>
 
 <svelte:window on:resize={handleSize} />
-<div>
+<div class="flex">
 	<canvas
-		class="rounded-box bg-base-200"
-		{width}
-		{height}
+		class="aspect-[2/1] flex-1 rounded-box bg-base-200"
 		style:background
 		bind:this={canvas}
 		on:mousedown={handleStart}

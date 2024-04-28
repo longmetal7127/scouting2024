@@ -1,17 +1,17 @@
 import { SvelteKitAuth } from '@auth/sveltekit';
-import Auth0 from '@auth/sveltekit/providers/auth0';
+import Authentik from '@auth/sveltekit/providers/authentik';
 import {
 	AUTH_SECRET,
-	AUTH_AUTH0_SECRET,
-	AUTH_AUTH0_ISSUER,
-	AUTH_AUTH0_ID
+	AUTH_AUTHENTIK_ISSUER,
+	AUTH_AUTHENTIK_SECRET,
+	AUTH_AUTHENTIK_ID
 } from '$env/static/private';
 export const { handle, signIn, signOut } = SvelteKitAuth({
 	providers: [
-		Auth0({
-			client_id: AUTH_AUTH0_ID,
-			client_secret: AUTH_AUTH0_SECRET,
-			issuer: AUTH_AUTH0_ISSUER
+		Authentik({
+			clientId: AUTH_AUTHENTIK_ID,
+			clientSecret: AUTH_AUTHENTIK_SECRET,
+			issuer: 'https://auth.frc.autos/application/o/scouting/',
 		})
 	],
 	secret: AUTH_SECRET
